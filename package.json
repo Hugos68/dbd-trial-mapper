@@ -1,0 +1,30 @@
+{
+  "name": "dbd-trial-mapper",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "vite:dev": "vite dev",
+    "vite:build": "vite build",
+    "tauri:dev": "tauri dev",
+    "tauri:build": "tauri build"
+  },
+  "devDependencies": {
+    "@tauri-apps/api": "^2.4.0",
+    "@tauri-apps/plugin-opener": "^2.2.6",
+    "@lucide/svelte": "^0.483.0",
+    "@skeletonlabs/skeleton": "^3.1.1",
+    "@supabase/supabase-js": "^2.49.2",
+    "@sveltejs/adapter-static": "^3.0.8",
+    "@sveltejs/kit": "^2.20.2",
+    "@sveltejs/vite-plugin-svelte": "^5.0.3",
+    "@tailwindcss/forms": "^0.5.10",
+    "@tailwindcss/vite": "^4.0.15",
+    "@tauri-apps/cli": "^2.4.0",
+    "@types/bun": "^1.2.5",
+    "bits-ui": "^1.3.13",
+    "svelte": "^5.25.3",
+    "tailwindcss": "^4.0.15",
+    "typescript": "~5.8.2",
+    "vite": "^6.2.3"
+  }
+}
