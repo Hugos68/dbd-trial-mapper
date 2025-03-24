@@ -10,7 +10,7 @@
     const props: Props = $props();
 </script>
  
-<header class="preset-filled-surface-100-900 p-4 flex gap-2 justify-between items-center">
+<header class="sticky top-0 preset-filled-surface-100-900 p-4 flex gap-2 justify-between items-center">
     <nav>
         <a href="/" class="btn preset-filled-primary-500">Home <House class="size-5" /></a>
     </nav>
