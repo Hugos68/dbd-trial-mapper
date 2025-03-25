@@ -18,7 +18,7 @@
     return fuse.search(query).map(result => result.item);
   });
 
-  listen<string>('trial_select:done', (url) => {
+  listen<string>('trial:done', (url) => {
     console.log(url);
   });
 </script>
