@@ -12,9 +12,20 @@
   "app": {
     "windows": [
       {
+        "label": "main",
         "title": "Dead By Daylight Trial Mapper",
         "width": 800,
         "height": 600
+      },
+      {
+        "label": "trial-overlay",
+        "resizable": false,
+        "closable": false,
+        "minimizable": false,
+        "hiddenTitle": true,
+        "decorations": false,
+        "alwaysOnTop": true,
+        "visible": false
       }
     ],
     "security": {
