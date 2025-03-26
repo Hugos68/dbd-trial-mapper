@@ -20,7 +20,7 @@
 				"minimizable": false,
 				"decorations": false,
 				"alwaysOnTop": true,
-        "contentProtected": true
+				"contentProtected": true
 			}
 		],
 		"security": {

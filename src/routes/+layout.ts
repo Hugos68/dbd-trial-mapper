@@ -18,7 +18,7 @@ export async function load() {
 		}
 		return {
 			trials: trials.data,
-            trial: trial.data
+			trial: trial.data,
 		};
 	}
 	return {

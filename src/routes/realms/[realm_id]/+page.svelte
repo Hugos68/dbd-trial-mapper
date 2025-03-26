@@ -1,13 +1,13 @@
 <script lang="ts">
-import { goto } from '$app/navigation';
+import { goto } from "$app/navigation";
 
 const { data } = $props();
 
-async function selectTrial(trial: typeof data.trials[number]) {
-    localStorage.setItem('trial-id', trial.id);
-    await goto('/', {
-        invalidateAll: true
-    });
+async function selectTrial(trial: (typeof data.trials)[number]) {
+	localStorage.setItem("trial-id", trial.id);
+	await goto("/", {
+		invalidateAll: true,
+	});
 }
 </script>
 
