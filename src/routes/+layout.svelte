@@ -1,19 +1,19 @@
 <script lang="ts">
-    import { useDynamicWindowSize } from '$lib/hooks/use-dynamic-window-size.svelte.js';
-    import { useTopRightWindowPosition } from '$lib/hooks/use-top-right-window-position.js';
-    import { WebviewWindow } from '@tauri-apps/api/webviewWindow';
-    import { Plus, UserPlus, List, Settings } from '@lucide/svelte';
-    import '../app.css';
+import { useDynamicWindowSize } from "$lib/hooks/use-dynamic-window-size.svelte.js";
+import { useTopRightWindowPosition } from "$lib/hooks/use-top-right-window-position.js";
+import { List, Plus, Settings, UserPlus } from "@lucide/svelte";
+import { WebviewWindow } from "@tauri-apps/api/webviewWindow";
+import "../app.css";
 
-    const { children, data } = $props();
+const { children, data } = $props();
 
-    async function setup() {
-        useDynamicWindowSize();
-        await useTopRightWindowPosition();
-        await WebviewWindow.getCurrent().show();
-    }
+async function setup() {
+	useDynamicWindowSize();
+	await useTopRightWindowPosition();
+	await WebviewWindow.getCurrent().show();
+}
 
-    setup();
+setup();
 </script>
 
 <main class="p-2 grid gap-2">

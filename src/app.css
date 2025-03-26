@@ -1,10 +1,10 @@
-@import 'tailwindcss';
-@import '@skeletonlabs/skeleton';
-@import '@skeletonlabs/skeleton/themes/catppuccin';
-@import '@skeletonlabs/skeleton/optional/presets';
+@import "tailwindcss";
+@import "@skeletonlabs/skeleton";
+@import "@skeletonlabs/skeleton/themes/catppuccin";
+@import "@skeletonlabs/skeleton/optional/presets";
 
 @plugin '@tailwindcss/forms';
 
 html {
-    overflow: hidden;
+	overflow: hidden;
 }
