@@ -20,6 +20,7 @@
 				"minimizable": false,
 				"decorations": false,
 				"alwaysOnTop": true,
+				"incognito": true,
 				"contentProtected": true
 			}
 		],
