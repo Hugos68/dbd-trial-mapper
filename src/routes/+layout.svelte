@@ -1,40 +1,39 @@
 <script lang="ts">
 import { useDynamicWindowSize } from "$lib/hooks/use-dynamic-window-size.svelte.js";
+import { settings } from "$lib/settings.svelte.js";
 import { List, Plus, Settings, UserPlus } from "@lucide/svelte";
 import { WebviewWindow } from "@tauri-apps/api/webviewWindow";
-import { settings } from "$lib/settings.svelte.js";
 import { register, unregisterAll } from "@tauri-apps/plugin-global-shortcut";
 import "../app.css";
-  import { moveWindow, Position } from "@tauri-apps/plugin-positioner";
+import { Position, moveWindow } from "@tauri-apps/plugin-positioner";
 
 const { children, data } = $props();
 
 async function setup() {
 	useDynamicWindowSize();
-    await moveWindow(Position.TopRight);
-    await unregisterAll();
-    await register("CommandOrControl+Shift+Q", (event) => {
-        if (event.state === "Pressed") {
-            settings.zen = !settings.zen;
-        }
-    });
-    await register("CommandOrControl+Shift+W", async (event) => {
-        if (event.state === "Pressed") {
-            if (await WebviewWindow.getCurrent().isVisible()) {
-                await WebviewWindow.getCurrent().hide();
-            } else {
-                await WebviewWindow.getCurrent().show();
-            }
-            
-        }
-    });
+	await moveWindow(Position.TopRight);
+	await unregisterAll();
+	await register("CommandOrControl+Shift+Q", (event) => {
+		if (event.state === "Pressed") {
+			settings.zen = !settings.zen;
+		}
+	});
+	await register("CommandOrControl+Shift+W", async (event) => {
+		if (event.state === "Pressed") {
+			if (await WebviewWindow.getCurrent().isVisible()) {
+				await WebviewWindow.getCurrent().hide();
+			} else {
+				await WebviewWindow.getCurrent().show();
+			}
+		}
+	});
 	await WebviewWindow.getCurrent().show();
 }
 
 setup();
 </script>
 
-<main class={{ "p-2 ": !settings.zen }}>
+<main class={{ "p-2 space-y-2": !settings.zen }}>
     <div>
         {#if data.trial}
             <img class="rounded-md" src={data.trial.image_url} alt={data.trial.name} />

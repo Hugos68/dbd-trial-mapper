@@ -1,5 +1,5 @@
 class Settings {
-    zen = $state(false);
+	zen = $state(false);
 }
 
 const settings = new Settings();
