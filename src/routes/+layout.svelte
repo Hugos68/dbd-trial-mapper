@@ -4,7 +4,9 @@
     import { WebviewWindow } from '@tauri-apps/api/webviewWindow';
     import '../app.css';
 
-    const { children } = $props();
+    const { children, data } = $props();
+
+    const trial = data.trials.at(0);
 
     async function setup() {
         useDynamicWindowSize();
@@ -15,4 +17,15 @@
     setup();
 </script>
 
-{@render children()}    
+{#if trial}
+  <img src={trial.image_url} alt={trial.name} />
+{:else}
+  <div class="h-36 grid place-items-center">
+    <span>No trial chosen</span>
+  </div>
+{/if}
+
+<main class="p-2">
+    {@render children()}   
+</main>
+ 

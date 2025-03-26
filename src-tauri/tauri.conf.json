@@ -12,6 +12,7 @@
   "app": {
     "windows": [
       {
+        "title": "DBD Trial Mapper",
         "label": "main",
         "visible": false,
         "closable": false,
