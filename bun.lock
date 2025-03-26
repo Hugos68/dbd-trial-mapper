@@ -4,7 +4,7 @@
     "": {
       "name": "dbd-trial-mapper",
       "dependencies": {
-        "@tauri-apps/plugin-global-shortcut": "~2",
+        "@tauri-apps/plugin-positioner": "~2",
       },
       "devDependencies": {
         "@biomejs/biome": "^1.9.4",
@@ -18,6 +18,7 @@
         "@tailwindcss/vite": "^4.0.15",
         "@tauri-apps/api": "^2.4.0",
         "@tauri-apps/cli": "^2.4.0",
+        "@tauri-apps/plugin-global-shortcut": "~2",
         "@types/bun": "^1.2.5",
         "runed": "^0.25.0",
         "svelte": "^5.25.3",
@@ -235,6 +236,8 @@
     "@tauri-apps/cli-win32-x64-msvc": ["@tauri-apps/cli-win32-x64-msvc@2.4.0", "", { "os": "win32", "cpu": "x64" }, "sha512-nv84b3a8eI5Y7ksTLBKjjvtr9NOlAGGGo7OJbjKT+xZLdiPOZ0nJ2cT+4IdfnNAZ33pKJugAfuj1fBvQKeTy0w=="],
 
     "@tauri-apps/plugin-global-shortcut": ["@tauri-apps/plugin-global-shortcut@2.2.0", "", { "dependencies": { "@tauri-apps/api": "^2.0.0" } }, "sha512-clI9Bg/BcxWXNDK+ij601o1qC2WxMEy8ovhGgEW5Ai17oPy0KK8uwzmc59KiVnOYKpBWHCUPqBxG+KBNUFXgzw=="],
+
+    "@tauri-apps/plugin-positioner": ["@tauri-apps/plugin-positioner@2.2.0", "", { "dependencies": { "@tauri-apps/api": "^2.0.0" } }, "sha512-3JIWqV4U1US4nmM4PGmAHODq0ltkJ91MyANR033elKSSpX3AqKnVQnLz76xThBFHjChJrZwsXASpc2Inpu+cTg=="],
 
     "@types/bun": ["@types/bun@1.2.5", "", { "dependencies": { "bun-types": "1.2.5" } }, "sha512-w2OZTzrZTVtbnJew1pdFmgV99H0/L+Pvw+z1P67HaR18MHOzYnTYOi6qzErhK8HyT+DB782ADVPPE92Xu2/Opg=="],
 
