@@ -14,23 +14,9 @@
       {
         "label": "main",
         "title": "Dead By Daylight Trial Mapper",
-        "width": 800,
-        "height": 600
-      },
-      {
-        "label": "overlay",
-        "url": "/overlay",
-        "visible": false,
-        "decorations": false,
-        "closable": false,
-        "alwaysOnTop": true,
-        "focus": false,
-        "hiddenTitle": true,
-        "devtools": false,
-        "dragDropEnabled": false,
         "resizable": false,
-        "minimizable": false,
-        "skipTaskbar": true
+        "closable": false,
+        "decorations": false
       }
     ],
     "security": {

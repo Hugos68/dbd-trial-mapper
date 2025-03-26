@@ -4,3 +4,7 @@
 @import '@skeletonlabs/skeleton/optional/presets';
 
 @plugin '@tailwindcss/forms';
+
+html {
+    height: fit-content;
+}
