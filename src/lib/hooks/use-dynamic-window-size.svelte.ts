@@ -6,7 +6,7 @@ function useDynamicWindowSize() {
     const height = useDocumentHeight();
     $effect(() => { 
         const window = WebviewWindow.getCurrent();
-        window.setSize(new PhysicalSize(500, Math.round(height.current)));
+        window.setSize(new PhysicalSize(300, Math.round(height.current)));
     });
 }
 
