@@ -4,9 +4,9 @@ import { PhysicalSize } from '@tauri-apps/api/window';
 
 function useDynamicWindowSize() {
     const height = useDocumentHeight();
-    $effect(() => {  
+    $effect(() => { 
         const window = WebviewWindow.getCurrent();
-        window.setSize(new PhysicalSize(500, 400));
+        window.setSize(new PhysicalSize(500, Math.round(height.current)));
     });
 }
 
