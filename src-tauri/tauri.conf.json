@@ -14,8 +14,10 @@
       {
         "label": "main",
         "title": "Dead By Daylight Trial Mapper",
-        "resizable": false,
+        "visible": false,
         "closable": false,
+        "resizable": false,
+        "minimizable": false,
         "decorations": false
       }
     ],

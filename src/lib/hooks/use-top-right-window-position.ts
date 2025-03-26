@@ -10,7 +10,8 @@ async function useTopRightWindowPosition() {
         throw new Error('No monitor found');
     }
     const size = await window.size();
-    window.setPosition(new PhysicalPosition(monitor.size.width - size.width - X_OFFSET, 0));
+    await window.setPosition(new PhysicalPosition(monitor.size.width - size.width - X_OFFSET, 0));
+    await window.show();
 }
 
 export { useTopRightWindowPosition }; 
