@@ -1,6 +1,6 @@
 {
 	"$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
 	"files": {
-		"ignore": [".svelte-kit/", "build/", "node_modules/"]
+		"ignore": [".svelte-kit/", "node_modules/", "build/", "src-tauri/target/"]
 	}
 }
