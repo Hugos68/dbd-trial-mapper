@@ -21,7 +21,7 @@
 				"decorations": false,
 				"alwaysOnTop": true,
 				"incognito": true,
-				"contentProtected": true
+				"contentProtected": false
 			}
 		],
 		"security": {

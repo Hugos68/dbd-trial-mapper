@@ -3,6 +3,8 @@ import { useDynamicWindowSize } from "$lib/hooks/use-dynamic-window-size.svelte.
 import { useTopRightWindowPosition } from "$lib/hooks/use-top-right-window-position.js";
 import { List, Plus, Settings, UserPlus } from "@lucide/svelte";
 import { WebviewWindow } from "@tauri-apps/api/webviewWindow";
+import { settings } from "$lib/settings.svelte.js";
+import { register, unregisterAll } from "@tauri-apps/plugin-global-shortcut";
 import "../app.css";
 
 const { children, data } = $props();
@@ -10,13 +12,19 @@ const { children, data } = $props();
 async function setup() {
 	useDynamicWindowSize();
 	await useTopRightWindowPosition();
+    await unregisterAll();
+    await register("CommandOrControl+Shift+Z", (event) => {
+        if (event.state === "Pressed") {
+            settings.zen = !settings.zen;
+        }
+    });
 	await WebviewWindow.getCurrent().show();
 }
 
 setup();
 </script>
 
-<main class="p-2 grid gap-2">
+<main class={{ "p-2 grid gap-2": !settings.zen }}>
     <div>
         {#if data.trial}
             <img class="rounded-md" src={data.trial.image_url} alt={data.trial.name} />
@@ -29,22 +37,24 @@ setup();
             </div>
         {/if}
     </div>
-    <div class="rounded-md">
-        {@render children()}   
-    </div>
-    <div class="grid grid-cols-2 gap-2">
-        <a href="/realms" class="btn preset-filled-primary-500">
-            <List />
-        </a>
-        <a href="/lobby/create" class="btn preset-filled-primary-500">
-            <Plus />
-        </a>
-        <a href="/lobby/join" class="btn preset-filled-primary-500">
-            <UserPlus />
-        </a> 
-        <a href="/settings"class="btn preset-filled-primary-500">
-            <Settings />
-        </a>
-    </div>
+    {#if !settings.zen}
+        <div class="rounded-md">
+            {@render children()}   
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+            <a href="/realms" class="btn preset-filled-primary-500">
+                <List />
+            </a>
+            <a href="/lobby/create" class="btn preset-filled-primary-500">
+                <Plus />
+            </a>
+            <a href="/lobby/join" class="btn preset-filled-primary-500">
+                <UserPlus />
+            </a> 
+            <a href="/settings"class="btn preset-filled-primary-500">
+                <Settings />
+            </a>
+        </div>
+    {/if}
 </main>
  
