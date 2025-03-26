@@ -18,8 +18,19 @@
         "height": 600
       },
       {
-        "label": "trial",
-        "url": "/trial"
+        "label": "overlay",
+        "url": "/overlay",
+        "visible": false,
+        "decorations": false,
+        "closable": false,
+        "alwaysOnTop": true,
+        "focus": false,
+        "hiddenTitle": true,
+        "devtools": false,
+        "dragDropEnabled": false,
+        "resizable": false,
+        "minimizable": false,
+        "skipTaskbar": true
       }
     ],
     "security": {
