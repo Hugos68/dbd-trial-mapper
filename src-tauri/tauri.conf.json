@@ -16,6 +16,10 @@
         "title": "Dead By Daylight Trial Mapper",
         "width": 800,
         "height": 600
+      },
+      {
+        "label": "trial",
+        "url": "/trial"
       }
     ],
     "security": {
