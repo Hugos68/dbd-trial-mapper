@@ -18,10 +18,13 @@ const { data } = $props();
     {/if}
     <button class="btn preset-filled-primary-500" onclick={() => leaveLobby(data.lobby!)}>Leave Lobby</button>
   {:else}
-    <div class="grid grid-cols-2 gap-2">
-      <button class="btn preset-filled-primary-500" onclick={createLobby}>Create Lobby</button>
-      <button class="btn preset-filled-primary-500">Join Lobby</button>
-    </div>
+    <button class="btn preset-filled-primary-500" onclick={createLobby}>Create Lobby</button>
+    <form class="input-group grid-cols-[1fr_auto]">
+      <input class="ig-input" placeholder="Enter ID..." />
+      <button class="ig-btn preset-filled-primary-500">
+        Join
+      </button>
+    </form>
   {/if}
   <button class="btn preset-filled-primary-500">Preferences</button>
   <button class="btn preset-filled-error-500" onclick={signOut}>Sign Out</button>
