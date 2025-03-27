@@ -17,7 +17,7 @@ const { trigger, content, ...props }: Props = $props();
         {/snippet}
 	</bits.Tooltip.Trigger>
 	<bits.Tooltip.Portal>
-		<bits.Tooltip.Content class="p-2 preset-filled rounded-md" sideOffset={8}>
+		<bits.Tooltip.Content class="p-1 preset-filled rounded-md text-xs font-bold" sideOffset={8}>
 			{@render content?.()}
 		</bits.Tooltip.Content>
 	</bits.Tooltip.Portal>

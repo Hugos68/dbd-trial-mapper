@@ -7,9 +7,9 @@ export async function load(event) {
 		redirect(303, "/sign-in");
 	}
 	const trials_response = await supabase
-		.from("trials")
+		.from("trial")
 		.select("*")
-		.eq("realm", event.params.realm_id);
+		.eq("realm_id", event.params.realm_id);
 	if (trials_response.error) {
 		error(500, trials_response.error.message);
 	}
