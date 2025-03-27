@@ -14,8 +14,11 @@
 			{
 				"label": "main",
 				"width": 300,
+				"visible": false,
 				"resizable": false,
+				"maximizable": false,
 				"minimizable": false,
+				"fullscreen": false,
 				"decorations": false,
 				"closable": false,
 				"alwaysOnTop": true,

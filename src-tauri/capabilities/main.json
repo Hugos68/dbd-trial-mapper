@@ -4,6 +4,9 @@
 	"windows": ["main"],
 	"permissions": [
 		"core:default",
+		"core:window:allow-show",
+		"core:window:allow-set-size",
+		"positioner:default",
 		"opener:default",
 		"deep-link:default"
 	]

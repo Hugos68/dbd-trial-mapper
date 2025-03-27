@@ -5,7 +5,7 @@ import { openUrl } from "@tauri-apps/plugin-opener";
 import { invalidateAll } from "$app/navigation";
 import { getCurrentWindow } from "@tauri-apps/api/window";
 
-export async function login_with_provider(provider: Provider) {
+export async function loginWithProvider(provider: Provider) {
 	const oauth_response = await supabase.auth.signInWithOAuth({
 		provider: provider,
 		options: {
