@@ -1,5 +1,6 @@
 <script lang="ts">
 import { invalidateAll } from "$app/navigation";
+import Layout from "$lib/components/layout.svelte";
 import { supabase } from "$lib/supabase/client";
 import type { Provider } from "@supabase/supabase-js";
 import { getCurrentWindow } from "@tauri-apps/api/window";
@@ -39,6 +40,8 @@ async function login_with_provider(provider: Provider) {
 }
 </script>
   
-{#each providers as provider}
-	<button class="btn preset-filled capitalize" onclick={() => login_with_provider(provider)}>{provider}</button>
-{/each}
+<Layout>
+	{#each providers as provider}
+		<button class="btn preset-filled capitalize" onclick={() => login_with_provider(provider)}>{provider}</button>
+	{/each}
+</Layout>
