@@ -22,6 +22,7 @@
 				"label": "overlay",
 				"url": "/overlay",
 				"width": 400,
+				"transparent": true,
 				"resizable": false,
 				"visible": false,
 				"minimizable": false,

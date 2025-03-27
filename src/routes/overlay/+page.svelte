@@ -10,8 +10,6 @@ const { data } = $props();
 const overlay = WebviewWindow.getCurrent();
 const documentRect = new ElementRect(() => document.documentElement);
 
-$inspect(documentRect.current.height);
-
 $effect(() => {
 	overlay.setSize(
 		new PhysicalSize(400, Math.round(documentRect.current.height)),
