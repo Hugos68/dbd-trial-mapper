@@ -23,6 +23,7 @@
 		"@tauri-apps/plugin-opener": "~2",
 		"@types/bun": "^1.2.6",
 		"bits-ui": "^1.3.14",
+		"runed": "^0.25.0",
 		"supabase": "^2.20.5",
 		"svelte": "^5.0.0",
 		"svelte-check": "^4.0.0",
