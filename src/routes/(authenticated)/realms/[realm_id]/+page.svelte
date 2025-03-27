@@ -13,9 +13,6 @@ async function select_trial(trial: (typeof data.trials)[number]) {
 	if (lobby_member_response.error) {
 		throw new Error(lobby_member_response.error.message);
 	}
-	console.log(
-		`Going to update lobby ${lobby_member_response.data.lobby_id} with trial ${trial.id}`,
-	);
 	const update_lobby_response = await supabase
 		.from("lobby")
 		.update({
