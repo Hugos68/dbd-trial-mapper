@@ -1,5 +1,5 @@
 import { invalidateAll } from "$app/navigation";
-import { supabase } from "./client";
+import { supabase } from "../client";
 
 export async function createLobby() {
 	const insertLobbyResponse = await supabase.from("lobby").insert({});

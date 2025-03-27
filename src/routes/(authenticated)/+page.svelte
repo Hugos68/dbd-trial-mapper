@@ -1,7 +1,7 @@
 <script lang="ts">
-import { createLobby } from "$lib/supabase/create-lobby";
-import { leaveLobby } from "$lib/supabase/leave-lobby.js";
-import { signOut } from "$lib/supabase/sign-out";
+import { createLobby } from "$lib/supabase/lobby/create-lobby";
+import { leaveLobby } from "$lib/supabase/lobby/leave-lobby";
+import { signOut } from "$lib/supabase/auth/sign-out";
 
 const { data } = $props();
 </script>

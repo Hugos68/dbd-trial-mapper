@@ -1,6 +1,6 @@
 import { invalidateAll } from "$app/navigation";
-import { supabase } from "./client";
-import type { Database } from "./types";
+import { supabase } from "../client";
+import type { Database } from "../types";
 
 export async function leaveLobby(
 	lobby: Database["public"]["Tables"]["lobby"]["Row"],

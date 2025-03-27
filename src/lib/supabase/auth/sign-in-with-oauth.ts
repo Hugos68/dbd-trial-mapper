@@ -3,7 +3,7 @@ import type { Provider } from "@supabase/supabase-js";
 import { getCurrentWindow } from "@tauri-apps/api/window";
 import { onOpenUrl } from "@tauri-apps/plugin-deep-link";
 import { openUrl } from "@tauri-apps/plugin-opener";
-import { supabase } from "./client";
+import { supabase } from "../client";
 
 export async function signInWithOAuth(provider: Provider) {
 	const oauth_response = await supabase.auth.signInWithOAuth({

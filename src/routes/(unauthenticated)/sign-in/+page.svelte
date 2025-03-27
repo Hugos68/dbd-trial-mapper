@@ -1,5 +1,5 @@
 <script lang="ts">
-import { signInWithOAuth } from "$lib/supabase/sign-in-with-oauth";
+import { signInWithOAuth } from "$lib/supabase/auth/sign-in-with-oauth";
 </script>
 
 <div>
