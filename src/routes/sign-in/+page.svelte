@@ -1,6 +1,6 @@
 <script lang="ts">
 import { invalidateAll } from "$app/navigation";
-import { supabase } from "$lib/supabase";
+import { supabase } from "$lib/supabase/client";
 import type { Provider } from "@supabase/supabase-js";
 import { getCurrentWindow } from "@tauri-apps/api/window";
 import { onOpenUrl } from "@tauri-apps/plugin-deep-link";

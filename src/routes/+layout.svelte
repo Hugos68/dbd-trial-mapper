@@ -1,6 +1,6 @@
 <script lang="ts">
 import { invalidateAll } from "$app/navigation";
-import { supabase } from "$lib/supabase";
+import { supabase } from "$lib/supabase/client";
 import {
 	HomeIcon,
 	LogInIcon,
