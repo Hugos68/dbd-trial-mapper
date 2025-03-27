@@ -1,8 +1,23 @@
 <script lang="ts">
+import { goto } from "$app/navigation";
+import { supabase } from "$lib/supabase/client.js";
+
 const { data } = $props();
 
 async function select_trial(trial: (typeof data.trials)[number]) {
-	localStorage.setItem("trial", JSON.stringify(trial));
+	const update_lobby_response = await supabase
+		.from("lobbies")
+		.update({
+			trial: trial.id,
+		})
+		.eq("id", data.session.user.id)
+		.select()
+		.single();
+	if (update_lobby_response.error) {
+		throw new Error(update_lobby_response.error.message);
+	}
+	console.log(update_lobby_response.data);
+	await goto("/overlay");
 }
 </script>
 

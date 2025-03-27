@@ -8,7 +8,7 @@ export async function load(event) {
 	}
 	const lobby_response = await supabase
 		.from("lobbies")
-		.select("*")
+		.select("*, trial (*)")
 		.eq("id", data.session.user.id)
 		.single();
 	if (lobby_response.error) {
