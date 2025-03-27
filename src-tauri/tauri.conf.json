@@ -13,9 +13,22 @@
 		"windows": [
 			{
 				"title": "DBD Trial Mapper",
+				"label": "main",
 				"width": 800,
 				"height": 600,
 				"center": true
+			},
+			{
+				"label": "overlay",
+				"url": "/overlay",
+				"resizable": false,
+				"visible": false,
+				"minimizable": false,
+				"decorations": false,
+				"closable": false,
+				"alwaysOnTop": true,
+				"contentProtected": true,
+				"skipTaskbar": true
 			}
 		],
 		"security": {

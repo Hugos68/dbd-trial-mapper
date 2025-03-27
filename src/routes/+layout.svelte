@@ -1,7 +1,8 @@
 <script lang="ts">
-import { invalidateAll } from "$app/navigation";
+import { beforeNavigate, invalidateAll } from "$app/navigation";
 import { supabase } from "$lib/supabase/client";
 import {
+  ExternalLinkIcon,
 	HomeIcon,
 	LogInIcon,
 	LogOutIcon,
@@ -12,8 +13,24 @@ import {
 import "../app.css";
 import Tooltip from "$lib/components/tooltip.svelte";
 import * as bits from "bits-ui";
+  import { WebviewWindow } from "@tauri-apps/api/webviewWindow";
 
 const { children, data } = $props();
+
+beforeNavigate(async (event) => {
+	if (event.to?.url.pathname === "/overlay") {
+		event.cancel();
+		const overlay = await WebviewWindow.getByLabel('overlay');
+		if (!overlay) {
+			return;
+		}
+		if (await overlay.isVisible()) {
+			await overlay.hide();
+		} else {
+			await overlay.show();
+		}
+	}
+});
 
 async function sign_out() {
 	await supabase.auth.signOut();
@@ -32,7 +49,14 @@ async function sign_out() {
 					<span>Home</span>
 				{/snippet}
 			</Tooltip>
-			<a href="/overlay">Overlay</a>
+			<Tooltip>
+				{#snippet trigger({ props })}
+					<a {...props} class="btn preset-filled" href="/overlay"><ExternalLinkIcon /></a>
+				{/snippet}
+				{#snippet content()}
+					<span>Toggle Overlay</span>
+				{/snippet}
+			</Tooltip>
 		</nav>
 		<nav class="flex gap-2">
 			{#if data.session}
@@ -62,7 +86,7 @@ async function sign_out() {
 				</Tooltip>
 				<Tooltip>
 					{#snippet trigger({ props })}
-						<button {...props} class="btn preset-filled-error-500" onclick={sign_out}><LogOutIcon /></button>
+						<button {...props} class="btn preset-filled-error-500" onclick={sign_out}><LogOutIcon /></button>	
 					{/snippet}
 					{#snippet content()}
 						<span>Sign Out</span>
