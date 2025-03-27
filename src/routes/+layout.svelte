@@ -32,6 +32,7 @@ async function sign_out() {
 					<span>Home</span>
 				{/snippet}
 			</Tooltip>
+			<a href="/overlay">Overlay</a>
 		</nav>
 		<nav class="flex gap-2">
 			{#if data.session}

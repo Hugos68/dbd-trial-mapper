@@ -3,7 +3,7 @@ import { error } from "@sveltejs/kit";
 
 export async function load(event) {
 	const trials_response = await supabase
-		.from("trial")
+		.from("trials")
 		.select("*")
 		.eq("realm", event.params.realm_id);
 	if (trials_response.error) {

@@ -1,7 +1,13 @@
 {
 	"$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
 	"files": {
-		"ignore": [".svelte-kit/", "node_modules/", "build/", "src-tauri/target/"]
+		"ignore": [
+			".svelte-kit/",
+			"node_modules/",
+			"build/",
+			"src-tauri/target/",
+			"src/lib/supabase/types.ts"
+		]
 	},
 	"overrides": [
 		{
