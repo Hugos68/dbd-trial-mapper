@@ -1,7 +1,7 @@
 <script lang="ts">
+import { signOut } from "$lib/supabase/auth/sign-out";
 import { createLobby } from "$lib/supabase/lobby/create-lobby";
 import { leaveLobby } from "$lib/supabase/lobby/leave-lobby";
-import { signOut } from "$lib/supabase/auth/sign-out";
 
 const { data } = $props();
 </script>
@@ -13,13 +13,17 @@ const { data } = $props();
 
 <div class="grid gap-2">
   {#if data.lobby}
-    <button class="btn preset-filled" onclick={() => leaveLobby(data.lobby!)}>Leave Lobby</button>
+    {#if data.lobby.user_id === data.session.user.id}
+      <button class="btn preset-filled-primary-500">Choose Map</button>
+    {/if}
+    <button class="btn preset-filled-primary-500" onclick={() => leaveLobby(data.lobby!)}>Leave Lobby</button>
   {:else}
     <div class="grid grid-cols-2 gap-2">
-      <button class="btn preset-filled" onclick={createLobby}>Create Lobby</button>
-      <button class="btn preset-filled">Join Lobby</button>
+      <button class="btn preset-filled-primary-500" onclick={createLobby}>Create Lobby</button>
+      <button class="btn preset-filled-primary-500">Join Lobby</button>
     </div>
   {/if}
+  <button class="btn preset-filled-primary-500">Preferences</button>
   <button class="btn preset-filled-error-500" onclick={signOut}>Sign Out</button>
 </div>
 

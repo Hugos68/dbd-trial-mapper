@@ -23,7 +23,7 @@ export async function load(event) {
 		error(500, participatingLobbyResponse.error.message);
 	}
 	return {
-		...data,
+		session: data.session,
 		lobby: hostingLobbyResponse.data ?? participatingLobbyResponse.data?.lobby,
 	};
 }
