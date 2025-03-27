@@ -1,5 +1,5 @@
-import { moveWindow, type Position } from '@tauri-apps/plugin-positioner';
+import { type Position, moveWindow } from "@tauri-apps/plugin-positioner";
 
 export async function useWindowPosition(position: Position) {
-    await moveWindow(position);
+	await moveWindow(position);
 }

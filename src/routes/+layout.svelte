@@ -1,9 +1,9 @@
 <script lang="ts">
-import { Position } from '@tauri-apps/plugin-positioner';
-import { useWindowPosition } from '$lib/hooks/use-window-position';
-import { useShowWindow } from '$lib/hooks/use-show-window';
-import { useDynamicHeight } from '$lib/hooks/use-dynamic-height.svelte';
-import '../app.css';
+import { useDynamicHeight } from "$lib/hooks/use-dynamic-height.svelte";
+import { useShowWindow } from "$lib/hooks/use-show-window";
+import { useWindowPosition } from "$lib/hooks/use-window-position";
+import { Position } from "@tauri-apps/plugin-positioner";
+import "../app.css";
 
 const { children } = $props();
 
@@ -12,4 +12,6 @@ useWindowPosition(Position.TopRight);
 useShowWindow();
 </script>
 
-{@render children()}
+<main class="p-4 grid gap-4">
+    {@render children()}
+</main>

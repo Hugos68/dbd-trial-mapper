@@ -1,11 +1,11 @@
+import { invalidateAll } from "$app/navigation";
 import type { Provider } from "@supabase/supabase-js";
-import { supabase } from "./client";
+import { getCurrentWindow } from "@tauri-apps/api/window";
 import { onOpenUrl } from "@tauri-apps/plugin-deep-link";
 import { openUrl } from "@tauri-apps/plugin-opener";
-import { invalidateAll } from "$app/navigation";
-import { getCurrentWindow } from "@tauri-apps/api/window";
+import { supabase } from "./client";
 
-export async function loginWithProvider(provider: Provider) {
+export async function signInWithOAuth(provider: Provider) {
 	const oauth_response = await supabase.auth.signInWithOAuth({
 		provider: provider,
 		options: {

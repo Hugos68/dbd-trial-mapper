@@ -1,0 +1,16 @@
+<script lang="ts">
+import { signInWithOAuth } from "$lib/supabase/sign-in-with-oauth";
+</script>
+
+<div>
+    <h1 class="h1">Welcome!</h1>
+    <p >Sign in with one of the follow providers:</p>
+</div>
+
+<div class="grid gap-2">
+    {#each ["google"] as const as provider}
+        <button class="btn preset-filled capitalize" onclick={() => signInWithOAuth(provider)}>
+            {provider}
+        </button>
+    {/each}
+</div>
