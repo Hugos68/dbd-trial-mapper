@@ -11,19 +11,19 @@ export type Database = {
     Tables: {
       lobby: {
         Row: {
-          access: Database["public"]["Enums"]["lobby_access"]
           id: string
           trial_id: string | null
+          user_id: string
         }
         Insert: {
-          access?: Database["public"]["Enums"]["lobby_access"]
           id?: string
           trial_id?: string | null
+          user_id?: string
         }
         Update: {
-          access?: Database["public"]["Enums"]["lobby_access"]
           id?: string
           trial_id?: string | null
+          user_id?: string
         }
         Relationships: [
           {
@@ -35,34 +35,43 @@ export type Database = {
           },
         ]
       }
-      lobby_member: {
+      lobby_participant: {
         Row: {
           id: string
           lobby_id: string
-          type: Database["public"]["Enums"]["lobby_member_type"]
           user_id: string
         }
         Insert: {
           id?: string
           lobby_id: string
-          type?: Database["public"]["Enums"]["lobby_member_type"]
-          user_id: string
+          user_id?: string
         }
         Update: {
           id?: string
           lobby_id?: string
-          type?: Database["public"]["Enums"]["lobby_member_type"]
           user_id?: string
         }
         Relationships: [
           {
-            foreignKeyName: "lobby_member_lobby_id_fkey"
+            foreignKeyName: "lobby_participant_lobby_id_fkey"
             columns: ["lobby_id"]
             isOneToOne: false
             referencedRelation: "lobby"
             referencedColumns: ["id"]
           },
         ]
+      }
+      preference: {
+        Row: {
+          id: string
+        }
+        Insert: {
+          id?: string
+        }
+        Update: {
+          id?: string
+        }
+        Relationships: []
       }
       realm: {
         Row: {
@@ -122,8 +131,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      lobby_access: "public" | "private"
-      lobby_member_type: "host" | "guest"
+      [_ in never]: never
     }
     CompositeTypes: {
       [_ in never]: never

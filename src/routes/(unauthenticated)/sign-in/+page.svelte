@@ -4,7 +4,7 @@ import { signInWithOAuth } from "$lib/supabase/sign-in-with-oauth";
 
 <div>
     <h1 class="h1">Welcome!</h1>
-    <p >Sign in with one of the follow providers:</p>
+    <span class="text-surface-500 text-sm">Sign in with one of the follow providers</span>
 </div>
 
 <div class="grid gap-2">
