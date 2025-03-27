@@ -1,6 +1,5 @@
 <script lang="ts">
 import { supabase } from "$lib/supabase/client.js";
-import { WebviewWindow } from "@tauri-apps/api/webviewWindow";
 
 const { data } = $props();
 
@@ -14,20 +13,19 @@ async function select_trial(trial: (typeof data.trials)[number]) {
 	if (lobby_member_response.error) {
 		throw new Error(lobby_member_response.error.message);
 	}
+	console.log(
+		`Going to update lobby ${lobby_member_response.data.lobby_id} with trial ${trial.id}`,
+	);
 	const update_lobby_response = await supabase
 		.from("lobby")
 		.update({
 			trial_id: trial.id,
 		})
-		.eq("id", lobby_member_response.data.lobby.id);
+		.eq("id", lobby_member_response.data.lobby_id)
+		.select();
 	if (update_lobby_response.error) {
 		throw new Error(update_lobby_response.error.message);
 	}
-	const overlay = await WebviewWindow.getByLabel("overlay");
-	if (!overlay) {
-		throw new Error("Overlay not found");
-	}
-	await overlay.emit("trial:update");
 }
 </script>
 

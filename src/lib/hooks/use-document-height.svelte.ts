@@ -7,7 +7,7 @@ export function use_document_height() {
 	const documentRect = new ElementRect(() => document.documentElement);
 	$effect(() => {
 		window.setSize(
-			new PhysicalSize(400, Math.round(documentRect.current.height)),
+			new PhysicalSize(300, Math.round(documentRect.current.height)),
 		);
 	});
 }

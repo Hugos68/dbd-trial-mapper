@@ -1,9 +1,7 @@
 import { supabase } from "$lib/supabase/client";
 import type { Database } from "$lib/supabase/types";
 
-export function useRealtimeLobby(
-	lobby: Database["public"]["Tables"]["lobby"]["Row"],
-) {
+export function useRealtimeLobby<T extends { id: string }>(lobby: T) {
 	const value = $state({ current: lobby });
 	$effect(() => {
 		const channel = supabase.channel("lobby-changes");
@@ -17,7 +15,6 @@ export function useRealtimeLobby(
 					filter: `id=eq.${lobby.id}`,
 				},
 				async (payload) => {
-					console.log("lobby-changes", payload);
 					const lobby_response = await supabase
 						.from("lobby")
 						.select("*, trial (*)")
@@ -26,7 +23,7 @@ export function useRealtimeLobby(
 					if (lobby_response.error) {
 						throw new Error(lobby_response.error.message);
 					}
-					value.current = lobby_response.data;
+					value.current = lobby_response.data as unknown as T;
 				},
 			)
 			.subscribe();
