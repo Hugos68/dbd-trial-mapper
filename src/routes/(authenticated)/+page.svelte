@@ -13,7 +13,7 @@ const { data } = $props();
 
 <div class="grid gap-2">
   {#if data.lobby}
-    <button class="btn preset-filled" onclick={() => leaveLobby(data.lobby)}>Leave Lobby</button>
+    <button class="btn preset-filled" onclick={() => leaveLobby(data.lobby!)}>Leave Lobby</button>
   {:else}
     <div class="grid grid-cols-2 gap-2">
       <button class="btn preset-filled" onclick={createLobby}>Create Lobby</button>
