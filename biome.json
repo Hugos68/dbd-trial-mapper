@@ -4,16 +4,16 @@
 		"ignore": [".svelte-kit/", "node_modules/", "build/", "src-tauri/target/"]
 	},
 	"overrides": [
-      {
-        "include": ["*.svelte"],
-        "linter": {
-          "rules": {
-            "style": {
-              "useConst": "off",
-              "useImportType": "off"
-            }
-          }
-        }
-      }
-    ]
+		{
+			"include": ["*.svelte"],
+			"linter": {
+				"rules": {
+					"style": {
+						"useConst": "off",
+						"useImportType": "off"
+					}
+				}
+			}
+		}
+	]
 }

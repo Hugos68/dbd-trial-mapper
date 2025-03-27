@@ -2,9 +2,9 @@
 import { invalidateAll } from "$app/navigation";
 import { supabase } from "$lib/supabase";
 import type { Provider } from "@supabase/supabase-js";
+import { getCurrentWindow } from "@tauri-apps/api/window";
 import { onOpenUrl } from "@tauri-apps/plugin-deep-link";
 import { openUrl } from "@tauri-apps/plugin-opener";
-import { getCurrentWindow } from '@tauri-apps/api/window';
 
 const providers: Provider[] = ["google"];
 
@@ -26,7 +26,6 @@ async function login_with_provider(provider: Provider) {
 		}
 		const code = new URL(url).searchParams.get("code");
 		if (!code) {
-		
 			throw new Error("No code found");
 		}
 		const exchange_response = await supabase.auth.exchangeCodeForSession(code);

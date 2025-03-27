@@ -1,10 +1,17 @@
 <script lang="ts">
 import { invalidateAll } from "$app/navigation";
 import { supabase } from "$lib/supabase";
-import { Home, LogOut, LogIn, Plus, Users } from '@lucide/svelte'; 
+import {
+	HomeIcon,
+	LogInIcon,
+	LogOutIcon,
+	MapIcon,
+	PlusIcon,
+	UsersIcon,
+} from "@lucide/svelte";
 import "../app.css";
-import { Tooltip as BitsToolTip } from "bits-ui";
 import Tooltip from "$lib/components/tooltip.svelte";
+import * as bits from "bits-ui";
 
 const { children, data } = $props();
 
@@ -14,12 +21,12 @@ async function sign_out() {
 }
 </script>
 
-<BitsToolTip.Provider>
+<bits.Tooltip.Provider>
 	<header class="preset-filled-surface-100-900 p-4 rounded-b-md flex justify-between">
 		<nav>
 			<Tooltip>
 				{#snippet trigger({ props })}
-					<a {...props} class="btn preset-filled" href="/"><Home /></a>
+					<a {...props} class="btn preset-filled" href="/"><HomeIcon /></a>
 				{/snippet}
 				{#snippet content()}
 					<span>Home</span>
@@ -30,7 +37,15 @@ async function sign_out() {
 			{#if data.session}
 				<Tooltip>
 					{#snippet trigger({ props })}
-						<a {...props} class="btn preset-filled" href="/lobby/create"><Plus /></a>
+						<a {...props} class="btn preset-filled" href="/realms"><MapIcon /></a>
+					{/snippet}
+					{#snippet content()}
+						<span>Realms</span>
+					{/snippet}
+				</Tooltip>
+				<Tooltip>
+					{#snippet trigger({ props })}
+						<a {...props} class="btn preset-filled" href="/lobby/create"><PlusIcon  /></a>
 					{/snippet}
 					{#snippet content()}
 						<span>Create Lobby</span>
@@ -38,7 +53,7 @@ async function sign_out() {
 				</Tooltip>
 				<Tooltip>
 					{#snippet trigger({ props })}
-						<a {...props} class="btn preset-filled" href="/lobby/join"><Users /></a>
+						<a {...props} class="btn preset-filled" href="/lobby/join"><UsersIcon  /></a>
 					{/snippet}
 					{#snippet content()}
 						<span>Join Lobby</span>
@@ -46,7 +61,7 @@ async function sign_out() {
 				</Tooltip>
 				<Tooltip>
 					{#snippet trigger({ props })}
-						<button {...props} class="btn preset-filled-error-500" onclick={sign_out}><LogOut /></button>
+						<button {...props} class="btn preset-filled-error-500" onclick={sign_out}><LogOutIcon /></button>
 					{/snippet}
 					{#snippet content()}
 						<span>Sign Out</span>
@@ -55,10 +70,10 @@ async function sign_out() {
 			{:else}
 				<Tooltip>
 					{#snippet trigger({ props })}
-						<a {...props} class="btn preset-filled-success-500" href="/sign-in"><LogIn /></a>
+						<a {...props} class="btn preset-filled-success-500" href="/sign-in"><LogInIcon /></a>
 					{/snippet}
 					{#snippet content()}
-						<span>Sign Out</span>
+						<span>Sign In</span>
 					{/snippet}
 				</Tooltip>
 			{/if}
@@ -68,6 +83,6 @@ async function sign_out() {
 	<main class="p-4">
 		{@render children()}
 	</main>
-</BitsToolTip.Provider>
+</bits.Tooltip.Provider>
 
 
