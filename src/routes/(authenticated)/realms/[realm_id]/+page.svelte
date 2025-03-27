@@ -1,5 +1,4 @@
 <script lang="ts">
-import { invalidate, invalidateAll } from "$app/navigation";
 import { supabase } from "$lib/supabase/client.js";
 import { WebviewWindow } from "@tauri-apps/api/webviewWindow";
 
@@ -12,7 +11,6 @@ async function select_trial(trial: (typeof data.trials)[number]) {
 		.eq("user_id", data.session.user.id)
 		.eq("type", "host")
 		.single();
-	console.log(lobby_member_response);
 	if (lobby_member_response.error) {
 		throw new Error(lobby_member_response.error.message);
 	}
@@ -29,8 +27,7 @@ async function select_trial(trial: (typeof data.trials)[number]) {
 	if (!overlay) {
 		throw new Error("Overlay not found");
 	}
-	console.log("Emitting update");
-	await overlay.emit("update");
+	await overlay.emit("trial:update");
 }
 </script>
 
