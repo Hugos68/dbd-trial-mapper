@@ -1,6 +1,5 @@
 <script lang="ts">
 import { signInWithOAuth } from "$lib/supabase/auth/sign-in-with-oauth";
-import { closeWindow } from "$lib/utilities/close-window";
 </script>
 
 <div class="grid gap-2">

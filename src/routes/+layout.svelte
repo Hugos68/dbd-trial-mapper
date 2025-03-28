@@ -4,7 +4,7 @@ import { useDynamicHeight } from "$lib/hooks/use-dynamic-height.svelte";
 import { useShowWindow } from "$lib/hooks/use-show-window";
 import { useWindowPosition } from "$lib/hooks/use-window-position";
 import { closeWindow } from "$lib/utilities/close-window";
-import { LogOutIcon, XIcon } from "@lucide/svelte";
+import { LogOutIcon, SettingsIcon, XIcon } from "@lucide/svelte";
 import { Position } from "@tauri-apps/plugin-positioner";
 import type { Snippet } from "svelte";
 import "../app.css";
@@ -23,16 +23,18 @@ useShowWindow();
 
 
 <div class="p-4 grid gap-16">
-    <header class="flex justify-between items-center">
-        {#if page.data.title}
+    <header>
+        <div class="grid grid-cols-[1fr_auto] items-center">
             <h1 class="h1">{page.data.title}</h1>
-        {/if}
-        <div class="h-fit flex gap-2">
-            {#if page.data.session}
-                <button class="btn preset-filled-error-500" onclick={signOut}><LogOutIcon /></button>
-            {/if}
-            <button class="btn preset-filled-error-500" onclick={closeWindow}><XIcon /></button>
+            <div class="flex gap-1">
+                {#if page.data.session}
+                    <a title="Settings" href="/preferences" class="block p-2 rounded hover:bg-surface-100-900"><SettingsIcon /></a>
+                    <button title="Sign Out" class="p-2 rounded hover:bg-surface-100-900" onclick={signOut}><LogOutIcon /></button>
+                {/if}
+                <button title="Close" class="p-2 rounded hover:bg-surface-100-900" onclick={closeWindow}><XIcon /></button>
+            </div>
         </div>
+        <span class="text-sm text-surface-500">{page.data.description}</span>
     </header>
     <main>
         {@render children()}
