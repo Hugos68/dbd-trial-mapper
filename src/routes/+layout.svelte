@@ -6,9 +6,9 @@ import { useWindowPosition } from "$lib/hooks/use-window-position";
 import { closeWindow } from "$lib/utilities/close-window";
 import { LogOutIcon, SettingsIcon, XIcon } from "@lucide/svelte";
 import { Position } from "@tauri-apps/plugin-positioner";
+import { signOut } from "$lib/supabase/auth/sign-out";
 import type { Snippet } from "svelte";
 import "../app.css";
-import { signOut } from "$lib/supabase/auth/sign-out";
 
 interface Props {
 	children: Snippet;
