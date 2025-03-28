@@ -2,24 +2,25 @@ import { supabase } from "$lib/supabase/client";
 import type { Tables } from "$lib/supabase/types";
 
 export function useRealtimeLobby<T extends Tables<"lobby">>(lobby: T) {
-	const channel = supabase.channel(`lobby:${lobby?.id}`);
 	const value = $state({
-		channel: channel,
 		current: lobby,
 	});
 	$effect(() => {
-		channel
+		const channel = supabase.channel(`lobby-${lobby.id}`)
 			.on(
-				"broadcast",
+				"postgres_changes",
 				{
-					event: "trial-update",
+					event: "UPDATE",
+					schema: "public",
+					table: "lobby",
+					filter: `id=eq.${lobby.id}`,
 				},
 				(payload) => {
-					value.current = payload as unknown as T;
-				},
+					value.current = payload.new as T;
+				}
 			)
 			.subscribe();
-		return () => channel.unsubscribe();
+		return channel.unsubscribe;
 	});
 	return value;
 }

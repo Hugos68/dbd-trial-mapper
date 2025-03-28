@@ -7,7 +7,7 @@ import { leaveLobby } from "$lib/supabase/lobby/leave-lobby";
 
 const { data } = $props();
 
-const lobby = data.lobby ? useRealtimeLobby(data.lobby) : null;
+const lobby = data.lobby && useRealtimeLobby(data.lobby);
 
 const trialsGroupedByRealm = $derived(
 	data.trials.reduce((realms, trial) => {
@@ -51,11 +51,6 @@ async function submitSelectTrial(event: SubmitEvent) {
 	if (updateLobbyResponse.error) {
 		throw new Error(updateLobbyResponse.error.message);
 	}
-	await lobby.channel.send({
-		type: "broadcast",
-		event: "trial-update",
-		payload: updateLobbyResponse.data,
-	});
 }
 </script>
 
