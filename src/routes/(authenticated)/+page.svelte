@@ -26,12 +26,7 @@ async function writeToClipboard(text: string) {
 }
 </script>
 
-<div>
-  <h1 class="h1">Dashboard</h1>
-  <span class="text-surface-500 text-sm">Welcome {data.session?.user.user_metadata.full_name}</span>
-</div>
-
-<div class="grid gap-2">
+<div class="grid gap-2">  
   {#if data.lobby}
     {#if data.lobby.user_id === data.session.user.id}
       <button class="btn preset-filled-primary-500 font-mono text-sm" onclick={() => writeToClipboard(data.lobby!.id)}>{data.lobby.id}</button>
@@ -48,8 +43,6 @@ async function writeToClipboard(text: string) {
     </form>
   {/if}
   <button class="btn preset-filled-primary-500">Preferences</button>
-  <button class="btn preset-filled-error-500" onclick={signOut}>Sign Out</button>
-  <button class="btn preset-filled-error-500" onclick={closeWindow}>Exit</button>
 </div>
 
 
