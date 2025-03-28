@@ -1,5 +1,5 @@
 <script lang="ts">
-import { invalidateAll } from "$app/navigation";
+import Layout from "$lib/components/layout.svelte";
 import { useRealtimeLobby } from "$lib/hooks/use-realtime-lobby.svelte.js";
 import { supabase } from "$lib/supabase/client.js";
 import { createLobby } from "$lib/supabase/lobby/create-lobby";
@@ -53,38 +53,39 @@ async function submitSelectTrial(event: SubmitEvent) {
 			trial_id: trialId,
 		})
 		.eq("id", lobby.current.id);
-	await invalidateAll();
 	if (updateLobbyResponse.error) {
 		throw new Error(updateLobbyResponse.error.message);
 	}
 }
 </script>
 
-<div class="grid gap-2">
-  {#if lobby}
-    <form onsubmit={submitSelectTrial}>
-      <select name="trial" class="select ring" disabled={lobby.current.user_id !== data.session.user.id} oninput={(event) => event.currentTarget.form?.requestSubmit()}>
-        {#each trialsGroupedByRealm as [realm, trials]}
-          <optgroup label={realm}>
-            {#each trials as trial}
-              <option value={trial.id} selected={lobby.current.trial?.id === trial.id}>
-                {trial.name}
-              </option>
-            {/each}
-          </optgroup>
-        {/each}
-      </select>      
-    </form>
-    <button class="btn preset-filled-primary-500" onclick={() => leaveLobby(lobby.current)}>Leave Lobby</button>
-  {:else}
-    <form class="input-group grid-cols-[1fr_auto]" onsubmit={submitJoinLobby}>
-      <input name="id" class="ig-input" placeholder="Enter ID..." />
-      <button class="ig-btn preset-filled-primary-500">
-        Join Lobby
-      </button>
-    </form>
-    <button class="btn preset-filled-primary-500" onclick={createLobby}>Create Lobby</button>
-  {/if}
-</div>
-
+<Layout title="Lobby" description={lobby ? `ID: ${lobby.current.id}` : "Join or create a lobby"} authenticated={true}>
+	<div class="grid gap-2">
+		{#if lobby}
+		<form onsubmit={submitSelectTrial}>
+			<select name="trial" class="select ring" disabled={lobby.current.user_id !== data.session.user.id} oninput={(event) => event.currentTarget.form?.requestSubmit()}>
+			{#each trialsGroupedByRealm as [realm, trials]}
+				<optgroup label={realm}>
+				{#each trials as trial}
+					<option value={trial.id} selected={lobby.current.trial?.id === trial.id}>
+						{trial.name}
+					</option>
+				{/each}
+				</optgroup>
+			{/each}
+			</select>      
+		</form>
+		<a class="btn preset-filled-primary-500" href="/trial">Show Trial</a>
+		<button class="btn preset-filled-primary-500" onclick={() => leaveLobby(lobby.current)}>Leave Lobby</button>
+		{:else}
+		<form class="input-group grid-cols-[1fr_auto]" onsubmit={submitJoinLobby}>
+			<input name="id" class="ig-input" placeholder="Enter ID..." />
+			<button class="ig-btn preset-filled-primary-500">
+				Join Lobby
+			</button>
+		</form>
+		<button class="btn preset-filled-primary-500" onclick={createLobby}>Create Lobby</button>
+		{/if}
+	</div>	  
+</Layout>
 

@@ -21,12 +21,10 @@ export async function load(event) {
 	}
 	const lobby =
 		hostingLobbyResponse.data ?? participatingLobbyResponse.data?.lobby;
-	const trials = await supabase.from("trial").select("*, realm (*)");
-	if (trials.error) {
-		error(500, trials.error.message);
+	if (!lobby) {
+		throw error(404, "Lobby not found");
 	}
 	return {
-		lobby: lobby,
-		trials: trials.data,
+		lobby,
 	};
 }

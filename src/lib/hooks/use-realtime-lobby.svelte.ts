@@ -1,7 +1,9 @@
 import { supabase } from "$lib/supabase/client";
 import type { Tables } from "$lib/supabase/types";
 
-export function useRealtimeLobby<T extends Tables<"lobby">>(lobby: T) {
+export function useRealtimeLobby(
+	lobby: Tables<"lobby"> & { trial: Tables<"trial"> | null },
+) {
 	const value = $state({
 		current: lobby,
 	});
@@ -16,8 +18,16 @@ export function useRealtimeLobby<T extends Tables<"lobby">>(lobby: T) {
 					table: "lobby",
 					filter: `id=eq.${lobby.id}`,
 				},
-				(payload) => {
-					value.current = payload.new as T;
+				async () => {
+					const lobbyResponse = await supabase
+						.from("lobby")
+						.select("*, trial (*)")
+						.eq("id", lobby.id)
+						.single();
+					if (lobbyResponse.error) {
+						throw new Error(lobbyResponse.error.message);
+					}
+					value.current = lobbyResponse.data;
 				},
 			)
 			.subscribe();
