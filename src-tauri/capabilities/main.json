@@ -6,6 +6,7 @@
 		"core:default",
 		"core:window:allow-close",
 		"core:window:allow-show",
+		"core:window:allow-set-focus",
 		"core:window:allow-set-size",
 		"positioner:default",
 		"opener:default",

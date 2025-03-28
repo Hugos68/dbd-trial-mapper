@@ -1,10 +1,8 @@
 import { invalidateAll } from "$app/navigation";
 import { supabase } from "../client";
-import type { Database } from "../types";
+import type { Tables } from "../types";
 
-export async function leaveLobby(
-	lobby: Database["public"]["Tables"]["lobby"]["Row"],
-) {
+export async function leaveLobby(lobby: Tables<"lobby">) {
 	const userResponse = await supabase.auth.getUser();
 	if (userResponse.error) {
 		throw new Error(userResponse.error.message);

@@ -21,9 +21,14 @@ export async function load(event) {
 	}
 	const lobby =
 		hostingLobbyResponse.data ?? participatingLobbyResponse.data?.lobby;
+	const trials = await supabase.from("trial").select("*, realm (*)");
+	if (trials.error) {
+		error(500, trials.error.message);
+	}
 	return {
 		title: "Lobby",
-		description: lobby ? `ID: ${lobby.id}` : undefined,
+		description: lobby ? `ID: ${lobby.id}` : "Join or create a lobby",
 		lobby: lobby,
+		trials: trials.data,
 	};
 }
