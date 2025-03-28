@@ -1,5 +1,6 @@
 <script lang="ts">
 import { signInWithOAuth } from "$lib/supabase/auth/sign-in-with-oauth";
+import { closeWindow } from "$lib/utilities/close-window";
 </script>
 
 <div>
@@ -13,4 +14,5 @@ import { signInWithOAuth } from "$lib/supabase/auth/sign-in-with-oauth";
             {provider}
         </button>
     {/each}
+    <button class="btn preset-filled-error-500" onclick={closeWindow}>Exit</button>
 </div>

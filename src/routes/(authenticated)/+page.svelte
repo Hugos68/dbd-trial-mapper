@@ -3,6 +3,8 @@ import { signOut } from "$lib/supabase/auth/sign-out";
 import { createLobby } from "$lib/supabase/lobby/create-lobby";
 import { joinLobby } from "$lib/supabase/lobby/join-lobby.js";
 import { leaveLobby } from "$lib/supabase/lobby/leave-lobby";
+import { closeWindow } from "$lib/utilities/close-window.js";
+import { WebviewWindow } from "@tauri-apps/api/webviewWindow";
 
 const { data } = $props();
 
@@ -47,6 +49,7 @@ async function writeToClipboard(text: string) {
   {/if}
   <button class="btn preset-filled-primary-500">Preferences</button>
   <button class="btn preset-filled-error-500" onclick={signOut}>Sign Out</button>
+  <button class="btn preset-filled-error-500" onclick={closeWindow}>Exit</button>
 </div>
 
 
