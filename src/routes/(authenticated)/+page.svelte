@@ -1,4 +1,5 @@
 <script lang="ts">
+import { invalidateAll } from "$app/navigation";
 import { useRealtimeLobby } from "$lib/hooks/use-realtime-lobby.svelte.js";
 import { supabase } from "$lib/supabase/client.js";
 import { createLobby } from "$lib/supabase/lobby/create-lobby";
@@ -7,7 +8,12 @@ import { leaveLobby } from "$lib/supabase/lobby/leave-lobby";
 
 const { data } = $props();
 
-const lobby = data.lobby && useRealtimeLobby(data.lobby);
+const lobby = $derived.by(() => {
+	if (!data.lobby) {
+		return;
+	}
+	return useRealtimeLobby(data.lobby);
+});
 
 const trialsGroupedByRealm = $derived(
 	data.trials.reduce((realms, trial) => {
@@ -46,15 +52,15 @@ async function submitSelectTrial(event: SubmitEvent) {
 		.update({
 			trial_id: trialId,
 		})
-		.eq("id", lobby.current.id)
-		.select();
+		.eq("id", lobby.current.id);
+	await invalidateAll();
 	if (updateLobbyResponse.error) {
 		throw new Error(updateLobbyResponse.error.message);
 	}
 }
 </script>
 
-<div class="grid gap-2">  
+<div class="grid gap-2">
   {#if lobby}
     <form onsubmit={submitSelectTrial}>
       <select name="trial" class="select ring" disabled={lobby.current.user_id !== data.session.user.id} oninput={(event) => event.currentTarget.form?.requestSubmit()}>

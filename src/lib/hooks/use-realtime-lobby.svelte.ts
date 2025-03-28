@@ -6,7 +6,8 @@ export function useRealtimeLobby<T extends Tables<"lobby">>(lobby: T) {
 		current: lobby,
 	});
 	$effect(() => {
-		const channel = supabase.channel(`lobby-${lobby.id}`)
+		const channel = supabase
+			.channel(`lobby-${lobby.id}`)
 			.on(
 				"postgres_changes",
 				{
@@ -17,10 +18,10 @@ export function useRealtimeLobby<T extends Tables<"lobby">>(lobby: T) {
 				},
 				(payload) => {
 					value.current = payload.new as T;
-				}
+				},
 			)
 			.subscribe();
-		return channel.unsubscribe;
+		return () => channel.unsubscribe();
 	});
 	return value;
 }
