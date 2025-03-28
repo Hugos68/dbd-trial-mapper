@@ -10,6 +10,9 @@ export async function signInWithOAuth(provider: Provider) {
 		provider: provider,
 		options: {
 			skipBrowserRedirect: true,
+			queryParams: {
+				prompt: "consent",
+			},
 		},
 	});
 	if (oauth_response.error) {
