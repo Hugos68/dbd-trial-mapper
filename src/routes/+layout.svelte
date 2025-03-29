@@ -13,7 +13,9 @@ async function setup() {
 	await useShowWindow();
 }
 
-setup();
+$effect(() => {
+	setup();
+});
 </script>
 
 {@render children()}
