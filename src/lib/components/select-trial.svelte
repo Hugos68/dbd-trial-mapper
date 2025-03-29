@@ -3,7 +3,7 @@ import { supabase } from "$lib/supabase/client";
 import type { Tables } from "$lib/supabase/types";
 import { EyeIcon } from "@lucide/svelte";
 import type { User } from "@supabase/auth-js";
-  import { error } from "@sveltejs/kit";
+import { error } from "@sveltejs/kit";
 
 interface Trial extends Tables<"trial"> {
 	realm: Tables<"realm">;

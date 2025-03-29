@@ -1,7 +1,7 @@
 <script lang="ts">
 import { invalidateAll } from "$app/navigation";
 import { supabase } from "$lib/supabase/client";
-  import { error } from "@sveltejs/kit";
+import { error } from "@sveltejs/kit";
 
 async function submitJoinLobby(event: SubmitEvent) {
 	if (!(event.target instanceof HTMLFormElement)) {
