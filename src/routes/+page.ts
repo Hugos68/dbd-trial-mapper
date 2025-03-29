@@ -9,6 +9,7 @@ export async function load(event) {
 		error(500, trials.error.message);
 	}
 	const lobby = await getLobbyFromUser(data.user);
+	console.log(lobby);
 	if (lobby.error) {
 		error(500, lobby.error.message);
 	}

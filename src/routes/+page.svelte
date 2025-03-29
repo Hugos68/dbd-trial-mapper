@@ -11,21 +11,23 @@ import { error } from "@sveltejs/kit";
 
 const { data } = $props();
 
-const lobby = useRealtimeRecord({
-	record: data.lobby,
-	table: "lobby",
-	async transformPayload(data) {
-		const lobby = await supabase
-			.from("lobby")
-			.select("*, trial (*)")
-			.eq("id", data.id)
-			.single();
-		if (lobby.error) {
-			error(500, lobby.error.message);
-		}
-		return lobby.data;
-	},
-});
+const lobby = $derived(
+	useRealtimeRecord({
+		record: data.lobby,
+		table: "lobby",
+		async transformPayload(data) {
+			const lobby = await supabase
+				.from("lobby")
+				.select("*, trial (*)")
+				.eq("id", data.id)
+				.single();
+			if (lobby.error) {
+				error(500, lobby.error.message);
+			}
+			return lobby.data;
+		},
+	}),
+);
 </script>
 
 <Layout>
