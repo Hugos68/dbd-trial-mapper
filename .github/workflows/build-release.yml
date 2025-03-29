@@ -20,6 +20,9 @@ jobs:
           - platform: 'windows-latest'
             args: ''
     runs-on: ubuntu-latest
+    env:
+      PUBLIC_SUPABASE_URL: ${{ vars.SUPABASE_URL }}
+      PUBLIC_SUPABASE_ANON_KEY: ${{ vars.SUPABASE_ANON_KEY }}
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
