@@ -1,15 +1,15 @@
 <script lang="ts">
 import "../app.css";
 import { useDocumentHeight } from "$lib/hooks/use-document-height.svelte";
-import { useRealtime } from "$lib/hooks/use-realtime.svelte";
+import { useRealtimeRecord } from "$lib/hooks/use-realtime-record.svelte";
 import { PhysicalSize } from "@tauri-apps/api/dpi";
 import { WebviewWindow } from "@tauri-apps/api/webviewWindow";
 import { Position, moveWindow } from "@tauri-apps/plugin-positioner";
 
 const { children, data } = $props();
 
-const preference = useRealtime({
-	init: data.preference,
+const preference = useRealtimeRecord({
+	record: data.preference,
 	table: "preference",
 });
 
