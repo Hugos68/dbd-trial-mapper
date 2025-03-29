@@ -5,16 +5,16 @@ import JoinLobby from "$lib/components/join-lobby.svelte";
 import Layout from "$lib/components/layout.svelte";
 import LeaveLobby from "$lib/components/leave-lobby.svelte";
 import SelectTrial from "$lib/components/select-trial.svelte";
-import { useRealtime } from "$lib/hooks/use-realtime.svelte.js";
+import { useRealtimeRecord } from "$lib/hooks/use-realtime-record.svelte.js";
 import { supabase } from "$lib/supabase/client.js";
 import { error } from "@sveltejs/kit";
 
 const { data } = $props();
 
-const lobby = useRealtime({
-	init: data.lobby,
+const lobby = useRealtimeRecord({
+	record: data.lobby,
 	table: "lobby",
-	async transform(data) {
+	async transformPayload(data) {
 		const lobby = await supabase
 			.from("lobby")
 			.select("*, trial (*)")

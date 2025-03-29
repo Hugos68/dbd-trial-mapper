@@ -1,15 +1,15 @@
 import { supabase } from "$lib/supabase/client";
 
-interface UseRealtimeOptions<T> {
-	init: T;
+interface UseRealtimeRecordOptions<T> {
+	record: T;
 	table: string;
-	transform?: (data: NonNullable<T>) => Promise<T> | T;
+	transformPayload?: (data: NonNullable<T>) => Promise<T> | T;
 }
 
-export function useRealtime<T extends { id: string } | undefined | null>(
-	options: UseRealtimeOptions<T>,
+export function useRealtimeRecord<T extends { id: string } | undefined | null>(
+	options: UseRealtimeRecordOptions<T>
 ) {
-	const value = $state({ current: options.init });
+	const value = $state({ current: options.record });
 	$effect(() => {
 		if (!value.current) {
 			return;
@@ -26,8 +26,8 @@ export function useRealtime<T extends { id: string } | undefined | null>(
 				},
 				async (payload) => {
 					const updated = payload.new as NonNullable<T>;
-					value.current = options.transform
-						? await options.transform(updated)
+					value.current = options.transformPayload
+						? await options.transformPayload(updated)
 						: updated;
 				},
 			)

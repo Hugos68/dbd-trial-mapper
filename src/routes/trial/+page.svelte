@@ -1,15 +1,15 @@
 <script lang="ts">
-import { useRealtime } from "$lib/hooks/use-realtime.svelte.js";
+import { useRealtimeRecord } from "$lib/hooks/use-realtime-record.svelte";
 import { supabase } from "$lib/supabase/client.js";
 import { promisifyImage } from "$lib/utilities/promisify-image";
 import { error } from "@sveltejs/kit";
 
 const { data } = $props();
 
-const lobby = useRealtime({
-	init: data.lobby,
+const lobby = useRealtimeRecord({
+	record: data.lobby,
 	table: "lobby",
-	async transform(data) {
+	async transformPayload(data) {
 		const lobby = await supabase
 			.from("lobby")
 			.select("*, trial (*)")
