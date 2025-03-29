@@ -6,7 +6,7 @@ export function useDynamicHeight() {
 	const window = WebviewWindow.getCurrent();
 	const documentRect = new ElementRect(() => document.documentElement);
 	const height = $derived(documentRect.current.height);
-	const size = $derived(new PhysicalSize(300, Math.round(height)));
+	const size = $derived(new PhysicalSize(300, Math.ceil(height)));
 	$effect(() => {
 		window.setSize(size);
 	});

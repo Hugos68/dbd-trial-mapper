@@ -2,7 +2,7 @@ import { supabase } from "$lib/supabase/client";
 import type { Tables } from "$lib/supabase/types";
 
 export function useRealtimeLobby(
-	lobby: Tables<"lobby"> & { trial: Tables<"trial"> | null },
+	lobby: Tables<"lobby"> & { trial: Tables<"trial"> },
 ) {
 	const value = $state({
 		current: lobby,

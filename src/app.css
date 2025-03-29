@@ -9,6 +9,5 @@
 @plugin '@tailwindcss/typography';
 
 html {
-	min-height: 1px;
 	overflow: hidden;
 }

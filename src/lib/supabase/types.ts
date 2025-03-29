@@ -12,17 +12,17 @@ export type Database = {
       lobby: {
         Row: {
           id: string
-          trial_id: string | null
+          trial_id: string
           user_id: string
         }
         Insert: {
           id?: string
-          trial_id?: string | null
+          trial_id?: string
           user_id?: string
         }
         Update: {
           id?: string
-          trial_id?: string | null
+          trial_id?: string
           user_id?: string
         }
         Relationships: [
