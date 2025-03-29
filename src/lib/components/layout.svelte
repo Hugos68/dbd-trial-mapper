@@ -5,11 +5,10 @@ import type { Snippet } from "svelte";
 
 interface Props {
 	title: string;
-	description: string;
 	children: Snippet;
 }
 
-const { title, description, children }: Props = $props();
+const { title, children }: Props = $props();
 </script>
 
 <div class="p-4 flex flex-col gap-8 justify-between">
@@ -18,7 +17,6 @@ const { title, description, children }: Props = $props();
             <h1 class="h1">{title}</h1>
             <button title="Close" class="p-2 rounded hover:bg-surface-100-900" onclick={closeWindow}><XIcon /></button>
         </div>
-        <span class="text-sm text-surface-500">{description}</span>
     </header>
     <main>
         {@render children()}

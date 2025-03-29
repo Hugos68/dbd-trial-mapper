@@ -18,7 +18,7 @@ let showTrial = $state(false);
 {#if lobby && showTrial}
 	<TrialOverlay lobby={lobby.current} onBackToLobby={() => (showTrial = false)} />
 {:else}
-	<Layout title="Lobby" description={lobby ? `ID: ${lobby.current.id}` : "Join or create a lobby"}>
+	<Layout title="Lobby">
 		<div class="grid gap-2">
 			{#if lobby}
 				<CopyLobbyId lobby={lobby.current} />
