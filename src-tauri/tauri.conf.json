@@ -22,7 +22,7 @@
 				"closable": false,
 				"transparent": true,
 				"alwaysOnTop": true,
-				"contentProtected": true,
+				"devtools": true,
 				"skipTaskbar": true,
 				"shadow": false
 			}

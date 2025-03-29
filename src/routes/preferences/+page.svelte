@@ -39,8 +39,6 @@ async function submitPreferences(event: SubmitEvent) {
 		error(500, updatePreference.error.message);
 	}
 }
-
-console.log(data.preference.window_position);
 </script>
 
 <Layout>
