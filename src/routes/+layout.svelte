@@ -5,6 +5,7 @@ import { useRealtimeRecord } from "$lib/hooks/use-realtime-record.svelte";
 import { PhysicalSize } from "@tauri-apps/api/dpi";
 import { WebviewWindow } from "@tauri-apps/api/webviewWindow";
 import { Position, moveWindow } from "@tauri-apps/plugin-positioner";
+import { page } from "$app/state";
 
 const { children, data } = $props();
 
@@ -13,14 +14,18 @@ const preference = useRealtimeRecord({
 	table: "preference",
 });
 
-const height = useDocumentHeight();
-
-const size = $derived.by(() => {
-	return new PhysicalSize(
-		preference.current.window_width,
-		Math.ceil(height.current),
-	);
+const width = $derived.by(() => {
+	if (page.url.pathname === "/trial") {
+		return preference.current.window_width;
+	}
+	return 400;
 });
+
+const documentHeight = useDocumentHeight();
+
+const height = $derived(Math.ceil(documentHeight.current));
+
+const size = $derived(new PhysicalSize(width, height));
 
 const position = $derived.by(() => {
 	switch (preference.current.window_position) {
