@@ -1,7 +1,9 @@
-# Tauri + SvelteKit + TypeScript
+# DBD Trial Mapper
 
-This template should help get you started developing with Tauri, SvelteKit and TypeScript in Vite.
+DBD Trial Mapper is a small application to choose and overlay a Dead By Daylight trial.
 
-## Recommended IDE Setup
+## Features
 
-[VS Code](https://code.visualstudio.com/) + [Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer).
+- Support for all current Dead By Daylight maps.
+- Support for creating/sharing lobbies with your SWF.
+- Supports realtime map updates by leveraging websockets.
