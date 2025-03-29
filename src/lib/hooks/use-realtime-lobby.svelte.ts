@@ -1,6 +1,6 @@
 import { supabase } from "$lib/supabase/client";
-import { error } from "@sveltejs/kit";
 import type { Tables } from "$lib/supabase/types";
+import { error } from "@sveltejs/kit";
 
 export function useRealtimeLobby(
 	lobby: Tables<"lobby"> & { trial: Tables<"trial"> },

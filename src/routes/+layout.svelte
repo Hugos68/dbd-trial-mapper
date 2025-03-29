@@ -2,8 +2,8 @@
 import { useDynamicHeight } from "$lib/hooks/use-dynamic-height.svelte";
 import { useShowWindow } from "$lib/hooks/use-show-window";
 import { useWindowPosition } from "$lib/hooks/use-window-position";
-import { Position } from "@tauri-apps/plugin-positioner";
 import { error } from "@sveltejs/kit";
+import { Position } from "@tauri-apps/plugin-positioner";
 import "../app.css";
 
 const { children, data } = $props();
