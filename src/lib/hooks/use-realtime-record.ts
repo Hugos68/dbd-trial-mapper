@@ -7,7 +7,7 @@ interface UseRealtimeRecordOptions<T> {
 }
 
 export function useRealtimeRecord<T extends { id: string } | undefined | null>(
-	options: UseRealtimeRecordOptions<T>
+	options: UseRealtimeRecordOptions<T>,
 ) {
 	const value = $state({ current: options.record });
 	$effect(() => {
