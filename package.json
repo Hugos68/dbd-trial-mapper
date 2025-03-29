@@ -1,5 +1,5 @@
 {
-	"name": "dbd-trial-mapper",
+	"name": "trial-sync",
 	"private": true,
 	"type": "module",
 	"scripts": {
@@ -21,8 +21,6 @@
 		"@tailwindcss/vite": "^4.0.0",
 		"@tauri-apps/api": "^2",
 		"@tauri-apps/cli": "^2",
-		"@tauri-apps/plugin-deep-link": "~2",
-		"@tauri-apps/plugin-opener": "~2",
 		"@tauri-apps/plugin-positioner": "~2",
 		"@types/bun": "^1.2.6",
 		"runed": "^0.25.0",

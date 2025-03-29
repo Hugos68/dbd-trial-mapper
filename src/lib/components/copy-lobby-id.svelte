@@ -15,7 +15,7 @@ async function copyLobbyId(lobbyId: string) {
 
 <div class="input-group grid-cols-[1fr_auto]">
     <input class="ig-input" value={lobby.id} readonly />
-    <button class="ig-btn preset-filled-primary-500" onclick={() => copyLobbyId(lobby.id)}>
+    <button title="Copy Lobby ID" class="ig-btn preset-filled-primary-500" onclick={() => copyLobbyId(lobby.id)}>
         <CopyIcon />
     </button>
 </div>

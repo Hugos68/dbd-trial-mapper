@@ -69,5 +69,5 @@ async function submitSelectTrial(event: SubmitEvent) {
             {/each}
         </select>
     </form>
-    <button class="ig-btn preset-filled-primary-500" onclick={onShowTrial}><EyeIcon /></button>
+    <button title="Show Trial" class="ig-btn preset-filled-primary-500" onclick={onShowTrial}><EyeIcon /></button>
 </div>

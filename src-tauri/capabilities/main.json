@@ -8,8 +8,6 @@
 		"core:window:allow-show",
 		"core:window:allow-set-focus",
 		"core:window:allow-set-size",
-		"positioner:default",
-		"opener:default",
-		"deep-link:default"
+		"positioner:default"
 	]
 }
