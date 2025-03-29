@@ -5,26 +5,34 @@ import { useWindowPosition } from "$lib/hooks/use-window-position";
 import { error } from "@sveltejs/kit";
 import { Position } from "@tauri-apps/plugin-positioner";
 import "../app.css";
+import { useRealtime } from "$lib/hooks/use-realtime.svelte";
 
 const { children, data } = $props();
 
-async function setup() {
-	useDynamicHeight(data.preference.window_width);
-	switch (data.preference.window_position) {
+const preference = useRealtime({
+	init: data.preference,
+	table: "preference",
+});
+
+$effect(() => {
+	switch (preference.current.window_position) {
 		case "TOP_RIGHT":
-			await useWindowPosition(Position.TopRight);
+			useWindowPosition(Position.TopRight);
 			break;
 		case "TOP_LEFT":
-			await useWindowPosition(Position.TopLeft);
+			useWindowPosition(Position.TopLeft);
 			break;
 		default:
 			error(500, "Invalid window position");
 	}
-	await useShowWindow();
-}
+});
 
 $effect(() => {
-	setup();
+	useDynamicHeight(preference.current.window_width);
+});
+
+$effect(() => {
+	useShowWindow();
 });
 </script>
 

@@ -1,6 +1,6 @@
 <script lang="ts">
 import { closeWindow } from "$lib/utilities/close-window";
-import { XIcon } from "@lucide/svelte";
+import { SettingsIcon, XIcon } from "@lucide/svelte";
 import type { Snippet } from "svelte";
 
 interface Props {
@@ -15,7 +15,10 @@ const { title, children }: Props = $props();
     <header>
         <div class="grid grid-cols-[1fr_auto] items-center">
             <h1 class="h1">{title}</h1>
-            <button title="Close" class="p-2 rounded hover:bg-surface-100-900" onclick={closeWindow}><XIcon /></button>
+            <nav class="flex gap-2 items-center">
+                <a href="/preferences" class="p-2 rounded hover:bg-surface-100-900" onclick={closeWindow}><SettingsIcon /></a>
+                <button title="Close" class="p-2 rounded hover:bg-surface-100-900" onclick={closeWindow}><XIcon /></button>
+            </nav>
         </div>
     </header>
     <main>
