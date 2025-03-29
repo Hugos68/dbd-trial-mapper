@@ -1,22 +1,9 @@
-import { supabase } from "$lib/supabase/client";
-import { error } from "@sveltejs/kit";
+import { getUser } from "$lib/utilities/get-user";
 
 export async function load() {
-	const user = await supabase.auth.getUser();
-	if (user.error || !user.data.user) {
-		const user = await supabase.auth.signInAnonymously();
-		if (user.error) {
-			error(500, user.error.message);
-		}
-		if (!user.data.user) {
-			error(500, "Failed to create anonymous user");
-		}
-		return {
-			user: user.data.user,
-		};
-	}
+	const user = await getUser();
 	return {
-		user: user.data.user,
+		user: user,
 	};
 }
 

@@ -1,11 +1,12 @@
 <script lang="ts">
 import { invalidateAll } from "$app/navigation";
 import { supabase } from "$lib/supabase/client";
+import { error } from "@sveltejs/kit";
 
 async function createLobby() {
 	const insertLobbyResponse = await supabase.from("lobby").insert({});
 	if (insertLobbyResponse.error) {
-		throw new Error(insertLobbyResponse.error.message);
+		error(500, insertLobbyResponse.error.message);
 	}
 	await invalidateAll();
 }

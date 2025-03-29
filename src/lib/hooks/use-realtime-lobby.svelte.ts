@@ -25,7 +25,7 @@ export function useRealtimeLobby(
 						.eq("id", lobby.id)
 						.single();
 					if (lobbyResponse.error) {
-						throw new Error(lobbyResponse.error.message);
+						error(500, lobbyResponse.error.message);
 					}
 					value.current = lobbyResponse.data;
 				},
