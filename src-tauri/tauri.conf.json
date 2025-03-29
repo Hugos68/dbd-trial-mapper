@@ -1,6 +1,6 @@
 {
 	"$schema": "https://schema.tauri.app/config/2",
-	"productName": "DBD Trial Mapper",
+	"productName": "TrialSync",
 	"version": "0.1.0",
 	"identifier": "com.dbd-trial-mapper.app",
 	"build": {

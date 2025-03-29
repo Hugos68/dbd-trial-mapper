@@ -1,4 +1,4 @@
-# DBD Trial Mapper
+# TrialSync
 
 Does this sound familiar?
 
@@ -10,11 +10,11 @@ Does this sound familiar?
 
 > Nea: THE OTHER F*CKING RED CAR!
 
-Never again with DBD Trial Mapper, SWF like never before.
+Never again with TrialSync, SWF like never before.
 
 ## What is this?
 
-DBD Trial Mapper is a small application to overlay a Dead By Daylight trial.
+TrialSync is a small application to overlay a Dead By Daylight trial.
 
 ## Features
 
