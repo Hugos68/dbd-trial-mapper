@@ -1,6 +1,6 @@
 <script lang="ts">
 import { useRealtimeRecord } from "$lib/hooks/use-realtime-record.svelte";
-import { supabase } from "$lib/supabase/client.js";
+import { supabase } from "$lib/supabase/client";
 import { promisifyImage } from "$lib/utilities/promisify-image";
 import { error } from "@sveltejs/kit";
 

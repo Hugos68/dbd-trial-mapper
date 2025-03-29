@@ -5,8 +5,8 @@ import JoinLobby from "$lib/components/join-lobby.svelte";
 import Layout from "$lib/components/layout.svelte";
 import LeaveLobby from "$lib/components/leave-lobby.svelte";
 import SelectTrial from "$lib/components/select-trial.svelte";
-import { useRealtimeRecord } from "$lib/hooks/use-realtime-record.svelte.js";
-import { supabase } from "$lib/supabase/client.js";
+import { useRealtimeRecord } from "$lib/hooks/use-realtime-record.svelte";
+import { supabase } from "$lib/supabase/client";
 import { error } from "@sveltejs/kit";
 
 const { data } = $props();
