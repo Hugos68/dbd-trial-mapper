@@ -29,7 +29,6 @@ const position = $derived.by(() => {
 $effect(async () => {
 	const window = WebviewWindow.getCurrent();
 	await moveWindow(position);
-	await window.show();
 });
 
 const width = $derived.by(() => {
@@ -46,6 +45,7 @@ const size = $derived(new PhysicalSize(width, height));
 $effect(async () => {
 	const window = WebviewWindow.getCurrent();
 	await window.setSize(size);
+	// Always move the window after resizing
 	await moveWindow(position);
 });
 
