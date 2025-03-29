@@ -1,5 +1,4 @@
 import { supabase } from "$lib/supabase/client";
-import { nanoid } from "nanoid";
 
 interface UseRealtimeOptions<T> {
 	init: T;
@@ -7,7 +6,7 @@ interface UseRealtimeOptions<T> {
 	transform?: (data: NonNullable<T>) => Promise<T> | T;
 }
 
-export function useRealtime<T extends { id: string } | undefined>(
+export function useRealtime<T extends { id: string } | undefined | null>(
 	options: UseRealtimeOptions<T>,
 ) {
 	const value = $state({ current: options.init });
@@ -15,7 +14,7 @@ export function useRealtime<T extends { id: string } | undefined>(
 		if (!value.current) {
 			return;
 		}
-		const channel = supabase.channel(nanoid());
+		const channel = supabase.channel(`${options.table}-${value.current.id}`);
 		channel
 			.on(
 				"postgres_changes",

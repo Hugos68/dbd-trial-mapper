@@ -1,11 +1,10 @@
 <script lang="ts">
-import { useDynamicHeight } from "$lib/hooks/use-dynamic-height.svelte";
-import { useShowWindow } from "$lib/hooks/use-show-window";
-import { useWindowPosition } from "$lib/hooks/use-window-position";
-import { error } from "@sveltejs/kit";
-import { Position } from "@tauri-apps/plugin-positioner";
 import "../app.css";
+import { useDocumentHeight } from "$lib/hooks/use-document-height.svelte";
 import { useRealtime } from "$lib/hooks/use-realtime.svelte";
+import { PhysicalSize } from "@tauri-apps/api/dpi";
+import { WebviewWindow } from "@tauri-apps/api/webviewWindow";
+import { Position, moveWindow } from "@tauri-apps/plugin-positioner";
 
 const { children, data } = $props();
 
@@ -14,25 +13,30 @@ const preference = useRealtime({
 	table: "preference",
 });
 
-$effect(() => {
+const height = useDocumentHeight();
+
+const size = $derived.by(() => {
+	return new PhysicalSize(
+		preference.current.window_width,
+		Math.ceil(height.current),
+	);
+});
+
+const position = $derived.by(() => {
 	switch (preference.current.window_position) {
-		case "TOP_RIGHT":
-			useWindowPosition(Position.TopRight);
-			break;
 		case "TOP_LEFT":
-			useWindowPosition(Position.TopLeft);
-			break;
-		default:
-			error(500, "Invalid window position");
+			return Position.TopLeft;
+		case "TOP_RIGHT":
+			return Position.TopRight;
 	}
 });
 
-$effect(() => {
-	useDynamicHeight(preference.current.window_width);
-});
-
-$effect(() => {
-	useShowWindow();
+// @ts-expect-error - This is fine as long as we don't return cleanup functions
+$effect(async () => {
+	const window = WebviewWindow.getCurrent();
+	await window.setSize(size);
+	await moveWindow(position);
+	await window.show();
 });
 </script>
 

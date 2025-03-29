@@ -1,11 +1,30 @@
 <script lang="ts">
+import { useRealtime } from "$lib/hooks/use-realtime.svelte.js";
+import { supabase } from "$lib/supabase/client.js";
 import { promisifyImage } from "$lib/utilities/promisify-image";
+import { error } from "@sveltejs/kit";
 
 const { data } = $props();
+
+const lobby = useRealtime({
+	init: data.lobby,
+	table: "lobby",
+	async transform(data) {
+		const lobby = await supabase
+			.from("lobby")
+			.select("*, trial (*)")
+			.eq("id", data.id)
+			.single();
+		if (lobby.error) {
+			error(500, lobby.error.message);
+		}
+		return lobby.data;
+	},
+});
 </script>
 
 <div class="group">
-    {#await promisifyImage(data.lobby.trial.image_url)}
+    {#await promisifyImage(lobby.current.trial.image_url)}
         <div class="grid place-items-center py-32">
             <span>Loading image...</span>
         </div>

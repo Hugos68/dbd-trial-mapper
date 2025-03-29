@@ -26,15 +26,13 @@ const lobby = useRealtime({
 		return lobby.data;
 	},
 });
-
-let showTrial = $state(false);
 </script>
 
-<Layout title="Lobby">
+<Layout>
 	<div class="grid gap-2">
 		{#if lobby.current}
 			<CopyLobbyId lobby={lobby.current} />
-			<SelectTrial lobby={lobby.current} trials={data.trials} user={data.user} onShowTrial={() => (showTrial = true)} />
+			<SelectTrial lobby={lobby.current} trials={data.trials} user={data.user} />
 			<LeaveLobby lobby={lobby.current} user={data.user} />
 		{:else}
 			<JoinLobby />
@@ -42,5 +40,4 @@ let showTrial = $state(false);
 		{/if}
 	</div>	  
 </Layout>
-
 
