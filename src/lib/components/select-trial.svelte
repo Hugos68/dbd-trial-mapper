@@ -17,10 +17,9 @@ interface Props {
 	trials: Trial[];
 	lobby: Lobby;
 	user: User;
-	onShowTrial: () => void;
 }
 
-const { trials, lobby, user, onShowTrial }: Props = $props();
+const { trials, lobby, user }: Props = $props();
 
 const trialsGroupedByRealm = $derived(
 	trials.reduce((realms, trial) => {
@@ -44,14 +43,14 @@ async function submitSelectTrial(event: SubmitEvent) {
 	if (!trial) {
 		return;
 	}
-	const updateLobbyResponse = await supabase
+	const updateLobby = await supabase
 		.from("lobby")
 		.update({
 			trial_id: trial,
 		})
 		.eq("id", lobby.id);
-	if (updateLobbyResponse.error) {
-		error(500, updateLobbyResponse.error.message);
+	if (updateLobby.error) {
+		error(500, updateLobby.error.message);
 	}
 }
 </script>
@@ -70,5 +69,5 @@ async function submitSelectTrial(event: SubmitEvent) {
             {/each}
         </select>
     </form>
-    <button title="Show Trial" class="ig-btn preset-filled-primary-500" onclick={onShowTrial}><EyeIcon /></button>
+    <a href="/trial" class="ig-btn preset-filled-primary-500"><EyeIcon /></a>
 </div>

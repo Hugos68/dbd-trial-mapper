@@ -13,11 +13,11 @@ async function submitJoinLobby(event: SubmitEvent) {
 	if (!id) {
 		return;
 	}
-	const insertLobbyResponse = await supabase.from("lobby_participant").insert({
+	const insertLobby = await supabase.from("lobby_participant").insert({
 		lobby_id: id,
 	});
-	if (insertLobbyResponse.error) {
-		error(500, insertLobbyResponse.error.message);
+	if (insertLobby.error) {
+		error(500, insertLobby.error.message);
 	}
 	await invalidateAll();
 }

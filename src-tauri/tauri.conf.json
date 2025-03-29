@@ -23,7 +23,8 @@
 				"transparent": true,
 				"alwaysOnTop": true,
 				"contentProtected": true,
-				"skipTaskbar": true
+				"skipTaskbar": true,
+				"shadow": false
 			}
 		],
 		"security": {
