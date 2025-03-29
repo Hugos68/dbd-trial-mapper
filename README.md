@@ -22,6 +22,11 @@ TrialSync is a small application to overlay a Dead By Daylight trial.
 - Support for creating/sharing lobbies with your SWF.
 - Supports realtime map updates by leveraging websockets.
 
+## Credits
+
+- [Hens](https://hens333.com/): For creating all the maps.
+- [Lucas](https://github.com/LucaFontanot): For creating [DBD Map Overlay](https://github.com/LucaFontanot/dbd-map-overlay) which this project was inspired by.
+
 ## License
 
 See [LICENSE](LICENSE)
