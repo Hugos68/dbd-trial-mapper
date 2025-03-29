@@ -1,6 +1,7 @@
 <script lang="ts">
 import { invalidateAll } from "$app/navigation";
 import { supabase } from "$lib/supabase/client";
+import { error } from "@sveltejs/kit";
 
 async function submitJoinLobby(event: SubmitEvent) {
 	if (!(event.target instanceof HTMLFormElement)) {
@@ -16,15 +17,15 @@ async function submitJoinLobby(event: SubmitEvent) {
 		lobby_id: id,
 	});
 	if (insertLobbyResponse.error) {
-		throw new Error(insertLobbyResponse.error.message);
+		error(500, insertLobbyResponse.error.message);
 	}
 	await invalidateAll();
 }
 </script>
 
 <form class="input-group grid-cols-[1fr_auto]" onsubmit={submitJoinLobby}>
-    <input name="id" class="ig-input" placeholder="Enter ID..." />
+    <input name="id" class="ig-input" placeholder="Lobby ID" />
     <button class="ig-btn preset-filled-primary-500">
-        Join Lobby
+        Join
     </button>
 </form>
