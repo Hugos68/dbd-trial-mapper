@@ -4,9 +4,9 @@ import { supabase } from "$lib/supabase/client";
 import { error } from "@sveltejs/kit";
 
 async function createLobby() {
-	const insertLobbyResponse = await supabase.from("lobby").insert({});
-	if (insertLobbyResponse.error) {
-		error(500, insertLobbyResponse.error.message);
+	const insertLobby = await supabase.from("lobby").insert({});
+	if (insertLobby.error) {
+		error(500, insertLobby.error.message);
 	}
 	await invalidateAll();
 }

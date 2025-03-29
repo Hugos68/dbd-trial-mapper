@@ -1,4 +1,5 @@
 import { supabase } from "$lib/supabase/client";
+import { getLobbyFromUser } from "$lib/utilities/get-lobby-from-user.js";
 import { error } from "@sveltejs/kit";
 
 export async function load(event) {
@@ -7,27 +8,13 @@ export async function load(event) {
 	if (trials.error) {
 		error(500, trials.error.message);
 	}
-	const hostingLobbyResponse = await supabase
-		.from("lobby")
-		.select("*, trial (*)")
-		.eq("user_id", data.user.id)
-		.maybeSingle();
-	if (hostingLobbyResponse.error) {
-		error(500, hostingLobbyResponse.error.message);
-	}
-	const participatingLobbyResponse = await supabase
-		.from("lobby_participant")
-		.select("*, lobby (*, trial (*))")
-		.eq("user_id", data.user.id)
-		.maybeSingle();
-	if (participatingLobbyResponse.error) {
-		error(500, participatingLobbyResponse.error.message);
-	}
-	const lobby =
-		hostingLobbyResponse.data ?? participatingLobbyResponse.data?.lobby;
+	const lobby = await getLobbyFromUser(data.user);
 	console.log(lobby);
+	if (lobby.error) {
+		error(500, lobby.error.message);
+	}
 	return {
-		lobby: lobby,
+		lobby: lobby.data,
 		trials: trials.data,
 	};
 }

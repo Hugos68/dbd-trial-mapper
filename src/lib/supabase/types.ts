@@ -64,12 +64,21 @@ export type Database = {
       preference: {
         Row: {
           id: string
+          user_id: string
+          window_position: Database["public"]["Enums"]["window_position"]
+          window_width: number
         }
         Insert: {
           id?: string
+          user_id?: string
+          window_position?: Database["public"]["Enums"]["window_position"]
+          window_width?: number
         }
         Update: {
           id?: string
+          user_id?: string
+          window_position?: Database["public"]["Enums"]["window_position"]
+          window_width?: number
         }
         Relationships: []
       }
@@ -131,7 +140,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      window_position: "TOP_LEFT" | "TOP_RIGHT"
     }
     CompositeTypes: {
       [_ in never]: never

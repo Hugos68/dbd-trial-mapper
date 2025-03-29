@@ -5,30 +5,41 @@ import JoinLobby from "$lib/components/join-lobby.svelte";
 import Layout from "$lib/components/layout.svelte";
 import LeaveLobby from "$lib/components/leave-lobby.svelte";
 import SelectTrial from "$lib/components/select-trial.svelte";
-import TrialOverlay from "$lib/components/trial-overlay.svelte";
-import { useRealtimeLobby } from "$lib/hooks/use-realtime-lobby.svelte.js";
+import { useRealtimeRecord } from "$lib/hooks/use-realtime-record.svelte";
+import { supabase } from "$lib/supabase/client";
+import { error } from "@sveltejs/kit";
 
 const { data } = $props();
 
-const lobby = $derived(data.lobby ? useRealtimeLobby(data.lobby) : undefined);
-
-let showTrial = $state(false);
+const lobby = $derived(
+	useRealtimeRecord({
+		record: data.lobby,
+		table: "lobby",
+		async transformPayload(data) {
+			const lobby = await supabase
+				.from("lobby")
+				.select("*, trial (*)")
+				.eq("id", data.id)
+				.single();
+			if (lobby.error) {
+				error(500, lobby.error.message);
+			}
+			return lobby.data;
+		},
+	}),
+);
 </script>
 
-{#if lobby && showTrial}
-	<TrialOverlay lobby={lobby.current} onBackToLobby={() => (showTrial = false)} />
-{:else}
-	<Layout title="Lobby">
-		<div class="grid gap-2">
-			{#if lobby}
-				<CopyLobbyId lobby={lobby.current} />
-				<SelectTrial lobby={lobby.current} trials={data.trials} user={data.user} onShowTrial={() => (showTrial = true)} />
-				<LeaveLobby lobby={lobby.current} user={data.user} />
-			{:else}
-				<JoinLobby />
-				<CreateLobby  />
-			{/if}
-		</div>	  
-	</Layout>
-{/if}
+<Layout>
+	<div class="grid gap-2">
+		{#if lobby.current}
+			<CopyLobbyId lobby={lobby.current} />
+			<SelectTrial lobby={lobby.current} trials={data.trials} user={data.user} />
+			<LeaveLobby lobby={lobby.current} user={data.user} />
+		{:else}
+			<JoinLobby />
+			<CreateLobby  />
+		{/if}
+	</div>	  
+</Layout>
 
