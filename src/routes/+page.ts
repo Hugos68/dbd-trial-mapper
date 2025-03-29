@@ -10,7 +10,7 @@ export async function load(event) {
 	const hostingLobbyResponse = await supabase
 		.from("lobby")
 		.select("*, trial (*)")
-		.eq("user_id", data.session.user.id)
+		.eq("user_id", data.user.id)
 		.maybeSingle();
 	if (hostingLobbyResponse.error) {
 		error(500, hostingLobbyResponse.error.message);
@@ -18,13 +18,14 @@ export async function load(event) {
 	const participatingLobbyResponse = await supabase
 		.from("lobby_participant")
 		.select("*, lobby (*, trial (*))")
-		.eq("user_id", data.session.user.id)
+		.eq("user_id", data.user.id)
 		.maybeSingle();
 	if (participatingLobbyResponse.error) {
 		error(500, participatingLobbyResponse.error.message);
 	}
 	const lobby =
 		hostingLobbyResponse.data ?? participatingLobbyResponse.data?.lobby;
+	console.log(lobby);
 	return {
 		lobby: lobby,
 		trials: trials.data,

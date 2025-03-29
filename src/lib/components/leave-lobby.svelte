@@ -2,7 +2,7 @@
 import { invalidateAll } from "$app/navigation";
 import { supabase } from "$lib/supabase/client";
 import type { Tables } from "$lib/supabase/types";
-import type { User } from "@supabase/supabase-js";
+import type { User } from "@supabase/auth-js";
 
 interface Props {
 	lobby: Tables<"lobby">;

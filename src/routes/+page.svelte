@@ -18,15 +18,15 @@ let showTrial = $state(false);
 {#if lobby && showTrial}
 	<TrialOverlay lobby={lobby.current} onBackToLobby={() => (showTrial = false)} />
 {:else}
-	<Layout title="Lobby" description={lobby ? `ID: ${lobby.current.id}` : "Join or create a lobby"} authenticated={true}>
+	<Layout title="Lobby" description={lobby ? `ID: ${lobby.current.id}` : "Join or create a lobby"}>
 		<div class="grid gap-2">
 			{#if lobby}
 				<CopyLobbyId lobby={lobby.current} />
-				<SelectTrial lobby={lobby.current} trials={data.trials} user={data.session.user} onShowTrial={() => (showTrial = true)} />
-				<LeaveLobby lobby={lobby.current} user={data.session.user} />
+				<SelectTrial lobby={lobby.current} trials={data.trials} user={data.user} onShowTrial={() => (showTrial = true)} />
+				<LeaveLobby lobby={lobby.current} user={data.user} />
 			{:else}
 				<JoinLobby />
-				<CreateLobby />
+				<CreateLobby  />
 			{/if}
 		</div>	  
 	</Layout>
