@@ -1,9 +1,9 @@
-import { error } from '@sveltejs/kit';
+import { redirect } from '@sveltejs/kit';
 
 export async function load(event) {
 	const data = await event.parent();
 	if (!data.lobby) {
-		error(404, 'Lobby not found');
+		redirect(303, '/');
 	}
 	return {
 		lobby: data.lobby

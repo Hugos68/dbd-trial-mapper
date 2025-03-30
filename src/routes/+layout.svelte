@@ -12,6 +12,7 @@
 	import { page } from '$app/state';
 	import { close } from '$lib/modules/tauri/window/close';
 	import type { HTMLAnchorAttributes } from 'svelte/elements';
+	import { Toaster } from 'svelte-french-toast';
 
 	const { children, data } = $props();
 
@@ -89,6 +90,8 @@
 			.join(' ');
 	});
 </script>
+
+<Toaster></Toaster>
 
 <div class="flex grow flex-col">
 	<header data-tauri-drag-region class="flex items-center justify-between rounded p-4">
