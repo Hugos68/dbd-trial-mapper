@@ -1,20 +1,15 @@
 <script lang="ts">
 	import '../app.css';
-	import { HomeIcon, MapIcon, PlusCircleIcon, SettingsIcon, XIcon } from '@lucide/svelte';
+	import { MapIcon, MergeIcon, PlusCircleIcon, SettingsIcon, XIcon } from '@lucide/svelte';
 	import { page } from '$app/state';
 
 	const { children } = $props();
 
 	const routes = [
-		{
-			label: 'Home',
-			href: '/',
-			Icon: HomeIcon
-		},
-		{
+		{	
 			label: 'Join Lobby',
 			href: '/join-lobby',
-			Icon: MapIcon
+			Icon: MergeIcon
 		},
 		{
 			label: 'Create Lobby',
@@ -31,8 +26,8 @@
 	const title = $derived(routes.find((route) => route.href === page.url.pathname)?.label);
 </script>
 
-<div class="flex grow flex-col">
-	<header data-tauri-drag-region class="flex items-center justify-between gap-2 p-4">
+<div class="grow flex flex-col">
+	<header data-tauri-drag-region class="flex items-center justify-between rounded p-4">
 		<div class="flex items-center gap-4">
 			<MapIcon />
 			<div class="grid">
@@ -44,14 +39,14 @@
 			<button class="cursor-pointer rounded p-2 hover:bg-red-500/50" onclick={close}><XIcon /></button>
 		</div>
 	</header>
-	<div class="flex grow gap-4 p-4">
-		<aside class="flex flex-col justify-between rounded bg-neutral-100 p-4 dark:bg-neutral-900">
+	<div class="grow flex gap-4 p-4 pt-0">
+		<aside class="flex flex-col justify-between rounded  p-4 bg-neutral-100 dark:bg-neutral-900">
 			<nav class="flex h-full flex-col gap-2">
 				{#each routes as route (route)}
 					{@const active = route.href === page.url.pathname}
 					<a
 						aria-current={active && 'page'}
-						class="flex items-center gap-4 rounded px-4 py-2 whitespace-nowrap last:mt-auto hover:bg-neutral-500/50 [&[aria-current=page]]:bg-neutral-500/50"
+						class="flex justify-between gap-8 rounded px-4 py-2 whitespace-nowrap last:mt-auto hover:bg-neutral-500/50 [&[aria-current=page]]:bg-neutral-500/50"
 						href={route.href}
 					>
 						<route.Icon />
@@ -68,4 +63,5 @@
 			</div>
 		</main>
 	</div>
+
 </div>
