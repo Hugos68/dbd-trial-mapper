@@ -88,7 +88,7 @@
 		<main class="flex grow flex-col gap-2 rounded bg-neutral-200 p-4 dark:bg-neutral-800">
 			<h1 class="text-2xl font-semibold">{title}</h1>
 			<hr />
-			<div>
+			<div class="grow">
 				{@render children()}
 			</div>
 		</main>
