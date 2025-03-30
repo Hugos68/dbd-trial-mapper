@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { superForm } from 'sveltekit-superforms';
+	import { setError, superForm } from 'sveltekit-superforms';
 	import { valibot } from 'sveltekit-superforms/adapters';
 	import { JoinLobbySchema } from './join-lobby-schema.js';
 	import Button from '$lib/components/button.svelte';
@@ -13,10 +13,14 @@
 		validators: valibot(JoinLobbySchema),
 		SPA: true,
 		async onUpdate(event) {
+			if (!event.form.valid) {
+				return;
+			}
 			const joinLobbyResponse = await supabase.from('lobby_participant').insert({
 				lobby_id: event.form.data['lobby-id']
 			});
 			if (joinLobbyResponse.error) {
+				event.form.valid = false;
 				toaster.error({
 					title: 'Failed to join lobby',
 					description: joinLobbyResponse.error.message
@@ -46,7 +50,7 @@
 			{...$constraints['lobby-id']}
 		/>
 		{#if $errors['lobby-id']}
-			<span class="text-sm text-red-500">{$errors['lobby-id']}</span>
+			<span class="text-sm text-red-500">{$errors['lobby-id'][0]}</span>
 		{/if}
 	</label>
 	<Button disabled={$submitting}>Join Lobby</Button>

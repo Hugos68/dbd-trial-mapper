@@ -12,9 +12,13 @@
 	const { enhance, submitting } = superForm(data.form, {
 		validators: valibot(CreateLobbySchema),
 		SPA: true,
-		async onUpdate() {
+		async onUpdate(event) {
+			if (!event.form.valid) {
+				return;
+			}
 			const insertLobbyResponse = await supabase.from('lobby').insert({});
 			if (insertLobbyResponse.error) {
+				event.form.valid = false;
 				toaster.error({
 					title: 'Failed to create lobby',
 					description: insertLobbyResponse.error.message

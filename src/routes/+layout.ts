@@ -11,7 +11,6 @@ export async function load() {
 	if (lobby.error) {
 		error(500, lobby.error.message);
 	}
-	console.log(lobby);
 	return {
 		user: user,
 		lobby: lobby.data

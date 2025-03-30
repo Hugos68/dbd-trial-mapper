@@ -13,11 +13,15 @@
 		validators: valibot(LeaveLobbySchema),
 		SPA: true,
 		async onUpdate(event) {
+			if (!event.form.valid) {
+				return;
+			}
 			const leaveLobbyResponse = await supabase.from('lobby_participant').delete().match({
 				lobby_id: event.form.data['lobby-id'],
 				user_id: event.form.data['user-id']
 			});
 			if (leaveLobbyResponse.error) {
+				event.form.valid = false;
 				toaster.error({
 					title: 'Failed to leave lobby',
 					description: leaveLobbyResponse.error.message

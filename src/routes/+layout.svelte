@@ -5,25 +5,17 @@
 		MapIcon,
 		MergeIcon,
 		PlusCircleIcon,
-		RefreshCcwIcon,
 		SettingsIcon,
 		XIcon
 	} from '@lucide/svelte';
 	import { page } from '$app/state';
 	import { close } from '$lib/modules/tauri/window/close';
-	import type { HTMLAnchorAttributes } from 'svelte/elements';
 	import Toaster from '$lib/components/toaster.svelte';
 
 	const { children, data } = $props();
 
-	interface NavigationItem {
-		label: string;
-		Icon: typeof HomeIcon;
-		attributes: HTMLAnchorAttributes;
-	}
-
-	const topNavigations = $derived.by(() => {
-		const items: NavigationItem[] = [
+	const navigationItems = $derived.by(() => {
+		const items = [
 			{
 				label: 'Home',
 				Icon: HomeIcon,
@@ -56,27 +48,14 @@
 				}
 			});
 		}
-		return items;
-	});
-
-	const bottomNavigations = $derived.by(() => {
-		return [
-			{
-				label: 'Refresh Session',
-				Icon: RefreshCcwIcon,
-				attributes: {
-					href: '/refresh-session',
-					'data-sveltekit-preload-data': 'tap'
-				}
-			},
-			{
-				label: 'Settings',
-				Icon: SettingsIcon,
-				attributes: {
-					href: '/settings'
-				}
+		items.push({
+			label: 'Settings',
+			Icon: SettingsIcon,
+			attributes: {
+				href: '/settings'
 			}
-		] satisfies NavigationItem[];
+		});
+		return items;
 	});
 
 	const title = $derived.by(() => {
@@ -108,24 +87,24 @@
 			>
 		</div>
 	</header>
-	<div class="flex grow gap-4 p-4 pt-0">
-		<aside class="flex flex-col justify-between rounded bg-neutral-100 p-4 dark:bg-neutral-900">
-			{#each [topNavigations, bottomNavigations] as navigations (navigations)}
-				<nav class="flex flex-col gap-2">
-					{#each navigations as navigation (navigation)}
-						{@const active = navigation.attributes.href === page.url.pathname}
-						<a
-							class="flex items-center justify-between gap-8 rounded px-4 py-2 whitespace-nowrap transition-colors last:mt-auto {active
-								? 'bg-neutral-500/50'
-								: ''} hover:bg-neutral-500/50"
-							{...navigation.attributes}
-						>
-							<span class={active ? 'font-bold' : 'font-semibold'}>{navigation.label}</span>
-							<navigation.Icon class="size-5" />
-						</a>
-					{/each}
-				</nav>
-			{/each}
+	<div class="flex grow gap-4 px-4 pb-4">
+		<aside
+			class="flex w-64 flex-col justify-between rounded bg-neutral-100 p-4 dark:bg-neutral-900"
+		>
+			<nav class="flex grow flex-col gap-2">
+				{#each navigationItems as navigation (navigation)}
+					{@const active = navigation.attributes.href === page.url.pathname}
+					<a
+						class="flex items-center justify-between gap-8 rounded px-4 py-2 whitespace-nowrap transition-colors last:mt-auto {active
+							? 'bg-neutral-500/50'
+							: ''} hover:bg-neutral-500/50"
+						{...navigation.attributes}
+					>
+						<span class={active ? 'font-bold' : 'font-semibold'}>{navigation.label}</span>
+						<navigation.Icon class="size-5" />
+					</a>
+				{/each}
+			</nav>
 		</aside>
 		<main class="flex grow flex-col gap-2 rounded bg-neutral-200 p-4 dark:bg-neutral-800">
 			<h1 class="text-2xl font-semibold">{title}</h1>
