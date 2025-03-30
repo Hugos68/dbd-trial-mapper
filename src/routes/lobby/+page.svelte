@@ -2,7 +2,7 @@
 	import { goto } from '$app/navigation';
 	import Button from '$lib/components/button.svelte';
 	import { supabase } from '$lib/modules/supabase/client';
-	import toast from 'svelte-french-toast';
+	import { toast } from 'svelte-french-toast';
 
 	const { data } = $props();
 
@@ -19,6 +19,7 @@
 			replaceState: true,
 			invalidateAll: true
 		});
+        toast.success('Successfully left lobby');
 	}
 </script>
 

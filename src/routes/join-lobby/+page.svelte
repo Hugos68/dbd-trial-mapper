@@ -5,6 +5,7 @@
 	import Button from '$lib/components/button.svelte';
 	import { supabase } from '$lib/modules/supabase/client.js';
 	import { goto } from '$app/navigation';
+	import { toast } from 'svelte-french-toast';
 
 	const { data } = $props();
 
@@ -23,6 +24,7 @@
 				replaceState: true,
 				invalidateAll: true
 			});
+            toast.success('Successfully joined lobby');
 		}
 	});
 </script>
