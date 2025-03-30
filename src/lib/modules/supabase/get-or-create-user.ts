@@ -1,7 +1,7 @@
 import { error } from '@sveltejs/kit';
 import { supabase } from './client';
 
-export async function cretUser() {
+export async function getOrCreateUser() {
 	const user = await supabase.auth.getUser();
 	if (user.error || !user.data.user) {
 		const user = await supabase.auth.signInAnonymously();
