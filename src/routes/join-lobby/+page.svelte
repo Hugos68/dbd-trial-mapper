@@ -12,17 +12,17 @@
 		validators: valibot(JoinLobbySchema),
 		SPA: true,
 		async onUpdate(event) {
-            const joinLobbyResponse = await supabase.from('lobby_participant').insert({
-                lobby_id: event.form.data['lobby-id']
-            });
-            if (joinLobbyResponse.error) {
-                setError(event.form, 'lobby-id', joinLobbyResponse.error.message);
-                return;
-            }
-            await goto('/lobby', {
-                replaceState: true,
-                invalidateAll: true
-            });
+			const joinLobbyResponse = await supabase.from('lobby_participant').insert({
+				lobby_id: event.form.data['lobby-id']
+			});
+			if (joinLobbyResponse.error) {
+				setError(event.form, 'lobby-id', joinLobbyResponse.error.message);
+				return;
+			}
+			await goto('/lobby', {
+				replaceState: true,
+				invalidateAll: true
+			});
 		}
 	});
 </script>
@@ -41,7 +41,5 @@
 			<span class="text-sm text-red-500">{$errors['lobby-id']}</span>
 		{/if}
 	</label>
-	<Button disabled={$submitting}>
-		Join Lobby
-	</Button>
+	<Button disabled={$submitting}>Join Lobby</Button>
 </form>
