@@ -1,11 +1,19 @@
 <script lang="ts">
 	import '../app.css';
-	import { HomeIcon, MapIcon, MergeIcon, PlusCircleIcon, RefreshCcwIcon, SettingsIcon, XIcon } from '@lucide/svelte';
+	import {
+		HomeIcon,
+		MapIcon,
+		MergeIcon,
+		PlusCircleIcon,
+		RefreshCcwIcon,
+		SettingsIcon,
+		XIcon
+	} from '@lucide/svelte';
 	import { page } from '$app/state';
 	import { close } from '$lib/modules/tauri/window/close';
 
 	const { children } = $props();
-	
+
 	const routeGroups = [
 		[
 			{
@@ -22,7 +30,7 @@
 				label: 'Create Lobby',
 				href: '/create-lobby',
 				Icon: PlusCircleIcon
-			},
+			}
 		],
 		[
 			{
@@ -34,8 +42,7 @@
 				label: 'Settings',
 				href: '/settings',
 				Icon: SettingsIcon
-			},
-
+			}
 		]
 	];
 
@@ -46,7 +53,7 @@
 		}
 		return route
 			.split('-')
-			.map(word => word.charAt(0).toUpperCase() + word.slice(1))
+			.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
 			.join(' ');
 	});
 </script>

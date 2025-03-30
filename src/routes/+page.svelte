@@ -1,5 +1,14 @@
-<div class="grow grid gap-4">
-	<p>Welcome to Trial Sync! This is a desktop application to share your current trial with your SWF!</p>
-	<p>Found an issue? <a class="underline" href="https://github.com/Hugos68/trial-sync/issues/new">Report it here.</a></p>
+<div class="grid grow gap-4">
+	<p>Welcome to Trial Sync!</p>
+	<p>
+		Trial Sync is an application to overlay a Dead By Daylight trial while playing and share it with
+		your friends!
+	</p>
+	<p>
+		Found an issue? <a
+			class="underline"
+			target="_blank"
+			href="https://github.com/Hugos68/trial-sync/issues/new">Report it here.</a
+		>
+	</p>
 </div>
-
