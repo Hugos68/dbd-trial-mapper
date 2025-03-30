@@ -2,21 +2,21 @@
 @plugin '@tailwindcss/forms';
 
 html {
-    background-color: var(--color-neutral-50);
-    color: var(--color-neutral-950);
+	background-color: var(--color-neutral-50);
+	color: var(--color-neutral-950);
 }
 
 @variant dark {
-    html {
-        background-color: var(--color-neutral-950);
-        color: var(--color-neutral-50);
-    }
+	html {
+		background-color: var(--color-neutral-950);
+		color: var(--color-neutral-50);
+	}
 }
 
-
-html, body {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    user-select: none;
+html,
+body {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	user-select: none;
 }
