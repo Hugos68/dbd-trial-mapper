@@ -33,15 +33,16 @@
 
 <div class="flex grow flex-col">
 	<header data-tauri-drag-region class="flex items-center justify-between gap-2 p-4">
-		<div class="flex items-center gap-2">
+		<div class="flex items-center gap-4">
 			<MapIcon />
 			<div class="grid">
 				<span class="font-bold">Trial Sync</span>
 				<span class="text-xs text-neutral-500">User ID: {page.data.user.id}</span>
 			</div>
 		</div>
-		<button class="cursor-pointer rounded p-2 hover:bg-red-500/50" onclick={close}><XIcon /></button
-		>
+		<div class="flex gap-2">
+			<button class="cursor-pointer rounded p-2 hover:bg-red-500/50" onclick={close}><XIcon /></button>
+		</div>
 	</header>
 	<div class="flex grow gap-4 p-4">
 		<aside class="flex flex-col justify-between rounded bg-neutral-100 p-4 dark:bg-neutral-900">
@@ -59,9 +60,12 @@
 				{/each}
 			</nav>
 		</aside>
-		<main class="grid grow gap-2 rounded bg-neutral-100 p-4 dark:bg-neutral-900">
+		<main class="flex grow flex-col gap-2 rounded bg-neutral-200 p-4 dark:bg-neutral-800">
 			<h1 class="text-2xl font-semibold">{title}</h1>
-			{@render children()}
+			<hr />
+			<div>
+				{@render children()}
+			</div>
 		</main>
 	</div>
 </div>
