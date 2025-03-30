@@ -2,6 +2,7 @@
 	import '../app.css';
 	import { MapIcon, MergeIcon, PlusCircleIcon, SettingsIcon, XIcon } from '@lucide/svelte';
 	import { page } from '$app/state';
+	import { close } from '$lib/modules/tauri/window/close';
 
 	const { children } = $props();
 
