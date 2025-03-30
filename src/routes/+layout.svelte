@@ -18,30 +18,41 @@
 		[
 			{
 				label: 'Home',
-				href: '/',
-				Icon: HomeIcon
+				Icon: HomeIcon,
+				attributes: {
+					href: '/'
+				}
 			},
 			{
 				label: 'Join Lobby',
-				href: '/join-lobby',
-				Icon: MergeIcon
+				Icon: MergeIcon,
+				attributes: {
+					href: '/join-lobby'
+				}
 			},
 			{
 				label: 'Create Lobby',
-				href: '/create-lobby',
-				Icon: PlusCircleIcon
+				Icon: PlusCircleIcon,
+				attributes: {
+					href: '/create-lobby'
+				}
 			}
 		],
 		[
 			{
 				label: 'Refresh Session',
-				href: '/refresh-session',
-				Icon: RefreshCcwIcon
+				Icon: RefreshCcwIcon,
+				attributes: {
+					href: '/refresh-session',
+					'data-sveltekit-preload-data': 'tap'
+				}
 			},
 			{
 				label: 'Settings',
-				href: '/settings',
-				Icon: SettingsIcon
+				Icon: SettingsIcon,
+				attributes: {
+					href: '/settings'
+				}
 			}
 		]
 	];
@@ -68,24 +79,22 @@
 			</div>
 		</div>
 		<div class="flex gap-2">
-			<button
-				class="cursor-pointer rounded p-2 transition-colors hover:bg-red-500/50"
-				onclick={close}><XIcon /></button
+			<button class="rounded p-2 transition-colors hover:bg-red-500/50" onclick={close}
+				><XIcon /></button
 			>
 		</div>
 	</header>
 	<div class="flex grow gap-4 p-4 pt-0">
 		<aside class="flex flex-col justify-between rounded bg-neutral-100 p-4 dark:bg-neutral-900">
-			{#each routeGroups as routeGroup}
+			{#each routeGroups as routeGroup (routeGroup)}
 				<nav class="flex flex-col gap-2">
 					{#each routeGroup as route (route)}
-						{@const active = route.href === page.url.pathname}
+						{@const active = route.attributes.href === page.url.pathname}
 						<a
-							aria-current={active && 'page'}
-							class="flex items-center justify-between gap-8 rounded px-4 py-2 whitespace-nowrap transition-colors last:mt-auto hover:bg-neutral-500/50 [&[aria-current=page]]:bg-neutral-500/50"
-							href={route.href}
+							class="flex items-center justify-between gap-8 rounded px-4 py-2 whitespace-nowrap transition-colors last:mt-auto {active ? "bg-neutral-500/50" : ""} hover:bg-neutral-500/50"
+							{...route.attributes}
 						>
-							<span class="font-semibold">{route.label}</span>
+							<span class={active ? 'font-bold' : 'font-semibold'}>{route.label}</span>
 							<route.Icon class="size-5" />
 						</a>
 					{/each}
