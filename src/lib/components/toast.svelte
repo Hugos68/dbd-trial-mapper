@@ -30,11 +30,11 @@
 </script>
 
 <div
-	class="flex max-w-72 flex-col rounded bg-neutral-100 p-4 dark:bg-neutral-900 {typeClasses}"
+	class="grid gap-1 rounded bg-neutral-100 p-4 dark:bg-neutral-900 {typeClasses} min-w-xs"
 	{...api.getRootProps()}
 >
 	<span class="text-lg font-semibold" {...api.getTitleProps()}>{api.title}</span>
-	<span class="truncate text-sm" {...api.getDescriptionProps()}>{api.description}</span>
+	<span class="text-sm" {...api.getDescriptionProps()}>{api.description}</span>
 </div>
 
 <style>
