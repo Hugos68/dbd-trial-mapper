@@ -7,7 +7,7 @@
 	const { children } = $props();
 
 	const routes = [
-		{	
+		{
 			label: 'Join Lobby',
 			href: '/join-lobby',
 			Icon: MergeIcon
@@ -27,7 +27,7 @@
 	const title = $derived(routes.find((route) => route.href === page.url.pathname)?.label);
 </script>
 
-<div class="grow flex flex-col">
+<div class="flex grow flex-col">
 	<header data-tauri-drag-region class="flex items-center justify-between rounded p-4">
 		<div class="flex items-center gap-4">
 			<MapIcon />
@@ -37,17 +37,20 @@
 			</div>
 		</div>
 		<div class="flex gap-2">
-			<button class="cursor-pointer rounded p-2 hover:bg-red-500/50" onclick={close}><XIcon /></button>
+			<button
+				class="cursor-pointer rounded p-2 transition-colors hover:bg-red-500/50"
+				onclick={close}><XIcon /></button
+			>
 		</div>
 	</header>
-	<div class="grow flex gap-4 p-4 pt-0">
-		<aside class="flex flex-col justify-between rounded  p-4 bg-neutral-100 dark:bg-neutral-900">
+	<div class="flex grow gap-4 p-4 pt-0">
+		<aside class="flex flex-col justify-between rounded bg-neutral-100 p-4 dark:bg-neutral-900">
 			<nav class="flex h-full flex-col gap-2">
 				{#each routes as route (route)}
 					{@const active = route.href === page.url.pathname}
 					<a
 						aria-current={active && 'page'}
-						class="flex justify-between gap-8 rounded px-4 py-2 whitespace-nowrap last:mt-auto hover:bg-neutral-500/50 [&[aria-current=page]]:bg-neutral-500/50"
+						class="flex justify-between gap-8 rounded px-4 py-2 whitespace-nowrap transition-colors last:mt-auto hover:bg-neutral-500/50 [&[aria-current=page]]:bg-neutral-500/50"
 						href={route.href}
 					>
 						<route.Icon />
@@ -64,5 +67,4 @@
 			</div>
 		</main>
 	</div>
-
 </div>

@@ -1,1 +1,4 @@
-<p>Welcome to Trial Sync! This is a simple app that allows you to sync your trial data with your friends.</p>
+<p>
+	Welcome to Trial Sync! This is a simple app that allows you to sync your trial data with your
+	friends.
+</p>
