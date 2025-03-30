@@ -11,34 +11,55 @@
 	} from '@lucide/svelte';
 	import { page } from '$app/state';
 	import { close } from '$lib/modules/tauri/window/close';
+	import type { HTMLAnchorAttributes } from 'svelte/elements';
 
-	const { children } = $props();
+	const { children, data } = $props();
 
-	const routeGroups = [
-		[
+	interface NavigationItem {
+		label: string;
+		Icon: typeof HomeIcon;
+		attributes: HTMLAnchorAttributes;
+	}
+
+	const topNavigations = $derived.by(() => {
+		const items: NavigationItem[] = [
 			{
 				label: 'Home',
 				Icon: HomeIcon,
 				attributes: {
 					href: '/'
 				}
-			},
-			{
+			}
+		];
+		if (data.lobby) {
+			items.push({
+				label: 'Lobby',
+				Icon: MapIcon,
+				attributes: {
+					href: '/lobby'
+				}
+			});
+		} else {
+			items.push({
 				label: 'Join Lobby',
 				Icon: MergeIcon,
 				attributes: {
 					href: '/join-lobby'
 				}
-			},
-			{
+			});
+			items.push({
 				label: 'Create Lobby',
 				Icon: PlusCircleIcon,
 				attributes: {
 					href: '/create-lobby'
 				}
-			}
-		],
-		[
+			});
+		}
+		return items;
+	});
+
+	const bottomNavigations = $derived.by(() => {
+		return [
 			{
 				label: 'Refresh Session',
 				Icon: RefreshCcwIcon,
@@ -54,8 +75,8 @@
 					href: '/settings'
 				}
 			}
-		]
-	];
+		] satisfies NavigationItem[];
+	});
 
 	const title = $derived.by(() => {
 		const route = page.url.pathname.split('/').pop();
@@ -86,16 +107,18 @@
 	</header>
 	<div class="flex grow gap-4 p-4 pt-0">
 		<aside class="flex flex-col justify-between rounded bg-neutral-100 p-4 dark:bg-neutral-900">
-			{#each routeGroups as routeGroup (routeGroup)}
+			{#each [topNavigations, bottomNavigations] as navigations (navigations)}
 				<nav class="flex flex-col gap-2">
-					{#each routeGroup as route (route)}
-						{@const active = route.attributes.href === page.url.pathname}
+					{#each navigations as navigation (navigation)}
+						{@const active = navigation.attributes.href === page.url.pathname}
 						<a
-							class="flex items-center justify-between gap-8 rounded px-4 py-2 whitespace-nowrap transition-colors last:mt-auto {active ? "bg-neutral-500/50" : ""} hover:bg-neutral-500/50"
-							{...route.attributes}
+							class="flex items-center justify-between gap-8 rounded px-4 py-2 whitespace-nowrap transition-colors last:mt-auto {active
+								? 'bg-neutral-500/50'
+								: ''} hover:bg-neutral-500/50"
+							{...navigation.attributes}
 						>
-							<span class={active ? 'font-bold' : 'font-semibold'}>{route.label}</span>
-							<route.Icon class="size-5" />
+							<span class={active ? 'font-bold' : 'font-semibold'}>{navigation.label}</span>
+							<navigation.Icon class="size-5" />
 						</a>
 					{/each}
 				</nav>
