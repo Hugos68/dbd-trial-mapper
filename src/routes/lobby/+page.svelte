@@ -2,10 +2,10 @@
 	import { goto } from '$app/navigation';
 	import Button from '$lib/components/button.svelte';
 	import { supabase } from '$lib/modules/supabase/client';
-	import { toast } from 'svelte-french-toast';
 	import { valibot } from 'sveltekit-superforms/adapters';
 	import { LeaveLobbySchema } from './leave-lobby-schema.js';
 	import { superForm } from 'sveltekit-superforms';
+	import { toaster } from '$lib/modules/ui/toaster.js';
 
 	const { data } = $props();
 
@@ -18,14 +18,20 @@
 				user_id: event.form.data['user-id']
 			});
 			if (leaveLobbyResponse.error) {
-				toast.error(`Failed to leave lobby: ${leaveLobbyResponse.error.message}`);
+				toaster.error({
+					title: 'Failed to leave lobby',
+					description: leaveLobbyResponse.error.message
+				});
 				return;
 			}
 			await goto('/', {
 				replaceState: true,
 				invalidateAll: true
 			});
-			toast.success('Successfully left lobby');
+			toaster.success({
+				title: 'Successfully left lobby',
+				description: 'You have been redirected to the home page'
+			});
 		}
 	});
 </script>

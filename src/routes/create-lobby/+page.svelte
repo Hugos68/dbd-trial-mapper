@@ -4,8 +4,8 @@
 	import Button from '$lib/components/button.svelte';
 	import { supabase } from '$lib/modules/supabase/client.js';
 	import { goto } from '$app/navigation';
-	import { toast } from 'svelte-french-toast';
 	import { CreateLobbySchema } from './create-lobby-schema.js';
+	import { toaster } from '$lib/modules/ui/toaster.js';
 
 	const { data } = $props();
 
@@ -15,14 +15,20 @@
 		async onUpdate() {
 			const insertLobbyResponse = await supabase.from('lobby').insert({});
 			if (insertLobbyResponse.error) {
-				toast.error(`Failed to create lobby: ${insertLobbyResponse.error.message}`);
+				toaster.error({
+					title: 'Failed to create lobby',
+					description: insertLobbyResponse.error.message
+				});
 				return;
 			}
 			await goto('/lobby', {
 				replaceState: true,
 				invalidateAll: true
 			});
-			toast.success('Successfully created lobby');
+			toaster.success({
+				title: 'Successfully created lobby',
+				description: 'You have been redirected to the lobby page'
+			});
 		}
 	});
 </script>

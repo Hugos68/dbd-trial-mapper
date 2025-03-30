@@ -5,7 +5,7 @@
 	import Button from '$lib/components/button.svelte';
 	import { supabase } from '$lib/modules/supabase/client.js';
 	import { goto } from '$app/navigation';
-	import { toast } from 'svelte-french-toast';
+	import { toaster } from '$lib/modules/ui/toaster.js';
 
 	const { data } = $props();
 
@@ -17,14 +17,20 @@
 				lobby_id: event.form.data['lobby-id']
 			});
 			if (joinLobbyResponse.error) {
-				toast.error(`Failed to join lobby: ${joinLobbyResponse.error.message}`);
+				toaster.error({
+					title: 'Failed to join lobby',
+					description: joinLobbyResponse.error.message
+				});
 				return;
 			}
 			await goto('/lobby', {
 				replaceState: true,
 				invalidateAll: true
 			});
-			toast.success('Successfully joined lobby');
+			toaster.success({
+				title: 'Successfully joined lobby',
+				description: 'You have been redirected to the lobby page'
+			});
 		}
 	});
 </script>
