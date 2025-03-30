@@ -17,9 +17,10 @@ interface Props {
 	trials: Trial[];
 	lobby: Lobby;
 	user: User;
+	onOpen: () => void;
 }
 
-const { trials, lobby, user }: Props = $props();
+const { trials, lobby, user, onOpen }: Props = $props();
 
 const trialsGroupedByRealm = $derived(
 	trials.reduce((realms, trial) => {
@@ -69,5 +70,5 @@ async function submitSelectTrial(event: SubmitEvent) {
             {/each}
         </select>
     </form>
-    <a href="/trial" class="ig-btn preset-filled-primary-500"><EyeIcon /></a>
+    <button onclick={onOpen} class="ig-btn preset-filled-primary-500"><EyeIcon /></button>
 </div>
