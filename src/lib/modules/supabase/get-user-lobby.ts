@@ -4,7 +4,7 @@ import { supabase } from './client';
 export async function getUserLobby(user: User) {
 	const hostingLobby = await supabase
 		.from('lobby')
-		.select('*, trial (*)')
+		.select('*, trial (*, realm (*))')
 		.eq('user_id', user.id)
 		.maybeSingle();
 	if (hostingLobby.data) {
@@ -12,7 +12,7 @@ export async function getUserLobby(user: User) {
 	}
 	const participatingLobby = await supabase
 		.from('lobby_participant')
-		.select('*, lobby (*, trial (*))')
+		.select('*, lobby (*, trial (*, realm (*)))')
 		.eq('user_id', user.id)
 		.maybeSingle();
 	return {
