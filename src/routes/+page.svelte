@@ -1,2 +1,2 @@
 
-<h1 class="text-xl">Welcome to Trial Sync</h1>
+<h1 class="prose">Welcome to Trial Sync</h1>

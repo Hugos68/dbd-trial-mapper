@@ -1,11 +1,10 @@
 <script lang="ts">
 	import '../app.css';
 	import Header from '$lib/components/header.svelte';
-	import { HomeIcon, JoystickIcon, MapIcon, PlusCircleIcon, PlusIcon, SettingsIcon } from '@lucide/svelte';
+	import { HomeIcon, MapIcon, PlusCircleIcon, SettingsIcon } from '@lucide/svelte';
 	import { page } from '$app/state';
 
 	const { children } = $props();
-
 
 	const routes = [
 		{
@@ -50,3 +49,4 @@
 		</main>
 	</div>
 </div>
+
