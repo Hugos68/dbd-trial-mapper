@@ -1,30 +1,54 @@
 <script lang="ts">
 	import '../app.css';
-	import { MapIcon, MergeIcon, PlusCircleIcon, SettingsIcon, XIcon } from '@lucide/svelte';
+	import { HomeIcon, MapIcon, MergeIcon, PlusCircleIcon, RefreshCcwIcon, SettingsIcon, XIcon } from '@lucide/svelte';
 	import { page } from '$app/state';
 	import { close } from '$lib/modules/tauri/window/close';
 
 	const { children } = $props();
+	
+	const routeGroups = [
+		[
+			{
+				label: 'Home',
+				href: '/',
+				Icon: HomeIcon
+			},
+			{
+				label: 'Join Lobby',
+				href: '/join-lobby',
+				Icon: MergeIcon
+			},
+			{
+				label: 'Create Lobby',
+				href: '/create-lobby',
+				Icon: PlusCircleIcon
+			},
+		],
+		[
+			{
+				label: 'Refresh Session',
+				href: '/refresh-session',
+				Icon: RefreshCcwIcon
+			},
+			{
+				label: 'Settings',
+				href: '/settings',
+				Icon: SettingsIcon
+			},
 
-	const routes = [
-		{
-			label: 'Join Lobby',
-			href: '/join-lobby',
-			Icon: MergeIcon
-		},
-		{
-			label: 'Create Lobby',
-			href: '/create-lobby',
-			Icon: PlusCircleIcon
-		},
-		{
-			label: 'Settings',
-			href: '/settings',
-			Icon: SettingsIcon
+		]
+	];
+
+	const title = $derived.by(() => {
+		const route = page.url.pathname.split('/').pop();
+		if (!route) {
+			return 'Home';
 		}
-	] as const;
-
-	const title = $derived(routes.find((route) => route.href === page.url.pathname)?.label);
+		return route
+			.split('-')
+			.map(word => word.charAt(0).toUpperCase() + word.slice(1))
+			.join(' ');
+	});
 </script>
 
 <div class="flex grow flex-col">
@@ -45,19 +69,21 @@
 	</header>
 	<div class="flex grow gap-4 p-4 pt-0">
 		<aside class="flex flex-col justify-between rounded bg-neutral-100 p-4 dark:bg-neutral-900">
-			<nav class="flex h-full flex-col gap-2">
-				{#each routes as route (route)}
-					{@const active = route.href === page.url.pathname}
-					<a
-						aria-current={active && 'page'}
-						class="flex justify-between gap-8 rounded px-4 py-2 whitespace-nowrap transition-colors last:mt-auto hover:bg-neutral-500/50 [&[aria-current=page]]:bg-neutral-500/50"
-						href={route.href}
-					>
-						<route.Icon />
-						<span class="font-semibold">{route.label}</span>
-					</a>
-				{/each}
-			</nav>
+			{#each routeGroups as routeGroup}
+				<nav class="flex flex-col gap-2">
+					{#each routeGroup as route (route)}
+						{@const active = route.href === page.url.pathname}
+						<a
+							aria-current={active && 'page'}
+							class="flex items-center justify-between gap-8 rounded px-4 py-2 whitespace-nowrap transition-colors last:mt-auto hover:bg-neutral-500/50 [&[aria-current=page]]:bg-neutral-500/50"
+							href={route.href}
+						>
+							<span class="font-semibold">{route.label}</span>
+							<route.Icon class="size-5" />
+						</a>
+					{/each}
+				</nav>
+			{/each}
 		</aside>
 		<main class="flex grow flex-col gap-2 rounded bg-neutral-200 p-4 dark:bg-neutral-800">
 			<h1 class="text-2xl font-semibold">{title}</h1>
