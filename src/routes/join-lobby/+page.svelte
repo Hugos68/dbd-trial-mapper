@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { setError, superForm } from 'sveltekit-superforms';
+	import { superForm } from 'sveltekit-superforms';
 	import { valibot } from 'sveltekit-superforms/adapters';
 	import { JoinLobbySchema } from './join-lobby-schema.js';
 	import Button from '$lib/components/button.svelte';
@@ -17,14 +17,14 @@
 				lobby_id: event.form.data['lobby-id']
 			});
 			if (joinLobbyResponse.error) {
-				setError(event.form, 'lobby-id', joinLobbyResponse.error.message);
+				toast.error(`Failed to join lobby: ${joinLobbyResponse.error.message}`);
 				return;
 			}
 			await goto('/lobby', {
 				replaceState: true,
 				invalidateAll: true
 			});
-            toast.success('Successfully joined lobby');
+			toast.success('Successfully joined lobby');
 		}
 	});
 </script>
