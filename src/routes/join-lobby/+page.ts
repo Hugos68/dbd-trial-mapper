@@ -10,6 +10,6 @@ export async function load(event) {
 	}
 	const form = await superValidate(valibot(JoinLobbySchema));
 	return {
-		form: form
+		form: form,
 	};
 }

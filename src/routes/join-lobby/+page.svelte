@@ -15,24 +15,29 @@
 				return;
 			}
 			const joinLobbyResponse = await supabase.from('lobby_member').insert({
-				lobby_id: event.form.data['lobby-id']
+				lobby_id: event.form.data['lobby-id'],
 			});
 			if (joinLobbyResponse.error) {
 				event.form.valid = false;
 				toaster.error({
 					title: 'Failed to join lobby',
-					description: joinLobbyResponse.error.details
+					description: joinLobbyResponse.error.details,
 				});
 				return;
 			}
 			toaster.success({
-				title: 'Successfully joined lobby'
+				title: 'Successfully joined lobby',
 			});
-		}
+		},
 	});
 </script>
 
-<form class="flex h-full flex-col gap-4" method="post" autocomplete="off" use:enhance>
+<form
+	class="flex h-full flex-col gap-4"
+	method="post"
+	autocomplete="off"
+	use:enhance
+>
 	<label class="grid gap-1">
 		<span class="text-sm">Lobby ID</span>
 		<input

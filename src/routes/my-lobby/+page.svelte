@@ -15,28 +15,31 @@
 			if (!event.form.valid) {
 				return;
 			}
-			const leaveLobbyResponse = await supabase.from('lobby_member').delete().match({
-				lobby_id: event.form.data['lobby-id'],
-				user_id: event.form.data['user-id']
-			});
+			const leaveLobbyResponse = await supabase
+				.from('lobby_member')
+				.delete()
+				.match({
+					lobby_id: event.form.data['lobby-id'],
+					user_id: event.form.data['user-id'],
+				});
 			if (leaveLobbyResponse.error) {
 				event.form.valid = false;
 				toaster.error({
 					title: 'Failed to leave lobby',
-					description: leaveLobbyResponse.error.details
+					description: leaveLobbyResponse.error.details,
 				});
 				return;
 			}
 			toaster.success({
-				title: 'Successfully left lobby'
+				title: 'Successfully left lobby',
 			});
-		}
+		},
 	});
 
 	async function copyLobbyId() {
 		await copyToClipboard(data.lobby.id);
 		toaster.info({
-			title: 'Lobby ID copied to clipboard'
+			title: 'Lobby ID copied to clipboard',
 		});
 	}
 </script>
@@ -44,7 +47,9 @@
 <div class="flex h-full flex-col gap-2">
 	<div class="flex justify-between">
 		<div>
-			<button class="hover:underline" onclick={copyLobbyId}>ID: {data.lobby.id}</button>
+			<button class="hover:underline" onclick={copyLobbyId}
+				>ID: {data.lobby.id}</button
+			>
 			<p>Realm: {data.lobby.trial.realm.name}</p>
 			<p>Trial: {data.lobby.trial.name}</p>
 		</div>

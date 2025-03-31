@@ -17,6 +17,6 @@ export async function load() {
 	}
 	return {
 		user: user,
-		lobby: lobbyResponse.data?.lobby
+		lobby: lobbyResponse.data?.lobby,
 	};
 }

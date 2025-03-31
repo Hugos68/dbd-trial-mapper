@@ -7,7 +7,7 @@
 	const id = $props.id();
 	const service = useMachine(toast.group.machine, () => ({
 		id: id,
-		store: toaster
+		store: toaster,
 	}));
 	const api = $derived(toast.group.connect(service, normalizeProps));
 </script>

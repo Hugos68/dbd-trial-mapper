@@ -11,12 +11,12 @@ export async function load(event) {
 	const form = await superValidate(
 		{
 			'lobby-id': data.lobby.id,
-			'user-id': data.user.id
+			'user-id': data.user.id,
 		},
-		valibot(LeaveLobbySchema)
+		valibot(LeaveLobbySchema),
 	);
 	return {
 		lobby: data.lobby,
-		form: form
+		form: form,
 	};
 }

@@ -14,7 +14,7 @@
 	const service = useMachine(toast.machine, () => ({
 		...props.toast,
 		parent: props.service,
-		index: props.index
+		index: props.index,
 	}));
 	const api = $derived(toast.connect(service, normalizeProps));
 	const typeClasses = $derived.by(() => {
@@ -36,9 +36,14 @@
 	{...api.getRootProps()}
 >
 	<div>
-		<span class="size-xs block font-semibold" {...api.getTitleProps()}>{api.title}</span>
+		<span class="size-xs block font-semibold" {...api.getTitleProps()}
+			>{api.title}</span
+		>
 		{#if api.description}
-			<span class="block text-sm text-balance text-neutral-500" {...api.getDescriptionProps()}>
+			<span
+				class="block text-sm text-balance text-neutral-500"
+				{...api.getDescriptionProps()}
+			>
 				{api.description}
 			</span>
 		{/if}

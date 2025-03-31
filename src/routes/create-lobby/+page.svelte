@@ -19,14 +19,14 @@
 				event.form.valid = false;
 				toaster.error({
 					title: 'Failed to create lobby',
-					description: insertLobbyResponse.error.details
+					description: insertLobbyResponse.error.details,
 				});
 				return;
 			}
 			toaster.success({
-				title: 'Successfully created lobby'
+				title: 'Successfully created lobby',
 			});
-		}
+		},
 	});
 </script>
 

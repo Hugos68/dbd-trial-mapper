@@ -1,8 +1,8 @@
 <div class="grid grow gap-4">
 	<p>Welcome to Trial Sync!</p>
 	<p>
-		Trial Sync is an application to overlay a Dead By Daylight trial while playing and share it with
-		your friends!
+		Trial Sync is an application to overlay a Dead By Daylight trial while
+		playing and share it with your friends!
 	</p>
 	<p>
 		Found an issue? <a
