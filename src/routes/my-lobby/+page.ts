@@ -10,8 +10,8 @@ export async function load(event) {
 	}
 	const form = await superValidate(
 		{
-			'lobby-id': data.lobby.id,
-			'user-id': data.user.id,
+			lobby_id: data.lobby.id,
+			user_id: data.user.id,
 		},
 		valibot(LeaveLobbySchema),
 	);

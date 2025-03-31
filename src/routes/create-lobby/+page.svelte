@@ -5,6 +5,7 @@
 	import { CreateLobbySchema } from '../../lib/modules/schemas/create-lobby-schema.js';
 	import { toaster } from '$lib/modules/ui/toaster.js';
 	import { useForm } from '$lib/modules/hooks/use-form.js';
+	import Layout from '$lib/components/layout.svelte';
 
 	const { data } = $props();
 
@@ -30,6 +31,8 @@
 	});
 </script>
 
-<form class="grid h-full gap-4" method="post" autocomplete="off" use:enhance>
-	<Button class="mt-auto ml-auto" disabled={$submitting}>Create Lobby</Button>
-</form>
+<Layout title="Create Lobby" description="Create a new lobby.">
+	<form class="grid h-full gap-4" method="post" autocomplete="off" use:enhance>
+		<Button class="mt-auto ml-auto" disabled={$submitting}>Create Lobby</Button>
+	</form>
+</Layout>	

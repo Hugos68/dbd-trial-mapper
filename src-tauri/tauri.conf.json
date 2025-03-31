@@ -19,6 +19,15 @@
 				"height": 720,
 				"center": true,
 				"decorations": false
+			},
+			{
+				"label": "overlay",
+				"url": "/overlay",
+				"alwaysOnTop": true,
+				"visible": false,
+				"shadow": false,
+				"skipTaskbar": true,
+				"decorations": false
 			}
 		],
 		"security": {

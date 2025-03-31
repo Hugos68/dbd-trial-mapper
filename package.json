@@ -30,6 +30,7 @@
 		"prettier": "^3.5.3",
 		"prettier-plugin-svelte": "^3.3.3",
 		"prettier-plugin-tailwindcss": "^0.6.11",
+		"runed": "^0.25.0",
 		"supabase": "^2.20.5",
 		"svelte": "^5.25.3",
 		"svelte-check": "^4.1.5",
@@ -41,5 +42,8 @@
 		"vite": "^6.2.4"
 	},
 	"license": "MIT",
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"@tauri-apps/plugin-positioner": "~2"
+	}
 }

@@ -2,6 +2,7 @@
 @plugin '@tailwindcss/forms';
 
 html {
+	overflow: hidden;
 	background-color: var(--color-neutral-50);
 	color: var(--color-neutral-950);
 }
@@ -11,12 +12,4 @@ html {
 		background-color: var(--color-neutral-950);
 		color: var(--color-neutral-50);
 	}
-}
-
-html,
-body {
-	display: flex;
-	flex-direction: column;
-	height: 100%;
-	user-select: none;
 }

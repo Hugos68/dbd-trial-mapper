@@ -5,6 +5,7 @@
 	import { toaster } from '$lib/modules/ui/toaster.js';
 	import { JoinLobbySchema } from '$lib/modules/schemas/join-lobby-schema.js';
 	import { useForm } from '$lib/modules/hooks/use-form.js';
+	import Layout from '$lib/components/layout.svelte';
 
 	const { data } = $props();
 
@@ -14,9 +15,7 @@
 			if (!event.form.valid) {
 				return;
 			}
-			const joinLobbyResponse = await supabase.from('lobby_member').insert({
-				lobby_id: event.form.data['lobby-id'],
-			});
+			const joinLobbyResponse = await supabase.from('lobby_member').insert(event.form.data);
 			if (joinLobbyResponse.error) {
 				event.form.valid = false;
 				toaster.error({
@@ -32,23 +31,26 @@
 	});
 </script>
 
-<form
-	class="flex h-full flex-col gap-4"
-	method="post"
-	autocomplete="off"
-	use:enhance
->
-	<label class="grid gap-1">
-		<span class="text-sm">Lobby ID</span>
-		<input
-			name="lobby-id"
-			class="rounded bg-transparent focus:aria-[invalid=true]:ring-red-500"
-			placeholder="Lobby ID"
-			bind:value={$form['lobby-id']}
-		/>
-		{#if $errors['lobby-id']}
-			<span class="text-sm text-red-500">{$errors['lobby-id'].join(', ')}</span>
-		{/if}
-	</label>
-	<Button class="mt-auto ml-auto" disabled={$submitting}>Join Lobby</Button>
-</form>
+<Layout title="Join Lobby" description="Join an existing lobby.">
+	<form
+		class="flex h-full flex-col gap-4"
+		method="post"
+		autocomplete="off"
+		use:enhance
+	>
+		<label class="grid gap-1">
+			<span class="text-sm">Lobby ID</span>
+			<input
+				name="lobby-id"
+				class="rounded bg-transparent focus:aria-[invalid=true]:ring-red-500"
+				placeholder="Lobby ID"
+				bind:value={$form.lobby_id}
+			/>
+			{#if $errors.lobby_id}
+				<span class="text-sm text-red-500">{$errors.lobby_id.join(', ')}</span>
+			{/if}
+		</label>
+		<Button class="mt-auto ml-auto" disabled={$submitting}>Join Lobby</Button>
+	</form>
+</Layout>
+
