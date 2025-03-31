@@ -26,10 +26,6 @@
 				});
 				return;
 			}
-			await goto('/my-lobby', {
-				replaceState: true,
-				invalidateAll: true
-			});
 			toaster.success({
 				title: 'Successfully joined lobby'
 			});

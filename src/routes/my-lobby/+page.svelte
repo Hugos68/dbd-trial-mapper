@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
 	import Button from '$lib/components/button.svelte';
 	import { supabase } from '$lib/modules/supabase/client';
 	import { valibot } from 'sveltekit-superforms/adapters';
