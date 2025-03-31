@@ -3,6 +3,10 @@ name: Build and Release
 on:
   workflow_dispatch:
 
+env:
+  PUBLIC_SUPABASE_URL: ${{ vars.SUPABASE_URL }}
+  PUBLIC_SUPABASE_ANON_KEY: ${{ vars.SUPABASE_ANON_KEY }}
+
 jobs:
   release:
     permissions:
@@ -20,9 +24,6 @@ jobs:
           - platform: 'windows-latest'
             args: ''
     runs-on: ${{ matrix.platform }}
-    env:
-      PUBLIC_SUPABASE_URL: ${{ vars.SUPABASE_URL }}
-      PUBLIC_SUPABASE_ANON_KEY: ${{ vars.SUPABASE_ANON_KEY }}
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
