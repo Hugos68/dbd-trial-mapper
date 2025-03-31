@@ -10,7 +10,8 @@
 	import { overlaySettings } from '$lib/modules/ui/overlay-settings.js';
 	import { WebviewWindow } from '@tauri-apps/api/webviewWindow';
 	import { emit } from '@tauri-apps/api/event';
-	import { ExternalLinkIcon, XIcon } from '@lucide/svelte';
+	import { ExternalLink, ExternalLinkIcon, XIcon } from '@lucide/svelte';
+	import IconButton from '$lib/components/icon-button.svelte';
 
 	const { data } = $props();
 
@@ -131,17 +132,15 @@
 				onclick={() =>
 					(overlaySettings.current.visible = !overlaySettings.current.visible)}
 			>
-				<div
-					class="absolute top-1/2 left-1/2 z-50 -translate-1/2 opacity-0 transition-opacity group-hover:opacity-100"
+				<Button
+					class="absolute top-2 right-2 z-50 opacity-0 transition-opacity group-hover:opacity-100"
 				>
-					<Button class="flex gap-2">
-						{#if overlaySettings.current.visible}
-							Pop-in <XIcon />
-						{:else}
-							Pop-out <ExternalLinkIcon />
-						{/if}
-					</Button>
-				</div>
+					{#if overlaySettings.current.visible}
+						<XIcon />
+					{:else}
+						<ExternalLink />
+					{/if}
+				</Button>
 				<img
 					class="object-fit max-h-72 rounded-md border transition-opacity {overlaySettings
 						.current.visible
