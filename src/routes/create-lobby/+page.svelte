@@ -24,7 +24,7 @@
 				});
 				return;
 			}
-			await goto('/lobby', {
+			await goto('/my-lobby', {
 				replaceState: true,
 				invalidateAll: true
 			});

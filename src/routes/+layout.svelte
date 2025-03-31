@@ -26,10 +26,10 @@
 		];
 		if (data.lobby) {
 			items.push({
-				label: 'Lobby',
+				label: 'My Lobby',
 				Icon: MapIcon,
 				attributes: {
-					href: '/lobby'
+					href: '/my-lobby'
 				}
 			});
 		} else {

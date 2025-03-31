@@ -6,6 +6,7 @@
 	import { toaster } from '$lib/modules/ui/toaster.js';
 	import { LeaveLobbySchema } from '$lib/modules/schemas/leave-lobby-schema.js';
 	import { useForm } from '$lib/modules/hooks/use-form.js';
+	import { copyToClipboard } from '$lib/modules/ui/copy-to-clipboard.js';
 
 	const { data } = $props();
 
@@ -37,12 +38,20 @@
 			});
 		}
 	});
+
+	async function copyLobbyId() {
+		await copyToClipboard(data.lobby.id);
+		toaster.success({
+			title: 'Lobby ID copied to clipboard',
+			description: 'You can now share the lobby ID with your friends'
+		});
+	}
 </script>
 
 <div class="flex h-full flex-col gap-2">
 	<div class="flex justify-between">
 		<div>
-			<p>ID: <span class="select-all">{data.lobby.id}</span></p>
+			<button onclick={copyLobbyId}>ID: {data.lobby.id}</button>
 			<p>Trial: {data.lobby.trial.name}</p>
 		</div>
 		<img
