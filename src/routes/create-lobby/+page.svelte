@@ -4,14 +4,14 @@
 	import Button from '$lib/components/button.svelte';
 	import { supabase } from '$lib/modules/supabase/client.js';
 	import { goto } from '$app/navigation';
-	import { CreateLobbySchema } from './create-lobby-schema.js';
+	import { CreateLobbySchema } from '../../lib/modules/schemas/create-lobby-schema.js';
 	import { toaster } from '$lib/modules/ui/toaster.js';
+	import { useForm } from '$lib/modules/hooks/use-form.js';
 
 	const { data } = $props();
 
-	const { enhance, submitting } = superForm(data.form, {
+	const { enhance, submitting } = useForm(data.form, {
 		validators: valibot(CreateLobbySchema),
-		SPA: true,
 		async onUpdate(event) {
 			if (!event.form.valid) {
 				return;
@@ -37,6 +37,6 @@
 	});
 </script>
 
-<form class="grid gap-4" method="post" use:enhance>
-	<Button disabled={$submitting}>Create Lobby</Button>
+<form class="grid h-full gap-4" method="post" use:enhance>
+	<Button class="mt-auto ml-auto" disabled={$submitting}>Create Lobby</Button>
 </form>
