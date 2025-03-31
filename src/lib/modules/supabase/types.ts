@@ -29,7 +29,7 @@ export type Database = {
 					}
 				];
 			};
-			lobby_participant: {
+			lobby_member: {
 				Row: {
 					id: string;
 					lobby_id: string;
@@ -47,7 +47,7 @@ export type Database = {
 				};
 				Relationships: [
 					{
-						foreignKeyName: 'lobby_participant_lobby_id_fkey';
+						foreignKeyName: 'lobby_member_lobby_id_fkey';
 						columns: ['lobby_id'];
 						isOneToOne: false;
 						referencedRelation: 'lobby';

@@ -8,7 +8,7 @@ export const ssr = false;
 export async function load() {
 	const user = await getOrCreateUser();
 	const lobbyResponse = await supabase
-		.from('lobby_participant')
+		.from('lobby_member')
 		.select('*, lobby (*, trial (*, realm (*)))')
 		.eq('user_id', user.id)
 		.maybeSingle();

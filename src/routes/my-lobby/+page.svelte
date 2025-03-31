@@ -16,7 +16,7 @@
 			if (!event.form.valid) {
 				return;
 			}
-			const leaveLobbyResponse = await supabase.from('lobby_participant').delete().match({
+			const leaveLobbyResponse = await supabase.from('lobby_member').delete().match({
 				lobby_id: event.form.data['lobby-id'],
 				user_id: event.form.data['user-id']
 			});

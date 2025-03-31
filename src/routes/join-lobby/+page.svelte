@@ -15,7 +15,7 @@
 			if (!event.form.valid) {
 				return;
 			}
-			const joinLobbyResponse = await supabase.from('lobby_participant').insert({
+			const joinLobbyResponse = await supabase.from('lobby_member').insert({
 				lobby_id: event.form.data['lobby-id']
 			});
 			if (joinLobbyResponse.error) {
