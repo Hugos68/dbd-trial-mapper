@@ -6,13 +6,13 @@
 	import { overlaySettings } from '$lib/modules/ui/overlay-settings.js';
 	import { listen } from '@tauri-apps/api/event';
 
+	const { data } = $props();
+
+	let lobby = $derived(data.lobby);
+
 	const documentRect = new ElementRect(() => document.documentElement);
 
-	let trialUrl = $state('');
-
-	listen<string>('trial:update', (event) => {
-		trialUrl = event.payload;
-	});
+	listen<typeof data.lobby>('lobby:update', (event) => (lobby = event.payload));
 
 	// @ts-expect-error - this is fine
 	$effect(async () => {
@@ -32,8 +32,10 @@
 	});
 </script>
 
-{#if trialUrl}
-	<img class="size-full" src={trialUrl} alt="Trial" />
-{:else}
-	<p>No lobby</p>
-{/if}
+<div class="contents" inert>
+	{#if lobby}
+		<img class="size-full" src={lobby.trial.image_url} alt="Trial" />
+	{:else}
+		<p>No lobby</p>
+	{/if}
+</div>

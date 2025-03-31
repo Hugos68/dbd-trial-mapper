@@ -10,6 +10,7 @@
 	import { overlaySettings } from '$lib/modules/ui/overlay-settings.js';
 	import { WebviewWindow } from '@tauri-apps/api/webviewWindow';
 	import { emit } from '@tauri-apps/api/event';
+	import { ExternalLinkIcon, XIcon } from '@lucide/svelte';
 
 	const { data } = $props();
 
@@ -49,7 +50,7 @@
 
 	// @ts-expect-error - this is fine
 	$effect(async () => {
-		await emit('trial:update', lobby.trial.image_url);
+		await emit('lobby:update', lobby);
 	});
 
 	// @ts-expect-error - this is fine
@@ -117,25 +118,39 @@
 
 <Layout title="My Lobby">
 	<div class="flex h-full flex-col gap-2">
-		<div class="flex justify-between">
+		<div class="flex items-start justify-between">
 			<div>
-				<button class="hover:underline" onclick={copyLobbyId}
+				<button class="text-start hover:underline" onclick={copyLobbyId}
 					>ID: {lobby.id}</button
 				>
 				<p>Realm: {lobby.trial.realm.name}</p>
 				<p>Trial: {lobby.trial.name}</p>
-				<Button
-					onclick={() =>
-						(overlaySettings.current.visible =
-							!overlaySettings.current.visible)}>Toggle Overlay</Button
-				>
 			</div>
-			<img
-				class="object-fit rounded-md"
-				src={lobby.trial.image_url}
-				alt={lobby.trial.name}
-				width={overlaySettings.current.width}
-			/>
+			<button
+				class="group relative"
+				onclick={() =>
+					(overlaySettings.current.visible = !overlaySettings.current.visible)}
+			>
+				<div
+					class="absolute top-1/2 left-1/2 z-50 -translate-1/2 opacity-0 transition-opacity group-hover:opacity-100"
+				>
+					<Button class="flex gap-2">
+						{#if overlaySettings.current.visible}
+							Pop-in <XIcon />
+						{:else}
+							Pop-out <ExternalLinkIcon />
+						{/if}
+					</Button>
+				</div>
+				<img
+					class="object-fit max-h-72 rounded-md border transition-opacity {overlaySettings
+						.current.visible
+						? 'border-dashed opacity-25'
+						: ''}"
+					src={lobby.trial.image_url}
+					alt={lobby.trial.name}
+				/>
+			</button>
 		</div>
 		<form class="contents" method="post" autocomplete="off" use:enhance>
 			<input type="hidden" bind:value={$form.lobby_id} />

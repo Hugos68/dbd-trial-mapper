@@ -25,6 +25,7 @@
 				"url": "/overlay",
 				"alwaysOnTop": true,
 				"visible": false,
+				"focus": true,
 				"shadow": false,
 				"skipTaskbar": true,
 				"decorations": false

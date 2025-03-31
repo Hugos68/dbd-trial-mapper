@@ -11,6 +11,7 @@
 
 	const { form, errors, enhance, submitting } = useForm(data.form, {
 		validators: valibot(OverlaySettingsSchema),
+		resetForm: false,
 		async onUpdate(event) {
 			if (!event.form.valid) {
 				return;

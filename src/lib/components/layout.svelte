@@ -100,7 +100,7 @@
 	</header>
 	<div class="flex grow gap-4 px-4 pb-4">
 		<aside
-			class="flex w-64 flex-col justify-between rounded bg-neutral-100 p-4 dark:bg-neutral-900"
+			class="flex w-full max-w-64 flex-col justify-between rounded bg-neutral-100 p-4 dark:bg-neutral-900"
 		>
 			<nav class="flex grow flex-col gap-2">
 				{#each navigationItems as navigation (navigation)}
