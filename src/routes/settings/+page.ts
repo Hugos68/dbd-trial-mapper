@@ -4,13 +4,13 @@ import { superValidate } from 'sveltekit-superforms';
 import { valibot } from 'sveltekit-superforms/adapters';
 
 export async function load(event) {
-    const data = await event.parent();
-    const form = await superValidate(
-        overlaySettings.current,
-        valibot(OverlaySettingsSchema),
-    );
-    return {
-        lobby: data.lobby,
-        form: form,
-    };
+	const data = await event.parent();
+	const form = await superValidate(
+		overlaySettings.current,
+		valibot(OverlaySettingsSchema),
+	);
+	return {
+		lobby: data.lobby,
+		form: form,
+	};
 }

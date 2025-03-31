@@ -5,7 +5,7 @@ declare global {
 	namespace App {
 		interface PageData {
 			user: User;
-			lobby?: Tables['lobby'] & { trial: Tables<'trial'> }
+			lobby?: Tables['lobby'] & { trial: Tables<'trial'> };
 		}
 	}
 }

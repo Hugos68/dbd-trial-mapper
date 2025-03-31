@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Layout from "$lib/components/layout.svelte";
+	import Layout from '$lib/components/layout.svelte';
 </script>
 
 <Layout title="Home" description="Welcome to Trial Sync!">
@@ -12,9 +12,9 @@
 			Found an issue? <a
 				class="underline"
 				target="_blank"
-				href="https://github.com/Hugos68/trial-sync/issues/new">Report it here.</a
+				href="https://github.com/Hugos68/trial-sync/issues/new"
+				>Report it here.</a
 			>
 		</p>
-	</div>	
+	</div>
 </Layout>
-

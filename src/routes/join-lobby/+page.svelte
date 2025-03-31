@@ -15,7 +15,9 @@
 			if (!event.form.valid) {
 				return;
 			}
-			const joinLobbyResponse = await supabase.from('lobby_member').insert(event.form.data);
+			const joinLobbyResponse = await supabase
+				.from('lobby_member')
+				.insert(event.form.data);
 			if (joinLobbyResponse.error) {
 				event.form.valid = false;
 				toaster.error({
@@ -53,4 +55,3 @@
 		<Button class="mt-auto ml-auto" disabled={$submitting}>Join Lobby</Button>
 	</form>
 </Layout>
-

@@ -35,4 +35,4 @@
 	<form class="grid h-full gap-4" method="post" autocomplete="off" use:enhance>
 		<Button class="mt-auto ml-auto" disabled={$submitting}>Create Lobby</Button>
 	</form>
-</Layout>	
+</Layout>

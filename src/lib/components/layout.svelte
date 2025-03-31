@@ -9,17 +9,16 @@
 	} from '@lucide/svelte';
 	import { page } from '$app/state';
 	import { close } from '$lib/modules/tauri/window/close';
-	import Toaster from '$lib/components/toaster.svelte';
 	import { copyToClipboard } from '$lib/modules/ui/copy-to-clipboard';
 	import { toaster } from '$lib/modules/ui/toaster';
 	import type { Snippet } from 'svelte';
-    import { show } from '$lib/modules/tauri/window/show';
+	import { show } from '$lib/modules/tauri/window/show';
 
-    interface Props {
-        title: string;
-        description: string;
-        children?: Snippet;
-    }
+	interface Props {
+		title: string;
+		description: string;
+		children?: Snippet;
+	}
 
 	const { title, description, children }: Props = $props();
 
@@ -78,9 +77,7 @@
 	$effect(show);
 </script>
 
-<Toaster />
-
-<div class="grow flex flex-col">
+<div class="flex grow flex-col">
 	<header
 		data-tauri-drag-region
 		class="flex items-center justify-between rounded p-4"
@@ -135,13 +132,12 @@
 	</div>
 </div>
 
-
 <style>
-    :global(html),
-    :global(body) {
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-        user-select: none;
-    }
+	:global(html),
+	:global(body) {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		user-select: none;
+	}
 </style>
