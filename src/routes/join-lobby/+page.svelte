@@ -9,7 +9,7 @@
 
 	const { data } = $props();
 
-	const { form, constraints, errors, enhance, submitting } = useForm(data.form, {
+	const { form, errors, enhance, submitting } = useForm(data.form, {
 		validators: valibot(JoinLobbySchema),
 		async onUpdate(event) {
 			if (!event.form.valid) {
@@ -43,10 +43,9 @@
 		<span class="text-sm">Lobby ID</span>
 		<input
 			name="lobby-id"
-			class="rounded bg-transparent"
+			class="rounded bg-transparent focus:aria-[invalid=true]:ring-red-500"
 			placeholder="Lobby ID"
 			bind:value={$form['lobby-id']}
-			{...$constraints['lobby-id']}
 		/>
 		{#if $errors['lobby-id']}
 			<span class="text-sm text-red-500">{$errors['lobby-id'].join(', ')}</span>
