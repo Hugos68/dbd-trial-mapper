@@ -6,7 +6,8 @@
 		"build": "tauri build",
 		"format": "prettier --write .",
 		"lint": "prettier --check . && eslint . && svelte-check",
-		"supabase:generate-types": "supabase gen types typescript --project-id \"rsscmciuemxtmlktlakz\" --schema public > src/lib/modules/supabase/types.ts"
+		"supabase:generate-types": "supabase gen types typescript --project-id \"rsscmciuemxtmlktlakz\" --schema public > src/lib/modules/supabase/types.ts",
+		"postinstall": "svelte-kit sync"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.2.5",
