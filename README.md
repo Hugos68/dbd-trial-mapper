@@ -1,38 +1,32 @@
-# sv
+# TrialSync
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Does this sound familiar?
 
-## Creating a project
+> Nea: Take a hit! I'm at the red car!
 
-If you're seeing this, you've probably already done this step. Congrats!
+> Claudette: I'm here! I don't see you.
 
-```bash
-# create a new project in the current directory
-npx sv create
+> Nea: _Gets Downed_
 
-# create a new project in my-app
-npx sv create my-app
-```
+> Nea: THE OTHER F\*CKING RED CAR!
 
-## Developing
+Never again with TrialSync, SWF like never before.
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## What is this?
 
-```bash
-npm run dev
+TrialSync is a small application to overlay a Dead By Daylight trial.
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+## Features
 
-## Building
+- Support for all current Dead By Daylight maps.
+- Support for creating/sharing lobbies with your SWF.
+- Supports realtime map updates by leveraging websockets.
 
-To create a production version of your app:
+## Credits
 
-```bash
-npm run build
-```
+- [Hens](https://hens333.com/): For creating all the maps.
+- [Lucas](https://github.com/LucaFontanot): For creating [DBD Map Overlay](https://github.com/LucaFontanot/dbd-map-overlay) which this project was inspired by.
 
-You can preview the production build with `npm run preview`.
+## License
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+See [LICENSE](LICENSE)
