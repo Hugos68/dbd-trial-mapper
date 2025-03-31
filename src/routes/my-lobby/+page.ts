@@ -8,7 +8,7 @@ export async function load(event) {
 	if (!data.lobby) {
 		redirect(303, '/');
 	}
-	const form = await superValidate(
+	const leaveLobbyForm = await superValidate(
 		{
 			lobby_id: data.lobby.id,
 			user_id: data.user.id,
@@ -17,6 +17,6 @@ export async function load(event) {
 	);
 	return {
 		lobby: data.lobby,
-		form: form,
+		leaveLobbyForm: leaveLobbyForm,
 	};
 }

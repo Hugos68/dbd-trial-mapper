@@ -16,6 +16,44 @@
 
 	let lobby = $derived(data.lobby);
 
+	const { form, enhance, submitting } = useForm(data.leaveLobbyForm, {
+		validators: valibot(LeaveLobbySchema),
+		async onUpdate(event) {
+			if (!event.form.valid) {
+				return;
+			}
+			const leaveLobbyResponse = await supabase
+				.from('lobby_member')
+				.delete()
+				.match({
+					lobby_id: event.form.data.lobby_id,
+					user_id: event.form.data.user_id,
+				});
+			if (leaveLobbyResponse.error) {
+				event.form.valid = false;
+				toaster.error({
+					title: 'Failed to leave lobby',
+					description: leaveLobbyResponse.error.details,
+				});
+				return;
+			}
+			toaster.success({
+				title: 'Successfully left lobby',
+			});
+			const overlay = await WebviewWindow.getByLabel('overlay');
+			if (overlay) {
+				await overlay.hide();
+			}
+		},
+	});
+
+	async function copyLobbyId() {
+		await copyToClipboard(data.lobby.id);
+		toaster.info({
+			title: 'Lobby ID copied to clipboard',
+		});
+	}
+
 	$effect(() => {
 		if (!data.lobby) {
 			return;
@@ -76,44 +114,6 @@
 			}
 		};
 	});
-
-	const { form, enhance, submitting } = useForm(data.form, {
-		validators: valibot(LeaveLobbySchema),
-		async onUpdate(event) {
-			if (!event.form.valid) {
-				return;
-			}
-			const leaveLobbyResponse = await supabase
-				.from('lobby_member')
-				.delete()
-				.match({
-					lobby_id: event.form.data.lobby_id,
-					user_id: event.form.data.user_id,
-				});
-			if (leaveLobbyResponse.error) {
-				event.form.valid = false;
-				toaster.error({
-					title: 'Failed to leave lobby',
-					description: leaveLobbyResponse.error.details,
-				});
-				return;
-			}
-			toaster.success({
-				title: 'Successfully left lobby',
-			});
-			const overlay = await WebviewWindow.getByLabel('overlay');
-			if (overlay) {
-				await overlay.hide();
-			}
-		},
-	});
-
-	async function copyLobbyId() {
-		await copyToClipboard(data.lobby.id);
-		toaster.info({
-			title: 'Lobby ID copied to clipboard',
-		});
-	}
 </script>
 
 <Layout title="My Lobby">
