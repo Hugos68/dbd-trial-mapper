@@ -61,7 +61,7 @@
 			alt={data.lobby.trial.name}
 		/>
 	</div>
-	<form class="contents" method="post" use:enhance>
+	<form class="contents" method="post" autocomplete="off" use:enhance>
 		<input type="hidden" name="lobby-id" bind:value={$form['lobby-id']} />
 		<input type="hidden" name="user-id" bind:value={$form['user-id']} />
 		<Button class="mt-auto ml-auto" disabled={$submitting}>Leave Lobby</Button>

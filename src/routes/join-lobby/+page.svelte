@@ -38,7 +38,7 @@
 	});
 </script>
 
-<form class="flex h-full flex-col gap-4" method="post" use:enhance>
+<form class="flex h-full flex-col gap-4" method="post" autocomplete="off" use:enhance>
 	<label class="grid gap-1">
 		<span class="text-sm">Lobby ID</span>
 		<input
