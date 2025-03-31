@@ -52,6 +52,7 @@
 	<div class="flex justify-between">
 		<div>
 			<button onclick={copyLobbyId}>ID: {data.lobby.id}</button>
+			<p>Realm: {data.lobby.trial.realm.name}</p>
 			<p>Trial: {data.lobby.trial.name}</p>
 		</div>
 		<img
