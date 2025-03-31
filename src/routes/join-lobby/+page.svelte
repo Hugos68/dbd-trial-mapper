@@ -22,7 +22,7 @@
 				event.form.valid = false;
 				toaster.error({
 					title: 'Failed to join lobby',
-					description: joinLobbyResponse.error.message
+					description: joinLobbyResponse.error.details
 				});
 				return;
 			}
@@ -31,8 +31,7 @@
 				invalidateAll: true
 			});
 			toaster.success({
-				title: 'Successfully joined lobby',
-				description: 'You have been redirected to the lobby page'
+				title: 'Successfully joined lobby'
 			});
 		}
 	});

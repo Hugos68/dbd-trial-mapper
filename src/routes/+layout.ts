@@ -13,7 +13,7 @@ export async function load() {
 		.eq('user_id', user.id)
 		.maybeSingle();
 	if (lobbyResponse.error) {
-		error(500, lobbyResponse.error.message);
+		error(500, lobbyResponse.error.details);
 	}
 	return {
 		user: user,

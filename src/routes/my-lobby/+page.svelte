@@ -24,26 +24,20 @@
 				event.form.valid = false;
 				toaster.error({
 					title: 'Failed to leave lobby',
-					description: leaveLobbyResponse.error.message
+					description: leaveLobbyResponse.error.details
 				});
 				return;
 			}
-			await goto('/', {
-				replaceState: true,
-				invalidateAll: true
-			});
 			toaster.success({
-				title: 'Successfully left lobby',
-				description: 'You have been redirected to the home page'
+				title: 'Successfully left lobby'
 			});
 		}
 	});
 
 	async function copyLobbyId() {
 		await copyToClipboard(data.lobby.id);
-		toaster.success({
-			title: 'Lobby ID copied to clipboard',
-			description: 'You can now share the lobby ID with your friends'
+		toaster.info({
+			title: 'Lobby ID copied to clipboard'
 		});
 	}
 </script>
@@ -51,7 +45,7 @@
 <div class="flex h-full flex-col gap-2">
 	<div class="flex justify-between">
 		<div>
-			<button onclick={copyLobbyId}>ID: {data.lobby.id}</button>
+			<button class="hover:underline" onclick={copyLobbyId}>ID: {data.lobby.id}</button>
 			<p>Realm: {data.lobby.trial.realm.name}</p>
 			<p>Trial: {data.lobby.trial.name}</p>
 		</div>

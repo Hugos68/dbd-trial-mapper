@@ -2,7 +2,6 @@
 	import { valibot } from 'sveltekit-superforms/adapters';
 	import Button from '$lib/components/button.svelte';
 	import { supabase } from '$lib/modules/supabase/client.js';
-	import { goto } from '$app/navigation';
 	import { CreateLobbySchema } from '../../lib/modules/schemas/create-lobby-schema.js';
 	import { toaster } from '$lib/modules/ui/toaster.js';
 	import { useForm } from '$lib/modules/hooks/use-form.js';
@@ -20,17 +19,12 @@
 				event.form.valid = false;
 				toaster.error({
 					title: 'Failed to create lobby',
-					description: insertLobbyResponse.error.message
+					description: insertLobbyResponse.error.details
 				});
 				return;
 			}
-			await goto('/my-lobby', {
-				replaceState: true,
-				invalidateAll: true
-			});
 			toaster.success({
-				title: 'Successfully created lobby',
-				description: 'You have been redirected to the lobby page'
+				title: 'Successfully created lobby'
 			});
 		}
 	});

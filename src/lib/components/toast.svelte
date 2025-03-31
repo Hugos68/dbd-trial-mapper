@@ -1,6 +1,8 @@
 <script lang="ts">
 	import * as toast from '@zag-js/toast';
 	import { normalizeProps, useMachine } from '@zag-js/svelte';
+	import { XIcon } from '@lucide/svelte';
+	import IconButton from './icon-button.svelte';
 
 	interface Props {
 		toast: toast.Options;
@@ -18,23 +20,30 @@
 	const typeClasses = $derived.by(() => {
 		switch (api.type) {
 			case 'success':
-				return 'border border-green-500/50';
+				return 'border-green-500/50';
 			case 'warning':
-				return 'border border-yellow-500/50';
+				return 'border-yellow-500/50';
 			case 'error':
-				return 'border border-red-500/50';
+				return 'border-red-500/50';
 			default:
-				return 'border border-default-500/50';
+				return 'border-default-500/50';
 		}
 	});
 </script>
 
 <div
-	class="grid gap-1 rounded bg-neutral-100 p-4 dark:bg-neutral-900 {typeClasses} w-full max-w-xs"
+	class="flex max-w-xs items-center justify-between gap-4 rounded border-b-2 bg-neutral-100 p-4 dark:bg-neutral-900 {typeClasses}"
 	{...api.getRootProps()}
 >
-	<span class="text-lg font-semibold" {...api.getTitleProps()}>{api.title}</span>
-	<span class="text-sm" {...api.getDescriptionProps()}>{api.description}</span>
+	<div>
+		<span class="size-xs block font-semibold" {...api.getTitleProps()}>{api.title}</span>
+		{#if api.description}
+			<span class="block text-sm text-balance text-neutral-500" {...api.getDescriptionProps()}>
+				{api.description}
+			</span>
+		{/if}
+	</div>
+	<IconButton onclick={api.dismiss}><XIcon /></IconButton>
 </div>
 
 <style>

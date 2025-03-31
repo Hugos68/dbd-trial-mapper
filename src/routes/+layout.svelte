@@ -11,6 +11,9 @@
 	import { page } from '$app/state';
 	import { close } from '$lib/modules/tauri/window/close';
 	import Toaster from '$lib/components/toaster.svelte';
+	import { show } from '$lib/modules/tauri/window/show';
+	import { copyToClipboard } from '$lib/modules/ui/copy-to-clipboard';
+	import { toaster } from '$lib/modules/ui/toaster';
 
 	const { children, data } = $props();
 
@@ -68,6 +71,16 @@
 			.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
 			.join(' ');
 	});
+
+	async function copyUserId() {
+		await copyToClipboard(data.user.id);
+		toaster.info({
+			title: 'User ID copied to clipboard'
+		});
+	}
+
+	// @ts-expect-error - Svelte dislikes promises, we know better
+	$effect(show);
 </script>
 
 <Toaster />
@@ -78,7 +91,9 @@
 			<MapIcon />
 			<div class="grid">
 				<span class="font-bold">Trial Sync</span>
-				<span class="text-xs text-neutral-500">User ID: {page.data.user.id}</span>
+				<button class="text-xs text-neutral-500 hover:underline" onclick={copyUserId}
+					>User ID: {page.data.user.id}</button
+				>
 			</div>
 		</div>
 		<div class="flex gap-2">

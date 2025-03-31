@@ -1,6 +1,6 @@
 import { Window } from '@tauri-apps/api/window';
 
-export async function close() {
+export async function show() {
 	const window = Window.getCurrent();
-	await window.close();
+	await window.show();
 }
