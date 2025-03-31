@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { setError } from 'sveltekit-superforms';
 	import { valibot } from 'sveltekit-superforms/adapters';
 	import Button from '$lib/components/button.svelte';
 	import { supabase } from '$lib/modules/supabase/client.js';

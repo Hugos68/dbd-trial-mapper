@@ -30,7 +30,7 @@
 </script>
 
 <div
-	class="grid gap-1 rounded bg-neutral-100 p-4 dark:bg-neutral-900 {typeClasses} min-w-xs"
+	class="grid gap-1 rounded bg-neutral-100 p-4 dark:bg-neutral-900 {typeClasses} w-full max-w-xs"
 	{...api.getRootProps()}
 >
 	<span class="text-lg font-semibold" {...api.getTitleProps()}>{api.title}</span>
