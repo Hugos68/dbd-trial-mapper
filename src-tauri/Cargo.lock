@@ -3857,7 +3857,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "trial-sync"
+name = "trial_sync"
 version = "0.1.0"
 dependencies = [
  "log",
