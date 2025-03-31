@@ -12,6 +12,7 @@
 	"app": {
 		"windows": [
 			{
+				"label": "default",
 				"title": "Trial Sync",
 				"visible": false,
 				"width": 1280,
