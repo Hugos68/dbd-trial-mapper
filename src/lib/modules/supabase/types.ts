@@ -55,27 +55,6 @@ export type Database = {
 					}
 				];
 			};
-			preference: {
-				Row: {
-					id: string;
-					user_id: string;
-					window_position: Database['public']['Enums']['window_position'];
-					window_width: number;
-				};
-				Insert: {
-					id?: string;
-					user_id?: string;
-					window_position?: Database['public']['Enums']['window_position'];
-					window_width?: number;
-				};
-				Update: {
-					id?: string;
-					user_id?: string;
-					window_position?: Database['public']['Enums']['window_position'];
-					window_width?: number;
-				};
-				Relationships: [];
-			};
 			realm: {
 				Row: {
 					code: string;
@@ -134,7 +113,7 @@ export type Database = {
 			[_ in never]: never;
 		};
 		Enums: {
-			window_position: 'TOP_LEFT' | 'TOP_RIGHT';
+			[_ in never]: never;
 		};
 		CompositeTypes: {
 			[_ in never]: never;
