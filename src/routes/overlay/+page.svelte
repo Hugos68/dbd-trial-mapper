@@ -14,12 +14,12 @@
 		trialUrl = event.payload;
 	});
 
-	// @ts-expect-error
+	// @ts-expect-error - this is fine
 	$effect(async () => {
 		await moveWindow(overlaySettings.current.position);
 	});
 
-	// @ts-expect-error
+	// @ts-expect-error - this is fine
 	$effect(async () => {
 		const window = WebviewWindow.getCurrent();
 		await window.setSize(

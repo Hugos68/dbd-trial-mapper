@@ -33,7 +33,7 @@
 	});
 </script>
 
-<Layout title="Join Lobby" description="Join an existing lobby.">
+<Layout title="Join Lobby">
 	<form
 		class="flex h-full flex-col gap-4"
 		method="post"

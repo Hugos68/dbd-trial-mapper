@@ -2,7 +2,7 @@
 	import Layout from '$lib/components/layout.svelte';
 </script>
 
-<Layout title="Home" description="Welcome to Trial Sync!">
+<Layout title="Home">
 	<div class="grid grow gap-4">
 		<p>
 			Trial Sync is an application to overlay a Dead By Daylight trial while

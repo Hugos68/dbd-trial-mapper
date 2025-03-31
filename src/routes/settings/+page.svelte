@@ -24,7 +24,7 @@
 	});
 </script>
 
-<Layout title="Settings" description="Configure your settings.">
+<Layout title="Settings">
 	<form
 		class="flex h-full flex-col gap-4"
 		method="post"

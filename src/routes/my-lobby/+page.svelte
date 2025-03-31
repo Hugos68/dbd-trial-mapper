@@ -47,12 +47,12 @@
 		};
 	});
 
-	// @ts-expect-error
+	// @ts-expect-error - this is fine
 	$effect(async () => {
 		await emit('trial:update', lobby.trial.image_url);
 	});
 
-	// @ts-expect-error
+	// @ts-expect-error - this is fine
 	$effect(async () => {
 		if (overlaySettings.current.visible) {
 			const overlay = await WebviewWindow.getByLabel('overlay');
@@ -115,7 +115,7 @@
 	}
 </script>
 
-<Layout title="My Lobby" description="The current lobby you're a member of.">
+<Layout title="My Lobby">
 	<div class="flex h-full flex-col gap-2">
 		<div class="flex justify-between">
 			<div>

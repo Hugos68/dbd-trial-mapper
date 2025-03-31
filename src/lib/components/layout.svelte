@@ -16,11 +16,10 @@
 
 	interface Props {
 		title: string;
-		description: string;
 		children?: Snippet;
 	}
 
-	const { title, description, children }: Props = $props();
+	const { title, children }: Props = $props();
 
 	const navigationItems = $derived.by(() => {
 		const items = [
