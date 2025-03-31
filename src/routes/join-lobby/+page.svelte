@@ -2,7 +2,6 @@
 	import { valibot } from 'sveltekit-superforms/adapters';
 	import Button from '$lib/components/button.svelte';
 	import { supabase } from '$lib/modules/supabase/client.js';
-	import { goto } from '$app/navigation';
 	import { toaster } from '$lib/modules/ui/toaster.js';
 	import { JoinLobbySchema } from '$lib/modules/schemas/join-lobby-schema.js';
 	import { useForm } from '$lib/modules/hooks/use-form.js';
