@@ -1,14 +1,17 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/forms';
 
-html {
-	background-color: var(--color-neutral-50);
-	color: var(--color-neutral-950);
-}
-
-@variant dark {
+@layer base {
 	html {
-		background-color: var(--color-neutral-950);
-		color: var(--color-neutral-50);
+		overflow: hidden;
+		background-color: var(--color-neutral-50);
+		color: var(--color-neutral-950);
+	}
+
+	@variant dark {
+		html {
+			background-color: var(--color-neutral-950);
+			color: var(--color-neutral-50);
+		}
 	}
 }

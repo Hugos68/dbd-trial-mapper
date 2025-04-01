@@ -11,6 +11,17 @@
 
 	// @ts-expect-error - this is fine
 	$effect(async () => {
+		// TODO: This doesn't seem to work
+		if (!lobby.current) {
+			const overlay = await WebviewWindow.getByLabel('overlay');
+			if (overlay) {
+				await overlay.hide();
+			}
+		}
+	});
+
+	// @ts-expect-error - this is fine
+	$effect(async () => {
 		if (overlaySettings.current.visible) {
 			const overlay = await WebviewWindow.getByLabel('overlay');
 			if (overlay) {
@@ -40,21 +51,21 @@
 <div inert>
 	{#if lobby.current}
 		<img
-			class="size-full opacity-50"
+			class="size-full"
+			style:opacity="{overlaySettings.current.opacity}%"
 			src={lobby.current.trial.image_url}
 			alt="Trial"
 		/>
 	{:else}
 		<div>
 			<p>No trial loaded</p>
-			<p></p>
 		</div>
 	{/if}
 </div>
 
 <style>
-	:global(html, body) {
-		width: fit-content;
-		height: fit-content;
+	:global(html) {
+		pointer-events: none;
+		background: transparent;
 	}
 </style>

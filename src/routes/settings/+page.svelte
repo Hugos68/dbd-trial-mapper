@@ -35,7 +35,7 @@
 			<span class="text-sm">Overlay Size</span>
 			<input
 				type="number"
-				class="rounded bg-transparent focus:aria-[invalid=true]:ring-red-500"
+				class="rounded bg-transparent"
 				bind:value={$form.size}
 			/>
 			{#if $errors.size}
@@ -43,10 +43,21 @@
 			{/if}
 		</label>
 		<label class="grid gap-1">
+			<span class="text-sm">Overlay Opacity</span>
+			<input
+				type="number"
+				class="rounded bg-transparent"
+				bind:value={$form.opacity}
+			/>
+			{#if $errors.opacity}
+				<span class="text-sm text-red-500">{$errors.opacity.join(', ')}</span>
+			{/if}
+		</label>
+		<label class="grid gap-1">
 			<span class="text-sm">Overlay Position</span>
 			<input
 				type="number"
-				class="rounded bg-transparent focus:aria-[invalid=true]:ring-red-500"
+				class="rounded bg-transparent"
 				bind:value={$form.position}
 			/>
 			{#if $errors.position}

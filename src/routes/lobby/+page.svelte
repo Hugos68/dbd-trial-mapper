@@ -8,7 +8,6 @@
 	import { copyToClipboard } from '$lib/modules/ui/copy-to-clipboard.js';
 	import Layout from '$lib/components/layout.svelte';
 	import { overlaySettings } from '$lib/modules/ui/overlay-settings.js';
-	import { WebviewWindow } from '@tauri-apps/api/webviewWindow';
 	import { Lobby } from '$lib/modules/context/lobby.js';
 
 	const { data } = $props();
@@ -39,10 +38,6 @@
 			toaster.success({
 				title: 'Successfully left lobby',
 			});
-			const overlay = await WebviewWindow.getByLabel('overlay');
-			if (overlay) {
-				await overlay.hide();
-			}
 		},
 	});
 

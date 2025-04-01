@@ -19,7 +19,7 @@ export function useRealtimeRecord<T extends { id: string } | undefined | null>(
 			.on(
 				'postgres_changes',
 				{
-					event: 'UPDATE',
+					event: '*',
 					schema: 'public',
 					table: options.table,
 					filter: `id=eq.${record.id}`,

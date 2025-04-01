@@ -44,7 +44,7 @@
 			<span class="text-sm">Lobby ID</span>
 			<input
 				name="lobby-id"
-				class="rounded bg-transparent focus:aria-[invalid=true]:ring-red-500"
+				class="rounded bg-transparent"
 				placeholder="Lobby ID"
 				bind:value={$form.lobby_id}
 			/>
