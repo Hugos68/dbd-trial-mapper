@@ -4,60 +4,60 @@
 	import { PhysicalSize } from '@tauri-apps/api/dpi';
 	import { overlaySettings } from '$lib/modules/ui/overlay-settings.js';
 	import { ElementSize } from 'runed';
-	import { Lobby } from '$lib/modules/context/lobby';
+	import { listen } from '@tauri-apps/api/event';
+	import type { Tables } from '$lib/modules/supabase/types';
 
-	const lobby = Lobby.get();
+	const window = WebviewWindow.getCurrent();
+
+	let lobby: Tables<'lobby'> & { trial: Tables<'trial'> & { realm: Tables<'realm'> } } | undefined = $state();
+
+	$inspect(lobby);
+
+	$effect(() => {
+		listen<typeof lobby>('lobby', async (event) => {
+			if (event.payload) {
+				lobby = event.payload;
+				await window.show();
+			} else {
+				await window.hide();
+				lobby = undefined;
+			}
+			
+		});	
+	});
+
 	const documentRect = new ElementSize(() => document.documentElement);
 
-	// @ts-expect-error - this is fine
-	$effect(async () => {
-		// TODO: This doesn't seem to work
-		if (!lobby.current) {
-			const overlay = await WebviewWindow.getByLabel('overlay');
-			if (overlay) {
-				await overlay.hide();
-			}
-		}
-	});
-
-	// @ts-expect-error - this is fine
-	$effect(async () => {
-		if (overlaySettings.current.visible) {
-			const overlay = await WebviewWindow.getByLabel('overlay');
-			if (overlay) {
-				await overlay.show();
-			}
+	$effect(() => {
+		if (overlaySettings.current.visible && lobby) {
+			window.show();
 		} else {
-			const overlay = await WebviewWindow.getByLabel('overlay');
-			if (overlay) {
-				await overlay.hide();
-			}
+			window.hide();
 		}
 	});
 
-	// @ts-expect-error - this is fine
-	$effect(async () => {
-		const window = WebviewWindow.getCurrent();
-		await window.setSize(
+	$effect(() => {
+		window.setSize(
 			new PhysicalSize(
 				Math.ceil(overlaySettings.current.size),
 				Math.ceil(documentRect.current.height),
 			),
-		);
-		await moveWindow(overlaySettings.current.position);
+		).then(() => {
+			moveWindow(overlaySettings.current.position)
+		})
 	});
 </script>
 
 <div inert>
-	{#if lobby.current}
+	{#if lobby}
 		<img
 			class="size-full"
 			style:opacity="{overlaySettings.current.opacity}%"
-			src={lobby.current.trial.image_url}
+			src={lobby.trial.image_url}
 			alt="Trial"
 		/>
 	{:else}
-		<div>
+		<div class="size-72 bg-red-500 grid place-items-center">
 			<p>No trial loaded</p>
 		</div>
 	{/if}

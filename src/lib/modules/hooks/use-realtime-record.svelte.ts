@@ -1,20 +1,15 @@
+import type { RealtimePostgresChangesPayload } from '@supabase/supabase-js';
 import { supabase } from '../supabase/client';
+import type { Database } from '../supabase/types';
 
-interface UseRealtimeRecordOptions<T> {
-	record: () => T;
-	table: string;
-	transformPayload?: (data: NonNullable<T>) => Promise<T> | T;
+interface UseRealmtimeRecordOptions<Table extends keyof Database['public']['Tables']> {
+	table: Table;
+	id: string;
 }
 
-export function useRealtimeRecord<T extends { id: string } | undefined | null>(
-	options: UseRealtimeRecordOptions<T>,
-) {
-	let record = $derived(options.record());
+export function useRealtimeRecord<Table extends keyof Database['public']['Tables']>(callback: (payload: RealtimePostgresChangesPayload<Record<string, unknown>>) => Promise<unknown>, options: UseRealmtimeRecordOptions<Table>) {
 	$effect(() => {
-		if (!record) {
-			return;
-		}
-		const channel = supabase.channel(`${options.table}-${record.id}`);
+		const channel = supabase.channel(`realtime-${options.table}`);
 		channel
 			.on(
 				'postgres_changes',
@@ -22,21 +17,11 @@ export function useRealtimeRecord<T extends { id: string } | undefined | null>(
 					event: '*',
 					schema: 'public',
 					table: options.table,
-					filter: `id=eq.${record.id}`,
-				},
-				async (payload) => {
-					const updated = payload.new as NonNullable<T>;
-					record = options.transformPayload
-						? await options.transformPayload(updated)
-						: updated;
-				},
+					filter: `id=eq.${options.id}`,
+				},	
+				callback
 			)
 			.subscribe();
 		return () => channel.unsubscribe();
 	});
-	return {
-		get current() {
-			return record;
-		},
-	};
 }
