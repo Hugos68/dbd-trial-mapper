@@ -4,13 +4,10 @@
 	import { PhysicalSize } from '@tauri-apps/api/dpi';
 	import { overlaySettings } from '$lib/modules/ui/overlay-settings.js';
 	import { ElementSize } from 'runed';
-	import { CurrentLobby } from '$lib/modules/context/current-lobby';
+	import { Lobby } from '$lib/modules/context/lobby';
 
-	const lobby = CurrentLobby.get();
-
+	const lobby = Lobby.get();
 	const documentRect = new ElementSize(() => document.documentElement);
-
-	$inspect(lobby.current);
 
 	// @ts-expect-error - this is fine
 	$effect(async () => {

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Toaster from '$lib/components/toaster.svelte';
-	import { CurrentLobby } from '$lib/modules/context/current-lobby';
+	import { Lobby } from '$lib/modules/context/lobby';
 	import { useRealtimeRecord } from '$lib/modules/hooks/use-realtime-record.svelte';
 	import { supabase } from '$lib/modules/supabase/client';
 	import '../app.css';
@@ -23,7 +23,7 @@
 		},
 	});
 
-	CurrentLobby.set(lobby);
+	Lobby.set(lobby);
 </script>
 
 <Toaster />

@@ -9,11 +9,11 @@
 	import Layout from '$lib/components/layout.svelte';
 	import { overlaySettings } from '$lib/modules/ui/overlay-settings.js';
 	import { WebviewWindow } from '@tauri-apps/api/webviewWindow';
-	import { CurrentLobby } from '$lib/modules/context/current-lobby.js';
+	import { Lobby } from '$lib/modules/context/lobby.js';
 
 	const { data } = $props();
 
-	const lobby = CurrentLobby.get();
+	const lobby = Lobby.get();
 
 	const { enhance, submitting } = useForm(data.leaveLobbyForm, {
 		validators: valibot(LeaveLobbySchema),
@@ -59,7 +59,7 @@
 </script>
 
 {#if lobby.current}
-	<Layout title="Current Lobby">
+	<Layout title="Lobby">
 		<div class="flex h-full flex-col gap-2">
 			<div class="flex items-start justify-between">
 				<div>

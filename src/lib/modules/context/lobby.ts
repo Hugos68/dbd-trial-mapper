@@ -1,10 +1,10 @@
 import { Context } from 'runed';
 import type { Tables } from '../supabase/types';
 
-export const CurrentLobby = new Context<{
+export const Lobby = new Context<{
 	current:
 		| (Tables<'lobby'> & {
 				trial: Tables<'trial'> & { realm: Tables<'realm'> };
 		  })
 		| undefined;
-}>('current-lobby');
+}>('lobby');
