@@ -4,63 +4,63 @@
 	import { PhysicalSize } from '@tauri-apps/api/dpi';
 	import { overlaySettings } from '$lib/modules/ui/overlay-settings.js';
 	import { ElementSize } from 'runed';
-	import { listen } from '@tauri-apps/api/event';
-	import type { Tables } from '$lib/modules/supabase/types';
+	import { invalidateAll } from '$app/navigation';
+	import { useRealtime } from '$lib/modules/hooks/use-realtime.svelte.js';
+
+	const { data } = $props();
 
 	const window = WebviewWindow.getCurrent();
-
-	let lobby: Tables<'lobby'> & { trial: Tables<'trial'> & { realm: Tables<'realm'> } } | undefined = $state();
-
-	$inspect(lobby);
-
-	$effect(() => {
-		listen<typeof lobby>('lobby', async (event) => {
-			if (event.payload) {
-				lobby = event.payload;
-				await window.show();
-			} else {
-				await window.hide();
-				lobby = undefined;
-			}
-			
-		});	
-	});
-
 	const documentRect = new ElementSize(() => document.documentElement);
 
+	useRealtime('lobby', async (event) => {
+		if (event.eventType === 'UPDATE' && data.lobby?.id === event.old.id) {
+			await invalidateAll();
+		}
+		if (event.eventType === 'DELETE' && data.lobby?.id === event.old.id) {
+			await invalidateAll();
+		}
+	});
+
+	useRealtime(
+		'lobby_member',
+		async (event) => {
+			if (event.eventType === 'INSERT') {
+				await invalidateAll();
+			}
+		},
+		{
+			filter: `user_id=eq.${data.user.id}`,
+		},
+	);
+
 	$effect(() => {
-		if (overlaySettings.current.visible && lobby) {
+		if (overlaySettings.current.visible) {
 			window.show();
 		} else {
 			window.hide();
 		}
 	});
 
-	$effect(() => {
-		window.setSize(
+	// @ts-expect-error - this is fine
+	$effect(async () => {
+		await window.setSize(
 			new PhysicalSize(
 				Math.ceil(overlaySettings.current.size),
 				Math.ceil(documentRect.current.height),
 			),
-		).then(() => {
-			moveWindow(overlaySettings.current.position)
-		})
+		);
+		await moveWindow(overlaySettings.current.position);
 	});
 </script>
 
-<div inert>
-	{#if lobby}
-		<img
-			class="size-full"
-			style:opacity="{overlaySettings.current.opacity}%"
-			src={lobby.trial.image_url}
-			alt="Trial"
-		/>
-	{:else}
-		<div class="size-72 bg-red-500 grid place-items-center">
-			<p>No trial loaded</p>
-		</div>
-	{/if}
+<div>
+	<img
+		class="size-full"
+		inert
+		style:opacity="{overlaySettings.current.opacity}%"
+		src={data.lobby?.trial.image_url}
+		alt="Trial"
+	/>
 </div>
 
 <style>
