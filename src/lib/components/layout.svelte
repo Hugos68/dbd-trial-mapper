@@ -13,6 +13,8 @@
 	import { toaster } from '$lib/modules/ui/toaster';
 	import type { Snippet } from 'svelte';
 	import { show } from '$lib/modules/tauri/window/show';
+	import { invalidateAll } from '$app/navigation';
+	import { useRealtime } from '$lib/modules/hooks/use-realtime.svelte';
 
 	interface Props {
 		title: string;
@@ -71,6 +73,21 @@
 			title: 'User ID copied to clipboard',
 		});
 	}
+
+	useRealtime('lobby', async (event) => {
+		if (event.eventType === 'INSERT') {
+			await invalidateAll();
+		}
+		if (event.eventType === 'UPDATE' && event.old.id === page.data.lobby.id) {
+			await invalidateAll();
+		}
+		if (event.eventType === 'DELETE' && event.old.id === page.data.lobby.id) {
+			toaster.info({
+				title: 'Lobby closed',
+			});
+			await invalidateAll();
+		}
+	});
 
 	// @ts-expect-error - Svelte dislikes promises, we know better
 	$effect(show);

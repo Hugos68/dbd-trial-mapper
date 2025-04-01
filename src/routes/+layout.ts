@@ -6,6 +6,7 @@ export const prerender = true;
 export const ssr = false;
 
 export async function load() {
+	console.log('Loading layout');
 	const user = await getOrCreateUser();
 	const lobbyResponse = await supabase
 		.from('lobby_member')

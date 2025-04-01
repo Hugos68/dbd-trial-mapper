@@ -6,29 +6,6 @@
 	import '../app.css';
 
 	const { data, children } = $props();
-
-	$effect(() => {
-		if (!data.lobby) {
-			return;
-		}
-		useRealtime(
-			'lobby',
-			async (event) => {
-				if (event.eventType === 'UPDATE' && data.lobby) {
-					await invalidateAll();
-				}
-				if (event.eventType === 'DELETE') {
-					toaster.info({
-						title: 'Lobby closed',
-					});
-					await invalidateAll();
-				}
-			},
-			{
-				filter: `id=eq.${data.lobby.id}`,
-			},
-		);
-	});
 </script>
 
 <Toaster />

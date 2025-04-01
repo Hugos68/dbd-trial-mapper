@@ -38,7 +38,7 @@
 </script>
 
 <Layout title="Lobby">
-	<div class="flex h-full flex-col gap-2">
+	<div class="flex h-full flex-col gap-4">
 		<div class="flex items-start justify-between">
 			<div>
 				<button class="text-start hover:underline" onclick={copyLobbyId}
