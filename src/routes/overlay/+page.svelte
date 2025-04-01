@@ -1,22 +1,30 @@
 <script lang="ts">
-	import { ElementRect } from 'runed';
 	import { moveWindow } from '@tauri-apps/plugin-positioner';
 	import { WebviewWindow } from '@tauri-apps/api/webviewWindow';
 	import { PhysicalSize } from '@tauri-apps/api/dpi';
 	import { overlaySettings } from '$lib/modules/ui/overlay-settings.js';
-	import { listen } from '@tauri-apps/api/event';
+	import { ElementSize } from 'runed';
+	import { CurrentLobby } from '$lib/modules/context/current-lobby';
 
-	const { data } = $props();
+	const lobby = CurrentLobby.get();
 
-	let lobby = $derived(data.lobby);
+	const documentRect = new ElementSize(() => document.documentElement);
 
-	const documentRect = new ElementRect(() => document.documentElement);
-
-	listen<typeof data.lobby>('lobby:update', (event) => (lobby = event.payload));
+	$inspect(lobby.current);
 
 	// @ts-expect-error - this is fine
 	$effect(async () => {
-		await moveWindow(overlaySettings.current.position);
+		if (overlaySettings.current.visible) {
+			const overlay = await WebviewWindow.getByLabel('overlay');
+			if (overlay) {
+				await overlay.show();
+			}
+		} else {
+			const overlay = await WebviewWindow.getByLabel('overlay');
+			if (overlay) {
+				await overlay.hide();
+			}
+		}
 	});
 
 	// @ts-expect-error - this is fine
@@ -24,7 +32,7 @@
 		const window = WebviewWindow.getCurrent();
 		await window.setSize(
 			new PhysicalSize(
-				overlaySettings.current.width,
+				Math.ceil(overlaySettings.current.size),
 				Math.ceil(documentRect.current.height),
 			),
 		);
@@ -32,10 +40,24 @@
 	});
 </script>
 
-<div class="contents" inert>
-	{#if lobby}
-		<img class="size-full" src={lobby.trial.image_url} alt="Trial" />
+<div inert>
+	{#if lobby.current}
+		<img
+			class="size-full opacity-50"
+			src={lobby.current.trial.image_url}
+			alt="Trial"
+		/>
 	{:else}
-		<p>No lobby</p>
+		<div>
+			<p>No trial loaded</p>
+			<p></p>
+		</div>
 	{/if}
 </div>
+
+<style>
+	:global(html, body) {
+		width: fit-content;
+		height: fit-content;
+	}
+</style>

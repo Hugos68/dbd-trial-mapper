@@ -5,7 +5,7 @@ import type { OverlaySettings } from '../schemas/overlay-settings-schema';
 export const overlaySettings = new PersistedState<OverlaySettings>(
 	'overlay-settings',
 	{
-		width: 250,
+		size: 250,
 		position: Position.TopRight,
 		visible: false,
 	},

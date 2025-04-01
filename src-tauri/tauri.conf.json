@@ -24,6 +24,7 @@
 				"label": "overlay",
 				"url": "/overlay",
 				"alwaysOnTop": true,
+				"transparent": true,
 				"visible": false,
 				"focus": true,
 				"shadow": false,

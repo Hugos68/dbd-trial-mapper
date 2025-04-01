@@ -33,10 +33,10 @@
 		];
 		if (page.data.lobby) {
 			items.push({
-				label: 'My Lobby',
+				label: 'Current Lobby',
 				Icon: MapIcon,
 				attributes: {
-					href: '/my-lobby',
+					href: '/current-lobby',
 				},
 			});
 		} else {

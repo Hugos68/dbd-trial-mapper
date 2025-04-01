@@ -16,8 +16,7 @@
 			if (!event.form.valid) {
 				return;
 			}
-			overlaySettings.current.width = event.form.data['width'];
-			overlaySettings.current.position = event.form.data['position'];
+			overlaySettings.current = event.form.data;
 			toaster.success({
 				title: 'Successfully updated settings',
 			});
@@ -33,14 +32,14 @@
 		use:enhance
 	>
 		<label class="grid gap-1">
-			<span class="text-sm">Overlay Width</span>
+			<span class="text-sm">Overlay Size</span>
 			<input
 				type="number"
 				class="rounded bg-transparent focus:aria-[invalid=true]:ring-red-500"
-				bind:value={$form.width}
+				bind:value={$form.size}
 			/>
-			{#if $errors.width}
-				<span class="text-sm text-red-500">{$errors.width.join(', ')}</span>
+			{#if $errors.size}
+				<span class="text-sm text-red-500">{$errors.size.join(', ')}</span>
 			{/if}
 		</label>
 		<label class="grid gap-1">
