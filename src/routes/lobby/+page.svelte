@@ -19,7 +19,14 @@
 		});
 	}
 
-	const { form, submitting, enhance } = useForm(data.form, {
+	const {
+		form: updateLobbyForm,
+		submitting: updateLobbySubmitting,
+		errors: updateLobbyErrors,
+		enhance: updateLobbyEnhance,
+		isTainted: updateLobbyIsTainted,
+		tainted: updateLobbyTainted,
+	} = useForm(data.updateLobbyForm, {
 		validators: valibot(UpdateLobbySchema),
 		resetForm: false,
 		async onUpdate(event) {
@@ -31,6 +38,7 @@
 				.update(event.form.data)
 				.eq('id', data.lobby.id);
 			if (updateLobbyResponse.error) {
+				event.form.valid = false;
 				toaster.error({
 					title: 'Failed to update lobby',
 					description: updateLobbyResponse.error.details,
@@ -43,25 +51,32 @@
 		},
 	});
 
-	async function leaveLobby() {
-		const leaveLobbyResponse = await supabase
-			.from('lobby_member')
-			.delete()
-			.match({
-				lobby_id: data.lobby.id,
-				user_id: page.data.user.id,
-			});
-		if (leaveLobbyResponse.error) {
-			toaster.error({
-				title: 'Failed to leave lobby',
-				description: leaveLobbyResponse.error.details,
-			});
-			return;
-		}
-		toaster.success({
-			title: 'Successfully left lobby',
+	const { submitting: leaveLobbySubmitting, enhance: leaveLobbyEnhance } =
+		useForm(data.leaveLobbyForm, {
+			async onUpdate(event) {
+				if (!event.form.valid) {
+					return;
+				}
+				const leaveLobbyResponse = await supabase
+					.from('lobby_member')
+					.delete()
+					.match({
+						lobby_id: data.lobby.id,
+						user_id: page.data.user.id,
+					});
+				if (leaveLobbyResponse.error) {
+					event.form.valid = false;
+					toaster.error({
+						title: 'Failed to leave lobby',
+						description: leaveLobbyResponse.error.details,
+					});
+					return;
+				}
+				toaster.success({
+					title: 'Successfully left lobby',
+				});
+			},
 		});
-	}
 </script>
 
 <Layout title="Lobby">
@@ -71,14 +86,14 @@
 				class="flex h-full w-full flex-col gap-4"
 				method="post"
 				autocomplete="off"
-				use:enhance
+				use:updateLobbyEnhance
 			>
 				<label class="grid gap-1">
 					<span class="text-sm">Lobby ID</span>
 					<div class="grid grid-cols-[1fr_auto]">
 						<input
 							class="rounded-l bg-transparent"
-							bind:value={$form.id}
+							bind:value={$updateLobbyForm.id}
 							readonly
 						/>
 						<Button
@@ -94,30 +109,37 @@
 					<span class="text-sm">User ID</span>
 					<input
 						class="rounded bg-transparent"
-						bind:value={$form.user_id}
+						bind:value={$updateLobbyForm.user_id}
 						readonly
 					/>
 				</label>
 				<label class="grid gap-1">
 					<span class="text-sm">Trial</span>
 					<select
-						bind:value={$form.trial_id}
+						bind:value={$updateLobbyForm.trial_id}
 						class="rounded bg-neutral-200 dark:bg-neutral-800"
 						disabled={data.lobby.user_id !== page.data.user.id}
 					>
 						{#each data.trials as trial (trial.id)}
 							<option
 								value={trial.id}
-								selected={data.lobby.trial.id === trial.id}
+								selected={$updateLobbyForm.trial_id === trial.id}
 							>
 								{trial.name}
 							</option>
 						{/each}
 					</select>
+					{#if $updateLobbyErrors.trial_id}
+						<span class="text-sm text-red-500"
+							>{$updateLobbyErrors.trial_id.join(', ')}</span
+						>
+					{/if}
 				</label>
 				<Button
 					class="mt-auto ml-auto"
-					disabled={$submitting || data.lobby.user_id !== page.data.user.id}
+					disabled={data.lobby.user_id !== page.data.user.id ||
+						$updateLobbySubmitting ||
+						!updateLobbyIsTainted($updateLobbyTainted)}
 				>
 					Update Lobby
 				</Button>
@@ -136,6 +158,15 @@
 				/>
 			</button>
 		</div>
-		<Button class="mt-auto ml-auto" onclick={leaveLobby}>Leave Lobby</Button>
+		<form
+			class="flex h-full"
+			method="post"
+			autocomplete="off"
+			use:leaveLobbyEnhance
+		>
+			<Button class="mt-auto ml-auto" disabled={$leaveLobbySubmitting}
+				>Leave Lobby</Button
+			>
+		</form>
 	</div>
 </Layout>

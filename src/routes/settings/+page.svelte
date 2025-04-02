@@ -9,19 +9,22 @@
 
 	const { data } = $props();
 
-	const { form, errors, enhance, submitting } = useForm(data.form, {
-		validators: valibot(OverlaySettingsSchema),
-		resetForm: false,
-		async onUpdate(event) {
-			if (!event.form.valid) {
-				return;
-			}
-			overlaySettings.current = event.form.data;
-			toaster.success({
-				title: 'Successfully updated settings',
-			});
+	const { form, errors, enhance, submitting, isTainted, tainted } = useForm(
+		data.form,
+		{
+			validators: valibot(OverlaySettingsSchema),
+			resetForm: false,
+			async onUpdate(event) {
+				if (!event.form.valid) {
+					return;
+				}
+				overlaySettings.current = event.form.data;
+				toaster.success({
+					title: 'Successfully updated settings',
+				});
+			},
 		},
-	});
+	);
 </script>
 
 <Layout title="Settings">
@@ -64,7 +67,9 @@
 				<span class="text-sm text-red-500">{$errors.position.join(', ')}</span>
 			{/if}
 		</label>
-		<Button class="mt-auto ml-auto" disabled={$submitting}>Save Settings</Button
+		<Button
+			class="mt-auto ml-auto"
+			disabled={$submitting || !isTainted($tainted)}>Save Settings</Button
 		>
 	</form>
 </Layout>
