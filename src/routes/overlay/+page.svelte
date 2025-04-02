@@ -57,6 +57,7 @@
 </script>
 
 <div
+	inert
 	class="size-fit"
 	style:width="{overlaySettings.current.size}px"
 	style:opacity="{overlaySettings.current.opacity}%"
@@ -68,7 +69,6 @@
 	:global(html) {
 		width: fit-content;
 		height: fit-content;
-		pointer-events: none;
 		background: transparent;
 	}
 </style>
