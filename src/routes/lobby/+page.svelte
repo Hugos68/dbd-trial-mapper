@@ -79,7 +79,6 @@
 						class="rounded bg-transparent"
 						bind:value={$form.id}
 						disabled
-						onclick={copyLobbyId}
 					/>
 				</label>
 				<label class="grid gap-1">
@@ -107,7 +106,6 @@
 						{/each}
 					</select>
 				</label>
-				<!-- TODO: Update doesn't actually update? -->
 				<Button
 					class="mt-auto ml-auto"
 					disabled={$submitting || data.lobby.user_id !== page.data.user.id}
