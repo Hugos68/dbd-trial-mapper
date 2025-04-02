@@ -26,6 +26,7 @@
 				"title": "Trial Sync Overlay",
 				"url": "/overlay",
 				"visible": false,
+				"focus": false,
 				"shadow": false,
 				"decorations": false,
 				"alwaysOnTop": true,
