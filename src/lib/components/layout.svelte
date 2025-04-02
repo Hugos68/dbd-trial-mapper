@@ -9,14 +9,14 @@
 		XIcon,
 	} from '@lucide/svelte';
 	import { page } from '$app/state';
-	import { closeAll } from '$lib/modules/tauri/window/close';
 	import { copyToClipboard } from '$lib/modules/ui/copy-to-clipboard';
 	import { toaster } from '$lib/modules/ui/toaster';
-	import type { Snippet } from 'svelte';
-	import { show } from '$lib/modules/tauri/window/show';
 	import { invalidateAll } from '$app/navigation';
 	import { useRealtime } from '$lib/modules/hooks/use-realtime.svelte';
-	import { minimize } from '$lib/modules/tauri/window/minimize';
+	import { minimizeWindow } from '$lib/modules/tauri/minimize-window';
+	import { exitApplication } from '$lib/modules/tauri/exit-application';
+	import { showWindow } from '$lib/modules/tauri/show-window';
+	import type { Snippet } from 'svelte';
 
 	interface Props {
 		title: string;
@@ -89,7 +89,7 @@
 	});
 
 	// @ts-expect-error - Svelte dislikes promises, we know better
-	$effect(show);
+	$effect(showWindow);
 </script>
 
 <div class="flex grow flex-col">
@@ -110,11 +110,11 @@
 		<div class="flex gap-2">
 			<button
 				class="rounded p-2 transition-colors hover:bg-neutral-500/50"
-				onclick={minimize}><MinusIcon /></button
+				onclick={minimizeWindow}><MinusIcon /></button
 			>
 			<button
 				class="rounded p-2 transition-colors hover:bg-red-500/50"
-				onclick={closeAll}><XIcon /></button
+				onclick={exitApplication}><XIcon /></button
 			>
 		</div>
 	</header>
