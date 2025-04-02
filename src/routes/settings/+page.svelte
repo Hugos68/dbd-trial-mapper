@@ -3,6 +3,7 @@
 	import Layout from '$lib/components/layout.svelte';
 	import { useForm } from '$lib/modules/hooks/use-form.js';
 	import { OverlaySettingsSchema } from '$lib/modules/schemas/overlay-settings-schema';
+	import { POSITIONS } from '$lib/modules/tauri/positions.js';
 	import { overlaySettings } from '$lib/modules/ui/overlay-settings';
 	import { toaster } from '$lib/modules/ui/toaster.js';
 	import { LoaderCircleIcon } from '@lucide/svelte';
@@ -59,11 +60,16 @@
 		</label>
 		<label class="grid gap-1">
 			<span class="text-sm">Overlay Position</span>
-			<input
-				type="number"
-				class="rounded bg-transparent"
+			<select
 				bind:value={$form.position}
-			/>
+				class="rounded bg-neutral-200 dark:bg-neutral-800"
+			>
+				{#each POSITIONS as position (position)}
+					<option value={position} selected={$form.position === position}>
+						{position}
+					</option>
+				{/each}
+			</select>
 			{#if $errors.position}
 				<span class="text-sm text-red-500">{$errors.position.join(', ')}</span>
 			{/if}

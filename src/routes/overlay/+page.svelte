@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { moveWindow } from '@tauri-apps/plugin-positioner';
 	import { PhysicalSize } from '@tauri-apps/api/dpi';
 	import { overlaySettings } from '$lib/modules/ui/overlay-settings.js';
 	import { ElementRect } from 'runed';
 	import { invalidateAll } from '$app/navigation';
 	import { useRealtime } from '$lib/modules/hooks/use-realtime.svelte.js';
 	import { WebviewWindow } from '@tauri-apps/api/webviewWindow';
+	import { positionallyResizeWindow } from '$lib/modules/tauri/resize-position-window.js';
 
 	const { data } = $props();
 
@@ -43,21 +43,16 @@
 
 	// @ts-expect-error - this is fine
 	$effect(async () => {
-		await moveWindow(overlaySettings.current.position);
-	});
-
-	// @ts-expect-error - this is fine
-	$effect(async () => {
 		if (documentRect.current.height === 0 || documentRect.current.width === 0) {
 			return;
 		}
-		await WebviewWindow.getCurrent().setSize(
+		await positionallyResizeWindow(
+			overlaySettings.current.position,
 			new PhysicalSize(
 				Math.ceil(documentRect.current.width),
 				Math.ceil(documentRect.current.height),
 			),
 		);
-		await moveWindow(overlaySettings.current.position);
 	});
 </script>
 
