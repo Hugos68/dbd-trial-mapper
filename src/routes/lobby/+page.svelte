@@ -103,7 +103,7 @@
 							class="w-fit rounded-none rounded-r"
 							onclick={copyLobbyId}
 						>
-							Copy ID
+							Copy
 						</Button>
 					</div>
 				</label>
