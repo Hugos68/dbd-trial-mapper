@@ -1,15 +1,14 @@
 <script lang="ts">
 	import { moveWindow } from '@tauri-apps/plugin-positioner';
-	import { WebviewWindow } from '@tauri-apps/api/webviewWindow';
 	import { PhysicalSize } from '@tauri-apps/api/dpi';
 	import { overlaySettings } from '$lib/modules/ui/overlay-settings.js';
 	import { ElementSize } from 'runed';
 	import { invalidateAll } from '$app/navigation';
 	import { useRealtime } from '$lib/modules/hooks/use-realtime.svelte.js';
+	import { WebviewWindow } from '@tauri-apps/api/webviewWindow';
 
 	const { data } = $props();
 
-	const window = WebviewWindow.getCurrent();
 	const documentRect = new ElementSize(() => document.documentElement);
 
 	useRealtime('lobby', async (event) => {
@@ -33,17 +32,18 @@
 		},
 	);
 
-	$effect(() => {
+	// @ts-expect-error - this is fine
+	$effect(async () => {
 		if (overlaySettings.current.visible) {
-			window.show();
+			await WebviewWindow.getCurrent().show();
 		} else {
-			window.hide();
+			await WebviewWindow.getCurrent().hide();
 		}
 	});
 
 	// @ts-expect-error - this is fine
 	$effect(async () => {
-		await window.setSize(
+		await WebviewWindow.getCurrent().setSize(
 			new PhysicalSize(
 				Math.ceil(overlaySettings.current.size),
 				Math.ceil(documentRect.current.height),
@@ -53,15 +53,13 @@
 	});
 </script>
 
-<div class="size-full">
-	<img
-		class="size-full"
-		inert
-		style:opacity="{overlaySettings.current.opacity}%"
-		src={data.lobby?.trial.image_url}
-		alt="Trial"
-	/>
-</div>
+<img
+	class="size-full"
+	inert
+	style:opacity="{overlaySettings.current.opacity}%"
+	src={data.lobby?.trial.image_url}
+	alt="Trial"
+/>
 
 <style>
 	:global(html) {
