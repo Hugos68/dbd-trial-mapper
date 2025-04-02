@@ -3,7 +3,6 @@
 	import { supabase } from '$lib/modules/supabase/client.js';
 	import { toaster } from '$lib/modules/ui/toaster.js';
 	import Layout from '$lib/components/layout.svelte';
-	import { goto } from '$app/navigation';
 
 	async function createLobby() {
 		const insertLobbyResponse = await supabase.from('lobby').insert({});
@@ -16,9 +15,6 @@
 		}
 		toaster.success({
 			title: 'Successfully created lobby',
-		});
-		await goto('/lobby', {
-			replaceState: true,
 		});
 	}
 </script>

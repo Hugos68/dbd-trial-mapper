@@ -8,7 +8,7 @@
 		XIcon,
 	} from '@lucide/svelte';
 	import { page } from '$app/state';
-	import { close } from '$lib/modules/tauri/window/close';
+	import { closeAll } from '$lib/modules/tauri/window/close';
 	import { copyToClipboard } from '$lib/modules/ui/copy-to-clipboard';
 	import { toaster } from '$lib/modules/ui/toaster';
 	import type { Snippet } from 'svelte';
@@ -82,9 +82,6 @@
 			await invalidateAll();
 		}
 		if (event.eventType === 'DELETE' && event.old.id === page.data.lobby.id) {
-			toaster.info({
-				title: 'Lobby closed',
-			});
 			await invalidateAll();
 		}
 	});
@@ -111,7 +108,7 @@
 		<div class="flex gap-2">
 			<button
 				class="rounded p-2 transition-colors hover:bg-red-500/50"
-				onclick={close}><XIcon /></button
+				onclick={closeAll}><XIcon /></button
 			>
 		</div>
 	</header>
