@@ -122,8 +122,8 @@
 						class="rounded bg-neutral-200 dark:bg-neutral-800"
 						disabled={data.lobby.user_id !== page.data.user.id}
 					>
-						{#each Object.entries(groupBy(data.trials, (trial) => trial.realm.id)) as [realmId, trials]}
-							<optgroup label={trials[0].realm.name || `Realm ${realmId}`}>
+						{#each Object.entries(groupBy(data.trials, (trial) => trial.realm.id)) as [realmId, trials] (realmId)}
+							<optgroup label={trials[0].realm.name}>
 								{#each trials as trial (trial.id)}
 									<option
 										value={trial.id}
