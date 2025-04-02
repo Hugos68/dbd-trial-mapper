@@ -10,23 +10,25 @@ Does this sound familiar?
 
 > Nea: THE OTHER F\*CKING RED CAR!
 
-Never again with TrialSync, SWF like never before.
+Never again with TrialSync, Survive With Friends like never before.
 
 ## What is this?
 
-TrialSync is a small application to overlay a Dead By Daylight trial.
+TrialSync is a small application to overlay and share a Dead By Daylight trial.
 
 ## Features
 
-- Support for all current Dead By Daylight maps.
+- Support for all current Dead By Daylight trials[^1].
 - Support for creating/sharing lobbies with your SWF.
-- Supports realtime map updates by leveraging websockets.
+- Supports realtime trial updates by leveraging [WebSockets]().
 
 ## Credits
 
-- [Hens](https://hens333.com/): For creating all the maps.
-- [Lucas](https://github.com/LucaFontanot): For creating [DBD Map Overlay](https://github.com/LucaFontanot/dbd-map-overlay) which this project was inspired by.
+- [Hens](https://hens333.com/), for creating all the maps.
+- [Lucas](https://github.com/LucaFontanot), for creating [DBD Map Overlay](https://github.com/LucaFontanot/dbd-map-overlay) which this project was **heavily** inspired by.
 
 ## License
 
 See [LICENSE](LICENSE)
+
+[^1]: Trials that are supported in [Hens' Callouts](https://hens333.com/callouts/)
