@@ -20,7 +20,7 @@ TrialSync is a small application to overlay and share a Dead By Daylight trial.
 
 - Support for all current Dead By Daylight trials[^1].
 - Support for creating/sharing lobbies with your SWF.
-- Supports realtime trial updates by leveraging [WebSockets]().
+- Supports realtime trial updates by leveraging [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API).
 
 ## Credits
 
