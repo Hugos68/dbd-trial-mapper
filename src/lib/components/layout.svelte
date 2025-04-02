@@ -3,6 +3,7 @@
 		HomeIcon,
 		MapIcon,
 		MergeIcon,
+		MinusIcon,
 		PlusCircleIcon,
 		SettingsIcon,
 		XIcon,
@@ -15,6 +16,7 @@
 	import { show } from '$lib/modules/tauri/window/show';
 	import { invalidateAll } from '$app/navigation';
 	import { useRealtime } from '$lib/modules/hooks/use-realtime.svelte';
+	import { minimize } from '$lib/modules/tauri/window/minimize';
 
 	interface Props {
 		title: string;
@@ -106,6 +108,10 @@
 			</div>
 		</div>
 		<div class="flex gap-2">
+			<button
+				class="rounded p-2 transition-colors hover:bg-neutral-500/50"
+				onclick={minimize}><MinusIcon /></button
+			>
 			<button
 				class="rounded p-2 transition-colors hover:bg-red-500/50"
 				onclick={closeAll}><XIcon /></button

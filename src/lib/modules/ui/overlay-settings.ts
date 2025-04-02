@@ -7,6 +7,7 @@ export const overlaySettings = new PersistedState<OverlaySettings>(
 	{
 		size: 250,
 		position: Position.TopRight,
+		opacity: 100,
 		visible: false,
 	},
 );
