@@ -75,18 +75,27 @@
 			>
 				<label class="grid gap-1">
 					<span class="text-sm">Lobby ID</span>
-					<input
-						class="rounded bg-transparent"
-						bind:value={$form.id}
-						disabled
-					/>
+					<div class="grid grid-cols-[1fr_auto]">
+						<input
+							class="rounded-l bg-transparent"
+							bind:value={$form.id}
+							readonly
+						/>
+						<Button
+							type="button"
+							class="w-fit rounded-none rounded-r"
+							onclick={copyLobbyId}
+						>
+							Copy ID
+						</Button>
+					</div>
 				</label>
 				<label class="grid gap-1">
 					<span class="text-sm">User ID</span>
 					<input
 						class="rounded bg-transparent"
 						bind:value={$form.user_id}
-						disabled
+						readonly
 					/>
 				</label>
 				<label class="grid gap-1">
@@ -121,7 +130,7 @@
 			>
 				<img
 					class:border-dashed={overlaySettings.current.visible}
-					class="object-fit max-h-72 rounded-md border"
+					class="object-fit max-h-72 rounded border"
 					src={data.lobby.trial.image_url}
 					alt={data.lobby.trial.name}
 				/>
