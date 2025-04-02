@@ -25,7 +25,7 @@ TrialSync is a small application to overlay and share a Dead By Daylight trial.
 ## Credits
 
 - [Hens](https://hens333.com/), for creating all the maps.
-- [Lucas](https://github.com/LucaFontanot), for creating [DBD Map Overlay](https://github.com/LucaFontanot/dbd-map-overlay) which this project was inspired by.
+- [Lucas](https://github.com/LucaFontanot), for creating [DBD Map Overlay](https://github.com/LucaFontanot/dbd-map-overlay) which this project was **heavily** inspired by.
 
 ## License
 
