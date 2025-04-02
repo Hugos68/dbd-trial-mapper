@@ -157,6 +157,5 @@
 		display: flex;
 		flex-direction: column;
 		height: 100%;
-		user-select: none;
 	}
 </style>
