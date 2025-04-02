@@ -10,6 +10,7 @@
 	import { UpdateLobbySchema } from '$lib/modules/schemas/update-lobby-schema.js';
 	import { valibot } from 'sveltekit-superforms/adapters';
 	import { LoaderCircleIcon } from '@lucide/svelte';
+	import { groupBy } from '$lib/modules/ui/group-by.js';
 
 	const { data } = $props();
 
@@ -121,13 +122,17 @@
 						class="rounded bg-neutral-200 dark:bg-neutral-800"
 						disabled={data.lobby.user_id !== page.data.user.id}
 					>
-						{#each data.trials as trial (trial.id)}
-							<option
-								value={trial.id}
-								selected={$updateLobbyForm.trial_id === trial.id}
-							>
-								{trial.name}
-							</option>
+						{#each Object.entries(groupBy(data.trials, (trial) => trial.realm.id)) as [realmId, trials]}
+							<optgroup label={trials[0].realm.name || `Realm ${realmId}`}>
+								{#each trials as trial (trial.id)}
+									<option
+										value={trial.id}
+										selected={$updateLobbyForm.trial_id === trial.id}
+									>
+										{trial.name}
+									</option>
+								{/each}
+							</optgroup>
 						{/each}
 					</select>
 					{#if $updateLobbyErrors.trial_id}

@@ -53,7 +53,7 @@
 	});
 </script>
 
-<div>
+<div class="size-full">
 	<img
 		class="size-full"
 		inert
