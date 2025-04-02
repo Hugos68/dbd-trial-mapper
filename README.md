@@ -6,9 +6,9 @@ Does this sound familiar?
 
 > Claudette: I'm here! I don't see you.
 
-> Nea: *Gets Downed*
+> Nea: _Gets Downed_
 
-> Nea: THE OTHER F*CKING RED CAR!
+> Nea: THE OTHER F\*CKING RED CAR!
 
 Never again with TrialSync, SWF like never before.
 

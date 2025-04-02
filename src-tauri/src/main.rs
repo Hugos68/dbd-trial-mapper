@@ -2,5 +2,5 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 fn main() {
-    dbd_trial_mapper_lib::run()
+    trial_sync_lib::run();
 }

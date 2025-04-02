@@ -1,13 +1,17 @@
-@import "tailwindcss";
-@import "@skeletonlabs/skeleton";
-@import "@skeletonlabs/skeleton/optional/presets";
-@import "@skeletonlabs/skeleton/themes/catppuccin";
-
-@source '../node_modules/@skeletonlabs/skeleton-svelte/dist';
-
+@import 'tailwindcss';
 @plugin '@tailwindcss/forms';
-@plugin '@tailwindcss/typography';
 
-html {
-	overflow: hidden;
+@layer base {
+	html {
+		overflow: hidden;
+		background-color: var(--color-neutral-50);
+		color: var(--color-neutral-950);
+	}
+
+	@variant dark {
+		html {
+			background-color: var(--color-neutral-950);
+			color: var(--color-neutral-50);
+		}
+	}
 }
