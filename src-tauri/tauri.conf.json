@@ -28,6 +28,7 @@
 				"visible": false,
 				"focus": false,
 				"shadow": false,
+				"resizable": false,
 				"decorations": false,
 				"alwaysOnTop": true,
 				"transparent": true,
