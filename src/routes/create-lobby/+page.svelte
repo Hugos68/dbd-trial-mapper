@@ -3,24 +3,47 @@
 	import { supabase } from '$lib/modules/supabase/client.js';
 	import { toaster } from '$lib/modules/ui/toaster.js';
 	import Layout from '$lib/components/layout.svelte';
+	import { useForm } from '$lib/modules/hooks/use-form.js';
+	import { LoaderCircleIcon } from '@lucide/svelte';
 
-	async function createLobby() {
-		const insertLobbyResponse = await supabase.from('lobby').insert({});
-		if (insertLobbyResponse.error) {
-			toaster.error({
-				title: 'Failed to create lobby',
-				description: insertLobbyResponse.error.details,
+	const { data } = $props();
+
+	const { submitting, enhance } = useForm(data.form, {
+		async onUpdate(event) {
+			if (!event.form.valid) {
+				return;
+			}
+			const createLobbyResponse = await supabase
+				.from('lobby')
+				.insert(event.form.data);
+			if (createLobbyResponse.error) {
+				event.form.valid = false;
+				toaster.error({
+					title: 'Failed to create lobby',
+					description: createLobbyResponse.error.details,
+				});
+				return;
+			}
+			toaster.success({
+				title: 'Successfully created lobby',
 			});
-			return;
-		}
-		toaster.success({
-			title: 'Successfully created lobby',
-		});
-	}
+		},
+	});
 </script>
 
 <Layout title="Create Lobby">
-	<div class="flex h-full flex-col">
-		<Button class="mt-auto ml-auto" onclick={createLobby}>Create Lobby</Button>
-	</div>
+	<form
+		class="flex h-full flex-col"
+		method="post"
+		autocomplete="off"
+		use:enhance
+	>
+		<Button class="mt-auto ml-auto">
+			{#if $submitting}
+				<LoaderCircleIcon class="animate-spin" />
+			{:else}
+				Create Lobby
+			{/if}
+		</Button>
+	</form>
 </Layout>

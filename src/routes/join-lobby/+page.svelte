@@ -6,6 +6,7 @@
 	import { JoinLobbySchema } from '$lib/modules/schemas/join-lobby-schema.js';
 	import { useForm } from '$lib/modules/hooks/use-form.js';
 	import Layout from '$lib/components/layout.svelte';
+	import { LoaderCircleIcon } from '@lucide/svelte';
 
 	const { data } = $props();
 
@@ -52,6 +53,12 @@
 				<span class="text-sm text-red-500">{$errors.lobby_id.join(', ')}</span>
 			{/if}
 		</label>
-		<Button class="mt-auto ml-auto" disabled={$submitting}>Join Lobby</Button>
+		<Button class="mt-auto ml-auto" disabled={$submitting}>
+			{#if $submitting}
+				<LoaderCircleIcon class="animate-spin" />
+			{:else}
+				Join Lobby
+			{/if}
+		</Button>
 	</form>
 </Layout>

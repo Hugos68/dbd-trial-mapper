@@ -9,6 +9,7 @@
 	import { useForm } from '$lib/modules/hooks/use-form.js';
 	import { UpdateLobbySchema } from '$lib/modules/schemas/update-lobby-schema.js';
 	import { valibot } from 'sveltekit-superforms/adapters';
+	import { LoaderCircleIcon } from '@lucide/svelte';
 
 	const { data } = $props();
 
@@ -141,7 +142,11 @@
 						$updateLobbySubmitting ||
 						!updateLobbyIsTainted($updateLobbyTainted)}
 				>
-					Update Lobby
+					{#if $updateLobbySubmitting}
+						<LoaderCircleIcon class="animate-spin" />
+					{:else}
+						Update Lobby
+					{/if}
 				</Button>
 			</form>
 			<button
@@ -164,9 +169,13 @@
 			autocomplete="off"
 			use:leaveLobbyEnhance
 		>
-			<Button class="mt-auto ml-auto" disabled={$leaveLobbySubmitting}
-				>Leave Lobby</Button
-			>
+			<Button class="mt-auto ml-auto" disabled={$leaveLobbySubmitting}>
+				{#if $leaveLobbySubmitting}
+					<LoaderCircleIcon class="animate-spin" />
+				{:else}
+					Leave Lobby
+				{/if}
+			</Button>
 		</form>
 	</div>
 </Layout>

@@ -5,6 +5,7 @@
 	import { OverlaySettingsSchema } from '$lib/modules/schemas/overlay-settings-schema';
 	import { overlaySettings } from '$lib/modules/ui/overlay-settings';
 	import { toaster } from '$lib/modules/ui/toaster.js';
+	import { LoaderCircleIcon } from '@lucide/svelte';
 	import { valibot } from 'sveltekit-superforms/adapters';
 
 	const { data } = $props();
@@ -69,7 +70,13 @@
 		</label>
 		<Button
 			class="mt-auto ml-auto"
-			disabled={$submitting || !isTainted($tainted)}>Save Settings</Button
+			disabled={$submitting || !isTainted($tainted)}
 		>
+			{#if $submitting}
+				<LoaderCircleIcon class="animate-spin" />
+			{:else}
+				Update Settings
+			{/if}
+		</Button>
 	</form>
 </Layout>
