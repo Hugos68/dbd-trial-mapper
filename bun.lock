@@ -3,10 +3,6 @@
   "workspaces": {
     "": {
       "name": "trial-sync",
-      "dependencies": {
-        "@tauri-apps/plugin-positioner": "~2",
-        "@tauri-apps/plugin-process": "~2",
-      },
       "devDependencies": {
         "@eslint/compat": "^1.2.7",
         "@eslint/js": "^9.23.0",
@@ -19,6 +15,7 @@
         "@tailwindcss/vite": "^4.0.17",
         "@tauri-apps/api": "^2.4.0",
         "@tauri-apps/cli": "^2.4.0",
+        "@tauri-apps/plugin-process": "~2",
         "@zag-js/svelte": "^1.7.0",
         "@zag-js/toast": "^1.7.0",
         "eslint": "^9.23.0",
@@ -294,8 +291,6 @@
     "@tauri-apps/cli-win32-ia32-msvc": ["@tauri-apps/cli-win32-ia32-msvc@2.4.0", "", { "os": "win32", "cpu": "ia32" }, "sha512-j+fOFVeSSejk9hrUePY7bJuaYr+80xr+ftjXzxCj0CS0d2oSbq+lT8/zS514WemJk9e9yxUus+2ke/Ng17wkkQ=="],
 
     "@tauri-apps/cli-win32-x64-msvc": ["@tauri-apps/cli-win32-x64-msvc@2.4.0", "", { "os": "win32", "cpu": "x64" }, "sha512-nv84b3a8eI5Y7ksTLBKjjvtr9NOlAGGGo7OJbjKT+xZLdiPOZ0nJ2cT+4IdfnNAZ33pKJugAfuj1fBvQKeTy0w=="],
-
-    "@tauri-apps/plugin-positioner": ["@tauri-apps/plugin-positioner@2.2.0", "", { "dependencies": { "@tauri-apps/api": "^2.0.0" } }, "sha512-3JIWqV4U1US4nmM4PGmAHODq0ltkJ91MyANR033elKSSpX3AqKnVQnLz76xThBFHjChJrZwsXASpc2Inpu+cTg=="],
 
     "@tauri-apps/plugin-process": ["@tauri-apps/plugin-process@2.2.1", "", { "dependencies": { "@tauri-apps/api": "^2.0.0" } }, "sha512-cF/k8J+YjjuowhNG1AboHNTlrGiOwgX5j6NzsX6WFf9FMzyZUchkCgZMxCdSE5NIgFX0vvOgLQhODFJgbMenLg=="],
 

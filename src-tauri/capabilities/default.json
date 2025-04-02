@@ -12,7 +12,7 @@
 		"core:window:allow-show",
 		"core:window:allow-hide",
 		"core:window:allow-set-size",
-		"positioner:default",
+		"core:window:allow-set-position",
 		"process:default"
 	]
 }
