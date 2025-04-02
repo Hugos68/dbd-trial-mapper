@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { PhysicalSize } from '@tauri-apps/api/dpi';
+	import { PhysicalSize } from '@tauri-apps/api/window';
 	import { overlaySettings } from '$lib/modules/ui/overlay-settings.js';
 	import { ElementRect } from 'runed';
 	import { invalidateAll } from '$app/navigation';
