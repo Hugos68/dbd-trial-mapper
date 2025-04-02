@@ -96,7 +96,7 @@
 						<input
 							class="rounded-l bg-transparent"
 							bind:value={$updateLobbyForm.id}
-							readonly
+							disabled
 						/>
 						<Button
 							type="button"
@@ -112,7 +112,7 @@
 					<input
 						class="rounded bg-transparent"
 						bind:value={$updateLobbyForm.user_id}
-						readonly
+						disabled
 					/>
 				</label>
 				<label class="grid gap-1">
